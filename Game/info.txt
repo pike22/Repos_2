@@ -1,0 +1,117 @@
+This upload is the first of many project saves that will go into Github.
+The major content completed before this upload is properly working collision identification.
+
+
+Every Friday I will be pushing adding a small summary of the last week of this projects progression.
+This first summary is more of a general overview than just the last week being that this is the first of
+many. If you want to run the code run the alpha.py file.
+
+
+ -Overall Summary:
+	This is a small High school project that I have decided to dedicate more time than probably necessary to do.
+	Although I am doing this for fun with the benefits from an eventually finished product. The overall goal is to create some
+	form of 2D game that is based around a dungeon crawler. This may change overtime. I have no name or story in mind yet.
+	This is more due to being to early in game development. Daily updates to Github will be normal.
+	- A summary of weekly events will continue to be added bellow as time moves forward.
+	- A 'Title' of sorts will be added next to the week to give a main idea of what was worked on for that week.
+
+
+ -09/17/2021 Weeks Summary
+ 	This weeks work only had some small changes. None of these changes are to be permanent for the most part due to that most
+	was written in attempts to work out how to use the implemented collision. I figured that just shoving ideas into code wasn't
+	going to work so I took some time outside of the code to put together an Idea for what to do. With some help from my teacher
+	we came up with the idea to use Dictionaries. Something I haven't used since when I first reconstructed my classes.
+
+ -09/24/2021 Weeks Summary (Collision Dictionary, problems/solutions)
+	This week I fully put together my Collision Dictionary(Col_Dict) that I had described in the last summary.
+	After completing that I moved on to using that Dictionary to identify what I have colliding.
+	The problem that I ran into was that this current method worked all fine and well with each class object only having one
+	"entity" to work with. So once I added a second stalfos to the table. I began to run into problems. As I found out that I
+	need more identification for. The biggest problem was that my keys that I used ended up pointing to one spot rather
+	than to the different parts of the system that it should have. Other than this the early implementation that I
+	have works.
+
+		-I might want to consider instead of using lists in my stalfos parameters, I would create a new instance of the entire object with slight changes
+			-Pros:  It may help with my recent problem (Having to constantly find and pass which stalfos in the list I wanted)
+			-Cons:  It will most likely cause more problems that I otherwise wouldn't have, Difficult to manage a potentially large number of instances.
+
+
+ -10/01/2021 Week Summary (Enemy Class Rework)
+   This week I looked over my previous code of stalfos_main and decided to use a different method to identify the
+	different stalfos that I would have at once. So now instead of having one instance of the Stalfos_Main class
+	full of lists to have the parameters. I now will call a new instance of the Stalfos_main class every
+	time I need to have a new stalfos present. I am going to archive the previous main branch of this project then
+	this branch will be the new main.
+	(THIS IS THE LAST INSTANCE OF STALFOS_REWORK)
+
+
+ -10/08/21 Week Summary  (Created Timer_Node, Knockback collision)
+ 	This week I finished working on separating the game time from the alpha.py file to its own file. I also began
+	working on enhancing my knockback by creating a new function that uses math on the grid plane to determine
+	where the objects that are colliding are at. This allows me to then when using the knockback function have them
+	be knocked back in the opposite direction they were hit from. This is still being worked on in the next week and
+	will be talked about again next entry.
+
+
+ -10/15/21 Week Summary  (Object Direction, Item classes)
+ 	This Week I quickly put together saving the last direction my player moved. This allowed me to change which direction
+	my sword rendered to, I was also able to create the basic direction for knockback. So if player comes in from the top
+	the knockback sends the player back the same way. The same for the other 3 directions. As of Wednesday I began work on
+	creating a bow & arrow. I was able to implement the bow itself with no problem. It was practically a strait copy past of
+	the swords logic. Some will need to be edited but for now it works. The hard part right now is the arrow. I began by trying
+	to use some of the sword logic again but that has caused some problems. So I just hit ctrl-A and then the del key. To
+	attempt to write it again. The other thing to do is to use inheritance to help. That will also help for future projectiles.
+
+
+ -10/22/21 Week Summary  (Bow & Arrow, Future Ideas)
+ 	This week I worked more on the bow & arrow. With this I was able to now not just create the bow but also create
+	an arrow that would also not only just be a stagnant image. I was able to add movement to the arrow with relative ease.
+	The problems that I faced was because I went through the bow originally to create the arrow and use its movement.
+	When doing this it meant that the arrow would be very closely related to the bow. Which wouldn't be a problem I thought.
+	Only for that to cause the arrow to disappear after the timer on the bow ran out rather than the arrow staying around
+	until it hit something. That wasn't that bad of a change to make. I also was reminded of the difference between super()
+	versus just calling the parent class's __init__.py. My next goal for this project is to create walls and basic stalfos
+	movement. The next major project will most likely be animation. Although most implementation of that won't be common.
+	I plan to get the basics of it down before I look into how I want to do my camera.
+
+
+ -10/29/21 Week Summary  (Enemy Movement, Walls/Static objects)
+ 	This week I worked on creating a basic form of movement of my enemies and I worked on the basic form of a wall/static object. The enemy
+	movement itself wasn't that hard to do because the logic for it isn't that hard. The somewhat difficult thing was finding the timing
+	that allowed the movement to look somewhat natural. When I first set it up it looked as though the stalfos was having a seizure because
+	it kept bouncing in multiple directions at a fast rate. So I set up a little timer that would slow down the rate that it would change
+	directions. The next part was working on the wall. For the most part the wall was relatively easy to set up. I actually fond an slight change
+	in variable names I used that started to cause some problems. Once that was fixed I went through and made the if statements that allow player
+	movement and added a variable that is set to True if I am colliding with a wall/static object in that direction. This allowed for my player to
+	not be able to pass through the said object. That part was easy the next difficult thing was to turn that variable back to false. That itself
+	was a bit more challenging. In reality all I had to do was set up a simple if statement that only happened with everything else was None
+	and had the my_Collision() function called when collision happens and when and all the time during the game loop.
+
+ -11/19/21 Week Summary (Arrow/Bow rework, Collision Rework)
+ 	This week was packed full. I got an average of three hours a day for the project. To start my goal was to be able to fire more than one
+	arrow	at one time without breaking anything else. Only for it to not work and break multiple things. At the same time I saw that my
+	collision on the wall worked while the smaller entities like my player and enemies would collide I was running into some problems. The top
+	and left sides of the collision worked fine between smaller objects. It was the bottom and right sides that didn't work properly. This
+	itself was an easy fix, where I just set a minimum size that would use one form of my collision calculation. That made that problem
+	disappear. The bigger fish to fry was that when my player hit the wall he would bounce of and jitter back and forth rather than sticking. My
+	first steps to solving this was to go and isolate what was pushing my collision through. I did this by moving my loops of collision from
+	alpha into my collision node file since it wasn't being used. This brought some bugs that easily got fixed. With some handy python prints I
+	was able to see that my collision results got processed twice when it should only be happening once. To fix this I took the multiple nested
+	for loops that I had and broke them apart so that it didn't loop unnecessary times. While testing this I stopped rendering any enemies this
+	isolated my wall and player. I got my collision working and was like this is awesome. Went and rendered in my stalfos then the wall broke.
+	Through even more python prints I found that as my collision result was getting wiped before it could be used. That got	fixed by not
+	clearing the stored value as often. Once all that was said and done the problem that started it all was there loud and proud.
+		END Note: I did a quick 30 minute rewrite on the bow and arrow classes and got it to work with multiple shots fired at once and it worked
+		just it doesn't work with my walls yes. Haven't found out why yet. (seconds later it was fixed, with a simple solution)
+
+
+ -12/17/21 (Collision Re-work/level Designer/more Collision Re-work)
+ 	The last month I have been able to get quite a bit of work completed. After re-working the arrow and bow I moved on to actually being able
+	to create and use maps. So I took about two weeks to make a functional level editor. I can save images for my maps place them in a grid.
+	Then I can save the information that holds what is needed for the map, I can read the save files and reconstruct the original map. I can
+	place and remove specific walls if I want or I can wipe the entire map clean. Once I got it all working properly I was then able to get it
+	to render on the main game screen and allow for some collision. This was when I had to give my collision system a massive upgrade. I can
+	now handle collision between up to 4 objects. While working on the collision I had to re-work my almost all of my lvlDesigner folder.
+	This was due to an inefficient method of saving images to classes.
+		Now I can handle: multiple objects in one collision, multiple different groups of collision at once, more interactions between players/enemies
+								full map design capabilities, and a smooth render of the maps I create w/ working collision. 

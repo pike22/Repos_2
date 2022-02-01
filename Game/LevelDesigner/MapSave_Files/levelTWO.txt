@@ -1,0 +1,1068 @@
+LVD#W0000
+LVD#W0001
+LVD#W0002
+LVD#W0003
+LVD#W0004
+LVD#W0005
+LVD#W0006
+LVD#W0007
+LVD#W0008
+LVD#W0009
+LVD#W0010
+LVD#W0011
+LVD#W0012
+LVD#W0013
+LVD#W0014
+LVD#W0015
+LVD#W0016
+LVD#W0017
+LVD#W0018
+LVD#W0019
+LVD#W0020
+LVD#W0021
+LVD#W0022
+LVD#W0023
+LVD#W0024
+LVD#W0025
+LVD#W0026
+LVD#W0027
+LVD#W0028
+LVD#W0029
+LVD#W0030
+LVD#W0031
+LVD#W0032
+LVD#W0033
+LVD#W0034
+LVD#W0035
+LVD#W0036
+LVD#W0037
+LVD#W0038
+LVD#W0039
+LVD#W0040
+LVD#W0041
+LVD#W0042
+LVD#W0043
+LVD#W0044
+LVD#W0045
+LVD#W0046
+LVD#W0047
+LVD#W0048
+LVD#W0049
+LVD#W0051
+LVD#W0052
+LVD#W0053
+LVD#W0054
+LVD#W0055
+LVD#W0056
+LVD#W0059
+LVD#W0060
+LVD#W0061
+LVD#W0062
+LVD#W0063
+LVD#W0064
+LVD#W0065
+LVD#W0066
+LVD#W0067
+LVD#W0068
+LVD#W0069
+LVD#W0070
+LVD#W0071
+LVD#W0072
+LVD#W0073
+LVD#W0108
+LVD#W0109
+LVD#W0110
+LVD#W0112
+LVD#W0113
+LVD#W0114
+LVD#W0115
+LVD#W0116
+LVD#W0117
+LVD#W0118
+LVD#W0119
+LVD#W0120
+LVD#W0121
+LVD#W0122
+LVD#W0123
+LVD#W0124
+LVD#W0125
+LVD#W0126
+LVD#W0127
+LVD#W0128
+LVD#W0129
+LVD#W0130
+LVD#W0131
+LVD#W0133
+LVD#W0134
+LVD#W0135
+LVD#W0136
+LVD#W0137
+LVD#W0138
+LVD#W0139
+LVD#W0140
+LVD#W0143
+LVD#W0144
+LVD#W0145
+LVD#W0146
+LVD#W0147
+LVD#W0148
+LVD#W0150
+LVD#W0151
+LVD#W0152
+LVD#W0153
+LVD#W0154
+LVD#W0155
+LVD#W0156
+LVD#W0157
+LVD#W0158
+LVD#W0159
+LVD#W0160
+LVD#W0161
+LVD#W0162
+LVD#W0163
+LVD#W0164
+LVD#W0165
+LVD#W0166
+LVD#W0167
+LVD#W0168
+LVD#W0169
+LVD#W0170
+LVD#W0171
+LVD#W0172
+LVD#W0173
+LVD#W0174
+LVD#W0175
+LVD#W0176
+LVD#W0177
+LVD#W0178
+LVD#W0179
+LVD#W0180
+LVD#W0181
+LVD#W0182
+LVD#W0183
+LVD#W0184
+LVD#W0185
+LVD#W0186
+LVD#W0187
+LVD#W0188
+LVD#W0189
+LVD#W0190
+LVD#W0192
+LVD#W0193
+LVD#W0194
+LVD#W0195
+LVD#W0196
+LVD#W0197
+LVD#W0198
+LVD#W0199
+LVD#W0200
+LVD#W0201
+LVD#W0202
+LVD#W0203
+LVD#W0204
+LVD#W0205
+LVD#W0206
+LVD#W0207
+LVD#W0208
+LVD#W0209
+LVD#W0211
+LVD#W0212
+LVD#W0213
+LVD#W0214
+LVD#W0215
+LVD#W0216
+LVD#W0217
+LVD#W0218
+LVD#W0219
+LVD#W0220
+LVD#W0221
+LVD#W0222
+LVD#W0223
+LVD#W0224
+LVD#W0226
+LVD#W0228
+LVD#W0229
+LVD#W0230
+LVD#W0231
+LVD#W0232
+LVD#W0233
+LVD#W0234
+LVD#W0235
+LVD#W0236
+LVD#W0237
+LVD#W0239
+LVD#W0240
+LVD#W0241
+LVD#W0242
+LVD#W0243
+LVD#W0244
+LVD#W0245
+LVD#W0246
+LVD#W0247
+LVD#W0248
+LVD#W0249
+LVD#W0250
+LVD#W0251
+LVD#W0252
+LVD#W0253
+LVD#W0254
+LVD#W0255
+LVD#W0256
+LVD#W0257
+LVD#W0258
+LVD#W0259
+LVD#W0260
+LVD#W0261
+LVD#W0262
+LVD#W0263
+LVD#W0264
+LVD#W0265
+LVD#W0266
+LVD#W0267
+LVD#W0268
+LVD#W0269
+LVD#W0270
+LVD#W0271
+LVD#W0272
+LVD#W0273
+LVD#W0274
+LVD#W0275
+LVD#W0276
+LVD#W0277
+LVD#W0278
+LVD#W0279
+LVD#W0280
+LVD#W0281
+LVD#W0282
+LVD#W0283
+LVD#W0284
+LVD#W0285
+LVD#W0286
+LVD#W0287
+LVD#W0289
+LVD#W0290
+LVD#W0291
+LVD#W0292
+LVD#W0293
+LVD#W0294
+LVD#W0295
+LVD#W0296
+LVD#W0297
+LVD#W0298
+LVD#W0299
+LVD#W0300
+LVD#W0301
+LVD#W0302
+LVD#W0303
+LVD#W0304
+LVD#W0305
+LVD#W0306
+LVD#W0307
+LVD#W0308
+LVD#W0309
+LVD#W0311
+LVD#W0312
+
+<=======================================================>
+
+LVD#W0000=z_Pictures/Walls/corner01.png
+LVD#W0001=z_Pictures/Walls/corner01.png
+LVD#W0002=z_Pictures/Walls/corner01.png
+LVD#W0003=z_Pictures/Walls/corner01.png
+LVD#W0004=z_Pictures/Walls/wall01.png
+LVD#W0005=z_Pictures/Walls/wall01.png
+LVD#W0006=z_Pictures/Walls/wall01.png
+LVD#W0007=z_Pictures/Walls/wall01.png
+LVD#W0008=z_Pictures/Walls/wall01.png
+LVD#W0009=z_Pictures/Walls/wall01.png
+LVD#W0010=z_Pictures/Walls/wall01.png
+LVD#W0011=z_Pictures/Walls/wall01.png
+LVD#W0012=z_Pictures/Walls/wall01.png
+LVD#W0013=z_Pictures/Walls/wall01.png
+LVD#W0014=z_Pictures/Walls/wall01.png
+LVD#W0015=z_Pictures/Walls/wall01.png
+LVD#W0016=z_Pictures/Walls/wall01.png
+LVD#W0017=z_Pictures/Walls/wall01.png
+LVD#W0018=z_Pictures/Walls/wall01.png
+LVD#W0019=z_Pictures/Walls/wall01.png
+LVD#W0020=z_Pictures/Walls/wall01.png
+LVD#W0021=z_Pictures/Walls/wall01.png
+LVD#W0022=z_Pictures/Walls/wall01.png
+LVD#W0023=z_Pictures/Walls/wall01.png
+LVD#W0024=z_Pictures/Walls/wall01.png
+LVD#W0025=z_Pictures/Walls/wall01.png
+LVD#W0026=z_Pictures/Walls/wall01.png
+LVD#W0027=z_Pictures/Walls/wall01.png
+LVD#W0028=z_Pictures/Walls/wall01.png
+LVD#W0029=z_Pictures/Walls/wall01.png
+LVD#W0030=z_Pictures/Walls/wall01.png
+LVD#W0031=z_Pictures/Walls/wall01.png
+LVD#W0032=z_Pictures/Walls/wall01.png
+LVD#W0033=z_Pictures/Walls/wall01.png
+LVD#W0034=z_Pictures/Walls/wall01.png
+LVD#W0035=z_Pictures/Walls/wall01.png
+LVD#W0036=z_Pictures/Walls/wall01.png
+LVD#W0037=z_Pictures/Walls/wall01.png
+LVD#W0038=z_Pictures/Walls/wall01.png
+LVD#W0039=z_Pictures/Walls/wall01.png
+LVD#W0040=z_Pictures/Walls/wall01.png
+LVD#W0041=z_Pictures/Walls/wall01.png
+LVD#W0042=z_Pictures/Walls/wall01.png
+LVD#W0043=z_Pictures/Walls/wall01.png
+LVD#W0044=z_Pictures/Walls/wall01.png
+LVD#W0045=z_Pictures/Walls/wall01.png
+LVD#W0046=z_Pictures/Walls/wall01.png
+LVD#W0047=z_Pictures/Walls/wall01.png
+LVD#W0048=z_Pictures/Walls/wall01.png
+LVD#W0049=z_Pictures/Walls/wall01.png
+LVD#W0051=z_Pictures/Walls/wall01.png
+LVD#W0052=z_Pictures/Walls/wall01.png
+LVD#W0053=z_Pictures/Walls/wall01.png
+LVD#W0054=z_Pictures/Walls/wall01.png
+LVD#W0055=z_Pictures/Walls/wall01.png
+LVD#W0056=z_Pictures/Walls/wall01.png
+LVD#W0059=z_Pictures/Walls/wall01.png
+LVD#W0060=z_Pictures/Walls/wall01.png
+LVD#W0061=z_Pictures/Walls/wall01.png
+LVD#W0062=z_Pictures/Walls/wall01.png
+LVD#W0063=z_Pictures/Walls/wall01.png
+LVD#W0064=z_Pictures/Walls/wall01.png
+LVD#W0065=z_Pictures/Walls/wall01.png
+LVD#W0066=z_Pictures/Walls/wall01.png
+LVD#W0067=z_Pictures/Walls/wall01.png
+LVD#W0068=z_Pictures/Walls/wall01.png
+LVD#W0069=z_Pictures/Walls/wall01.png
+LVD#W0070=z_Pictures/Walls/wall01.png
+LVD#W0071=z_Pictures/Walls/wall01.png
+LVD#W0072=z_Pictures/Walls/wall01.png
+LVD#W0073=z_Pictures/Walls/wall01.png
+LVD#W0108=z_Pictures/Walls/wall01.png
+LVD#W0109=z_Pictures/Walls/wall01.png
+LVD#W0110=z_Pictures/Walls/wall01.png
+LVD#W0112=z_Pictures/Walls/wall01.png
+LVD#W0113=z_Pictures/Walls/wall01.png
+LVD#W0114=z_Pictures/Walls/wall01.png
+LVD#W0115=z_Pictures/Walls/wall01.png
+LVD#W0116=z_Pictures/Walls/wall01.png
+LVD#W0117=z_Pictures/Walls/wall01.png
+LVD#W0118=z_Pictures/Walls/wall01.png
+LVD#W0119=z_Pictures/Walls/wall01.png
+LVD#W0120=z_Pictures/Walls/wall01.png
+LVD#W0121=z_Pictures/Walls/wall01.png
+LVD#W0122=z_Pictures/Walls/wall01.png
+LVD#W0123=z_Pictures/Walls/wall01.png
+LVD#W0124=z_Pictures/Walls/wall01.png
+LVD#W0125=z_Pictures/Walls/wall01.png
+LVD#W0126=z_Pictures/Walls/wall01.png
+LVD#W0127=z_Pictures/Walls/wall01.png
+LVD#W0128=z_Pictures/Walls/wall01.png
+LVD#W0129=z_Pictures/Walls/wall01.png
+LVD#W0130=z_Pictures/Walls/wall01.png
+LVD#W0131=z_Pictures/Walls/wall01.png
+LVD#W0133=z_Pictures/Walls/wall01.png
+LVD#W0134=z_Pictures/Walls/wall01.png
+LVD#W0135=z_Pictures/Walls/wall01.png
+LVD#W0136=z_Pictures/Walls/wall01.png
+LVD#W0137=z_Pictures/Walls/wall01.png
+LVD#W0138=z_Pictures/Walls/wall01.png
+LVD#W0139=z_Pictures/Walls/corner01.png
+LVD#W0140=z_Pictures/Walls/corner01.png
+LVD#W0143=z_Pictures/Walls/corner01.png
+LVD#W0144=z_Pictures/Walls/corner01.png
+LVD#W0145=z_Pictures/Walls/wall01.png
+LVD#W0146=z_Pictures/Walls/wall01.png
+LVD#W0147=z_Pictures/Walls/wall01.png
+LVD#W0148=z_Pictures/Walls/wall01.png
+LVD#W0150=z_Pictures/Walls/wall01.png
+LVD#W0151=z_Pictures/Walls/wall01.png
+LVD#W0152=z_Pictures/Walls/wall01.png
+LVD#W0153=z_Pictures/Walls/wall01.png
+LVD#W0154=z_Pictures/Walls/cornerin.png
+LVD#W0155=z_Pictures/Walls/cornerin.png
+LVD#W0156=z_Pictures/Walls/cornerin.png
+LVD#W0157=z_Pictures/Walls/cornerin.png
+LVD#W0158=z_Pictures/Walls/wall01.png
+LVD#W0159=z_Pictures/Walls/wall01.png
+LVD#W0160=z_Pictures/Walls/wall01.png
+LVD#W0161=z_Pictures/Walls/wall01.png
+LVD#W0162=z_Pictures/Walls/wall01.png
+LVD#W0163=z_Pictures/Walls/wall01.png
+LVD#W0164=z_Pictures/Walls/wall01.png
+LVD#W0165=z_Pictures/Walls/wall01.png
+LVD#W0166=z_Pictures/Walls/wall01.png
+LVD#W0167=z_Pictures/Walls/wall01.png
+LVD#W0168=z_Pictures/Walls/wall01.png
+LVD#W0169=z_Pictures/Walls/wall01.png
+LVD#W0170=z_Pictures/Walls/wall01.png
+LVD#W0171=z_Pictures/Walls/wall01.png
+LVD#W0172=z_Pictures/Walls/wall01.png
+LVD#W0173=z_Pictures/Walls/wall01.png
+LVD#W0174=z_Pictures/Walls/wall01.png
+LVD#W0175=z_Pictures/Walls/wall01.png
+LVD#W0176=z_Pictures/Walls/wall01.png
+LVD#W0177=z_Pictures/Walls/wall01.png
+LVD#W0178=z_Pictures/Walls/wall01.png
+LVD#W0179=z_Pictures/Walls/wall01.png
+LVD#W0180=z_Pictures/Walls/toptop.png
+LVD#W0181=z_Pictures/Walls/toptop.png
+LVD#W0182=z_Pictures/Walls/toptop.png
+LVD#W0183=z_Pictures/Walls/toptop.png
+LVD#W0184=z_Pictures/Walls/toptop.png
+LVD#W0185=z_Pictures/Walls/toptop.png
+LVD#W0186=z_Pictures/Walls/toptop.png
+LVD#W0187=z_Pictures/Walls/toptop.png
+LVD#W0188=z_Pictures/Walls/toptop.png
+LVD#W0189=z_Pictures/Walls/toptop.png
+LVD#W0190=z_Pictures/Walls/toptop.png
+LVD#W0192=z_Pictures/Walls/toptop.png
+LVD#W0193=z_Pictures/Walls/toptop.png
+LVD#W0194=z_Pictures/Walls/toptop.png
+LVD#W0195=z_Pictures/Walls/toptop.png
+LVD#W0196=z_Pictures/Walls/toptop.png
+LVD#W0197=z_Pictures/Walls/toptop.png
+LVD#W0198=z_Pictures/Walls/toptop.png
+LVD#W0199=z_Pictures/Walls/toptop.png
+LVD#W0200=z_Pictures/Walls/toptop.png
+LVD#W0201=z_Pictures/Walls/toptop.png
+LVD#W0202=z_Pictures/Walls/toptop.png
+LVD#W0203=z_Pictures/Walls/toptop.png
+LVD#W0204=z_Pictures/Walls/toptop.png
+LVD#W0205=z_Pictures/Walls/toptop.png
+LVD#W0206=z_Pictures/Walls/toptop.png
+LVD#W0207=z_Pictures/Walls/toptop.png
+LVD#W0208=z_Pictures/Walls/toptop.png
+LVD#W0209=z_Pictures/Walls/toptop.png
+LVD#W0211=z_Pictures/Walls/toptop.png
+LVD#W0212=z_Pictures/Walls/toptop.png
+LVD#W0213=z_Pictures/Walls/toptop.png
+LVD#W0214=z_Pictures/Walls/toptop.png
+LVD#W0215=z_Pictures/Walls/toptop.png
+LVD#W0216=z_Pictures/Walls/toptop.png
+LVD#W0217=z_Pictures/Walls/toptop.png
+LVD#W0218=z_Pictures/Walls/toptop.png
+LVD#W0219=z_Pictures/Walls/toptop.png
+LVD#W0220=z_Pictures/Walls/toptop.png
+LVD#W0221=z_Pictures/Walls/toptop.png
+LVD#W0222=z_Pictures/Walls/toptop.png
+LVD#W0223=z_Pictures/Walls/toptop.png
+LVD#W0224=z_Pictures/Walls/toptop.png
+LVD#W0226=z_Pictures/Walls/toptop.png
+LVD#W0228=z_Pictures/Walls/toptop.png
+LVD#W0229=z_Pictures/Walls/toptop.png
+LVD#W0230=z_Pictures/Walls/toptop.png
+LVD#W0231=z_Pictures/Walls/toptop.png
+LVD#W0232=z_Pictures/Walls/toptop.png
+LVD#W0233=z_Pictures/Walls/toptop.png
+LVD#W0234=z_Pictures/Walls/toptop.png
+LVD#W0235=z_Pictures/Walls/toptop.png
+LVD#W0236=z_Pictures/Walls/toptop.png
+LVD#W0237=z_Pictures/Walls/toptop.png
+LVD#W0239=z_Pictures/Walls/toptop.png
+LVD#W0240=z_Pictures/Walls/toptop.png
+LVD#W0241=z_Pictures/Walls/toptop.png
+LVD#W0242=z_Pictures/Walls/toptop.png
+LVD#W0243=z_Pictures/Walls/toptop.png
+LVD#W0244=z_Pictures/Walls/toptop.png
+LVD#W0245=z_Pictures/Walls/toptop.png
+LVD#W0246=z_Pictures/Walls/toptop.png
+LVD#W0247=z_Pictures/Walls/toptop.png
+LVD#W0248=z_Pictures/Walls/toptop.png
+LVD#W0249=z_Pictures/Walls/toptop.png
+LVD#W0250=z_Pictures/Walls/toptop.png
+LVD#W0251=z_Pictures/Walls/toptop.png
+LVD#W0252=z_Pictures/Walls/toptop.png
+LVD#W0253=z_Pictures/Walls/toptop.png
+LVD#W0254=z_Pictures/Walls/toptop.png
+LVD#W0255=z_Pictures/Walls/toptop.png
+LVD#W0256=z_Pictures/Walls/toptop.png
+LVD#W0257=z_Pictures/Walls/toptop.png
+LVD#W0258=z_Pictures/Walls/toptop.png
+LVD#W0259=z_Pictures/Walls/toptop.png
+LVD#W0260=z_Pictures/Walls/toptop.png
+LVD#W0261=z_Pictures/Walls/toptop.png
+LVD#W0262=z_Pictures/Walls/toptop.png
+LVD#W0263=z_Pictures/Walls/toptop.png
+LVD#W0264=z_Pictures/Walls/toptop.png
+LVD#W0265=z_Pictures/Walls/toptop.png
+LVD#W0266=z_Pictures/Walls/toptop.png
+LVD#W0267=z_Pictures/Walls/toptop.png
+LVD#W0268=z_Pictures/Walls/toptop.png
+LVD#W0269=z_Pictures/Walls/toptop.png
+LVD#W0270=z_Pictures/Walls/toptop.png
+LVD#W0271=z_Pictures/Walls/toptop.png
+LVD#W0272=z_Pictures/Walls/toptop.png
+LVD#W0273=z_Pictures/Walls/toptop.png
+LVD#W0274=z_Pictures/Walls/toptop.png
+LVD#W0275=z_Pictures/Walls/toptop.png
+LVD#W0276=z_Pictures/Walls/toptop.png
+LVD#W0277=z_Pictures/Walls/toptop.png
+LVD#W0278=z_Pictures/Walls/toptop.png
+LVD#W0279=z_Pictures/Walls/toptop.png
+LVD#W0280=z_Pictures/Walls/toptop.png
+LVD#W0281=z_Pictures/Walls/toptop.png
+LVD#W0282=z_Pictures/Walls/toptop.png
+LVD#W0283=z_Pictures/Walls/toptop.png
+LVD#W0284=z_Pictures/Walls/toptop.png
+LVD#W0285=z_Pictures/Walls/toptop.png
+LVD#W0286=z_Pictures/Walls/toptop.png
+LVD#W0287=z_Pictures/Walls/toptop.png
+LVD#W0289=z_Pictures/Walls/toptop.png
+LVD#W0290=z_Pictures/Walls/toptop.png
+LVD#W0291=z_Pictures/Walls/toptop.png
+LVD#W0292=z_Pictures/Walls/toptop.png
+LVD#W0293=z_Pictures/Walls/toptop.png
+LVD#W0294=z_Pictures/Walls/toptop.png
+LVD#W0295=z_Pictures/Walls/toptop.png
+LVD#W0296=z_Pictures/Walls/toptop.png
+LVD#W0297=z_Pictures/Walls/toptop.png
+LVD#W0298=z_Pictures/Walls/toptop.png
+LVD#W0299=z_Pictures/Walls/toptop.png
+LVD#W0300=z_Pictures/Walls/toptop.png
+LVD#W0301=z_Pictures/Walls/toptop.png
+LVD#W0302=z_Pictures/Walls/toptop.png
+LVD#W0303=z_Pictures/Walls/toptop.png
+LVD#W0304=z_Pictures/Walls/toptop.png
+LVD#W0305=z_Pictures/Walls/toptop.png
+LVD#W0306=z_Pictures/Walls/toptop.png
+LVD#W0307=z_Pictures/Walls/toptop.png
+LVD#W0308=z_Pictures/Walls/toptop.png
+LVD#W0309=z_Pictures/Walls/toptop.png
+LVD#W0311=z_Pictures/Walls/toptop.png
+LVD#W0312=z_Pictures/Walls/toptop.png
+
+<=======================================================>
+
+LVD#W0000=z0
+LVD#W0001=z90
+LVD#W0002=z180
+LVD#W0003=z270
+LVD#W0004=z0
+LVD#W0005=z0
+LVD#W0006=z0
+LVD#W0007=z0
+LVD#W0008=z0
+LVD#W0009=z0
+LVD#W0010=z0
+LVD#W0011=z0
+LVD#W0012=z0
+LVD#W0013=z0
+LVD#W0014=z0
+LVD#W0015=z0
+LVD#W0016=z0
+LVD#W0017=z0
+LVD#W0018=z0
+LVD#W0019=z0
+LVD#W0020=z0
+LVD#W0021=z0
+LVD#W0022=z0
+LVD#W0023=z0
+LVD#W0024=z0
+LVD#W0025=z0
+LVD#W0026=z0
+LVD#W0027=z0
+LVD#W0028=z0
+LVD#W0029=z0
+LVD#W0030=z0
+LVD#W0031=z0
+LVD#W0032=z0
+LVD#W0033=z0
+LVD#W0034=z0
+LVD#W0035=z0
+LVD#W0036=z0
+LVD#W0037=z0
+LVD#W0038=z0
+LVD#W0039=z0
+LVD#W0040=z0
+LVD#W0041=z0
+LVD#W0042=z90
+LVD#W0043=z90
+LVD#W0044=z90
+LVD#W0045=z90
+LVD#W0046=z90
+LVD#W0047=z90
+LVD#W0048=z90
+LVD#W0049=z90
+LVD#W0051=z90
+LVD#W0052=z90
+LVD#W0053=z90
+LVD#W0054=z90
+LVD#W0055=z90
+LVD#W0056=z90
+LVD#W0059=z90
+LVD#W0060=z90
+LVD#W0061=z90
+LVD#W0062=z90
+LVD#W0063=z90
+LVD#W0064=z90
+LVD#W0065=z90
+LVD#W0066=z90
+LVD#W0067=z90
+LVD#W0068=z180
+LVD#W0069=z180
+LVD#W0070=z180
+LVD#W0071=z180
+LVD#W0072=z180
+LVD#W0073=z180
+LVD#W0108=z270
+LVD#W0109=z270
+LVD#W0110=z270
+LVD#W0112=z270
+LVD#W0113=z270
+LVD#W0114=z270
+LVD#W0115=z270
+LVD#W0116=z270
+LVD#W0117=z270
+LVD#W0118=z270
+LVD#W0119=z270
+LVD#W0120=z270
+LVD#W0121=z270
+LVD#W0122=z270
+LVD#W0123=z270
+LVD#W0124=z270
+LVD#W0125=z270
+LVD#W0126=z270
+LVD#W0127=z270
+LVD#W0128=z270
+LVD#W0129=z270
+LVD#W0130=z270
+LVD#W0131=z270
+LVD#W0133=z180
+LVD#W0134=z180
+LVD#W0135=z180
+LVD#W0136=z180
+LVD#W0137=z180
+LVD#W0138=z180
+LVD#W0139=z180
+LVD#W0140=z270
+LVD#W0143=z270
+LVD#W0144=z180
+LVD#W0145=z180
+LVD#W0146=z180
+LVD#W0147=z270
+LVD#W0148=z270
+LVD#W0150=z90
+LVD#W0151=z90
+LVD#W0152=z180
+LVD#W0153=z180
+LVD#W0154=z270
+LVD#W0155=z180
+LVD#W0156=z180
+LVD#W0157=z270
+LVD#W0158=z90
+LVD#W0159=z90
+LVD#W0160=z270
+LVD#W0161=z270
+LVD#W0162=z180
+LVD#W0163=z180
+LVD#W0164=z180
+LVD#W0165=z180
+LVD#W0166=z180
+LVD#W0167=z180
+LVD#W0168=z180
+LVD#W0169=z180
+LVD#W0170=z180
+LVD#W0171=z180
+LVD#W0172=z180
+LVD#W0173=z180
+LVD#W0174=z180
+LVD#W0175=z180
+LVD#W0176=z180
+LVD#W0177=z180
+LVD#W0178=z180
+LVD#W0179=z180
+LVD#W0180=z0
+LVD#W0181=z0
+LVD#W0182=z0
+LVD#W0183=z0
+LVD#W0184=z0
+LVD#W0185=z0
+LVD#W0186=z0
+LVD#W0187=z0
+LVD#W0188=z0
+LVD#W0189=z0
+LVD#W0190=z0
+LVD#W0192=z0
+LVD#W0193=z0
+LVD#W0194=z0
+LVD#W0195=z0
+LVD#W0196=z0
+LVD#W0197=z0
+LVD#W0198=z0
+LVD#W0199=z0
+LVD#W0200=z0
+LVD#W0201=z0
+LVD#W0202=z0
+LVD#W0203=z0
+LVD#W0204=z0
+LVD#W0205=z0
+LVD#W0206=z0
+LVD#W0207=z0
+LVD#W0208=z0
+LVD#W0209=z0
+LVD#W0211=z0
+LVD#W0212=z0
+LVD#W0213=z0
+LVD#W0214=z0
+LVD#W0215=z0
+LVD#W0216=z0
+LVD#W0217=z0
+LVD#W0218=z0
+LVD#W0219=z0
+LVD#W0220=z0
+LVD#W0221=z0
+LVD#W0222=z0
+LVD#W0223=z0
+LVD#W0224=z0
+LVD#W0226=z0
+LVD#W0228=z0
+LVD#W0229=z0
+LVD#W0230=z0
+LVD#W0231=z0
+LVD#W0232=z0
+LVD#W0233=z0
+LVD#W0234=z0
+LVD#W0235=z0
+LVD#W0236=z0
+LVD#W0237=z0
+LVD#W0239=z0
+LVD#W0240=z0
+LVD#W0241=z0
+LVD#W0242=z0
+LVD#W0243=z0
+LVD#W0244=z0
+LVD#W0245=z0
+LVD#W0246=z0
+LVD#W0247=z0
+LVD#W0248=z0
+LVD#W0249=z0
+LVD#W0250=z0
+LVD#W0251=z0
+LVD#W0252=z0
+LVD#W0253=z0
+LVD#W0254=z0
+LVD#W0255=z0
+LVD#W0256=z0
+LVD#W0257=z0
+LVD#W0258=z0
+LVD#W0259=z0
+LVD#W0260=z0
+LVD#W0261=z0
+LVD#W0262=z0
+LVD#W0263=z0
+LVD#W0264=z0
+LVD#W0265=z0
+LVD#W0266=z0
+LVD#W0267=z0
+LVD#W0268=z0
+LVD#W0269=z0
+LVD#W0270=z0
+LVD#W0271=z0
+LVD#W0272=z0
+LVD#W0273=z0
+LVD#W0274=z0
+LVD#W0275=z0
+LVD#W0276=z0
+LVD#W0277=z0
+LVD#W0278=z0
+LVD#W0279=z0
+LVD#W0280=z0
+LVD#W0281=z0
+LVD#W0282=z0
+LVD#W0283=z0
+LVD#W0284=z0
+LVD#W0285=z0
+LVD#W0286=z0
+LVD#W0287=z0
+LVD#W0289=z0
+LVD#W0290=z0
+LVD#W0291=z0
+LVD#W0292=z0
+LVD#W0293=z0
+LVD#W0294=z0
+LVD#W0295=z0
+LVD#W0296=z0
+LVD#W0297=z0
+LVD#W0298=z0
+LVD#W0299=z0
+LVD#W0300=z0
+LVD#W0301=z0
+LVD#W0302=z0
+LVD#W0303=z0
+LVD#W0304=z0
+LVD#W0305=z0
+LVD#W0306=z0
+LVD#W0307=z0
+LVD#W0308=z0
+LVD#W0309=z0
+LVD#W0311=z0
+LVD#W0312=z0
+
+<=======================================================>
+
+LVD#W0000=z(1248, 0)
+LVD#W0001=z(0, 0)
+LVD#W0002=z(0, 768)
+LVD#W0003=z(1248, 768)
+LVD#W0004=z(1216, 0)
+LVD#W0005=z(1184, 0)
+LVD#W0006=z(1152, 0)
+LVD#W0007=z(1120, 0)
+LVD#W0008=z(1088, 0)
+LVD#W0009=z(1056, 0)
+LVD#W0010=z(1024, 0)
+LVD#W0011=z(992, 0)
+LVD#W0012=z(960, 0)
+LVD#W0013=z(928, 0)
+LVD#W0014=z(896, 0)
+LVD#W0015=z(864, 0)
+LVD#W0016=z(832, 0)
+LVD#W0017=z(800, 0)
+LVD#W0018=z(768, 0)
+LVD#W0019=z(736, 0)
+LVD#W0020=z(704, 0)
+LVD#W0021=z(672, 0)
+LVD#W0022=z(608, 0)
+LVD#W0023=z(640, 0)
+LVD#W0024=z(576, 0)
+LVD#W0025=z(544, 0)
+LVD#W0026=z(480, 0)
+LVD#W0027=z(512, 0)
+LVD#W0028=z(448, 0)
+LVD#W0029=z(416, 0)
+LVD#W0030=z(384, 0)
+LVD#W0031=z(320, 0)
+LVD#W0032=z(288, 0)
+LVD#W0033=z(352, 0)
+LVD#W0034=z(256, 0)
+LVD#W0035=z(224, 0)
+LVD#W0036=z(160, 0)
+LVD#W0037=z(192, 0)
+LVD#W0038=z(128, 0)
+LVD#W0039=z(64, 0)
+LVD#W0040=z(96, 0)
+LVD#W0041=z(32, 0)
+LVD#W0042=z(0, 32)
+LVD#W0043=z(0, 64)
+LVD#W0044=z(0, 96)
+LVD#W0045=z(0, 128)
+LVD#W0046=z(0, 192)
+LVD#W0047=z(0, 160)
+LVD#W0048=z(0, 224)
+LVD#W0049=z(0, 288)
+LVD#W0051=z(0, 352)
+LVD#W0052=z(0, 416)
+LVD#W0053=z(0, 512)
+LVD#W0054=z(0, 576)
+LVD#W0055=z(0, 608)
+LVD#W0056=z(0, 640)
+LVD#W0059=z(0, 736)
+LVD#W0060=z(0, 672)
+LVD#W0061=z(0, 704)
+LVD#W0062=z(0, 544)
+LVD#W0063=z(0, 448)
+LVD#W0064=z(0, 480)
+LVD#W0065=z(0, 384)
+LVD#W0066=z(0, 320)
+LVD#W0067=z(0, 256)
+LVD#W0068=z(32, 768)
+LVD#W0069=z(64, 768)
+LVD#W0070=z(96, 768)
+LVD#W0071=z(128, 768)
+LVD#W0072=z(160, 768)
+LVD#W0073=z(192, 768)
+LVD#W0108=z(1248, 736)
+LVD#W0109=z(1248, 704)
+LVD#W0110=z(1248, 672)
+LVD#W0112=z(1248, 32)
+LVD#W0113=z(1248, 64)
+LVD#W0114=z(1248, 96)
+LVD#W0115=z(1248, 128)
+LVD#W0116=z(1248, 160)
+LVD#W0117=z(1248, 192)
+LVD#W0118=z(1248, 224)
+LVD#W0119=z(1248, 256)
+LVD#W0120=z(1248, 288)
+LVD#W0121=z(1248, 320)
+LVD#W0122=z(1248, 352)
+LVD#W0123=z(1248, 384)
+LVD#W0124=z(1248, 448)
+LVD#W0125=z(1248, 416)
+LVD#W0126=z(1248, 480)
+LVD#W0127=z(1248, 512)
+LVD#W0128=z(1248, 544)
+LVD#W0129=z(1248, 576)
+LVD#W0130=z(1248, 608)
+LVD#W0131=z(1248, 640)
+LVD#W0133=z(1216, 768)
+LVD#W0134=z(1184, 768)
+LVD#W0135=z(1152, 768)
+LVD#W0136=z(1120, 768)
+LVD#W0137=z(1088, 768)
+LVD#W0138=z(1056, 768)
+LVD#W0139=z(1024, 768)
+LVD#W0140=z(224, 768)
+LVD#W0143=z(320, 672)
+LVD#W0144=z(928, 672)
+LVD#W0145=z(256, 672)
+LVD#W0146=z(288, 672)
+LVD#W0147=z(224, 704)
+LVD#W0148=z(224, 736)
+LVD#W0150=z(1024, 736)
+LVD#W0151=z(1024, 704)
+LVD#W0152=z(992, 672)
+LVD#W0153=z(960, 672)
+LVD#W0154=z(224, 672)
+LVD#W0155=z(1024, 672)
+LVD#W0156=z(928, 576)
+LVD#W0157=z(320, 576)
+LVD#W0158=z(928, 608)
+LVD#W0159=z(928, 640)
+LVD#W0160=z(320, 640)
+LVD#W0161=z(320, 608)
+LVD#W0162=z(352, 576)
+LVD#W0163=z(384, 576)
+LVD#W0164=z(416, 576)
+LVD#W0165=z(448, 576)
+LVD#W0166=z(480, 576)
+LVD#W0167=z(512, 576)
+LVD#W0168=z(544, 576)
+LVD#W0169=z(576, 576)
+LVD#W0170=z(608, 576)
+LVD#W0171=z(640, 576)
+LVD#W0172=z(672, 576)
+LVD#W0173=z(704, 576)
+LVD#W0174=z(736, 576)
+LVD#W0175=z(768, 576)
+LVD#W0176=z(800, 576)
+LVD#W0177=z(832, 576)
+LVD#W0178=z(864, 576)
+LVD#W0179=z(896, 576)
+LVD#W0180=z(352, 608)
+LVD#W0181=z(352, 640)
+LVD#W0182=z(352, 672)
+LVD#W0183=z(384, 640)
+LVD#W0184=z(384, 672)
+LVD#W0185=z(384, 608)
+LVD#W0186=z(416, 640)
+LVD#W0187=z(416, 672)
+LVD#W0188=z(416, 608)
+LVD#W0189=z(448, 608)
+LVD#W0190=z(448, 640)
+LVD#W0192=z(480, 672)
+LVD#W0193=z(448, 672)
+LVD#W0194=z(480, 640)
+LVD#W0195=z(480, 608)
+LVD#W0196=z(512, 608)
+LVD#W0197=z(512, 640)
+LVD#W0198=z(512, 672)
+LVD#W0199=z(544, 672)
+LVD#W0200=z(544, 640)
+LVD#W0201=z(544, 608)
+LVD#W0202=z(576, 608)
+LVD#W0203=z(576, 640)
+LVD#W0204=z(576, 672)
+LVD#W0205=z(608, 672)
+LVD#W0206=z(608, 640)
+LVD#W0207=z(640, 608)
+LVD#W0208=z(608, 608)
+LVD#W0209=z(640, 640)
+LVD#W0211=z(640, 672)
+LVD#W0212=z(672, 640)
+LVD#W0213=z(672, 672)
+LVD#W0214=z(672, 608)
+LVD#W0215=z(704, 608)
+LVD#W0216=z(704, 640)
+LVD#W0217=z(704, 672)
+LVD#W0218=z(736, 672)
+LVD#W0219=z(736, 640)
+LVD#W0220=z(736, 608)
+LVD#W0221=z(768, 608)
+LVD#W0222=z(768, 640)
+LVD#W0223=z(768, 672)
+LVD#W0224=z(800, 672)
+LVD#W0226=z(832, 608)
+LVD#W0228=z(800, 608)
+LVD#W0229=z(800, 640)
+LVD#W0230=z(832, 672)
+LVD#W0231=z(832, 640)
+LVD#W0232=z(864, 672)
+LVD#W0233=z(864, 640)
+LVD#W0234=z(864, 608)
+LVD#W0235=z(896, 608)
+LVD#W0236=z(896, 640)
+LVD#W0237=z(896, 672)
+LVD#W0239=z(288, 736)
+LVD#W0240=z(320, 768)
+LVD#W0241=z(352, 736)
+LVD#W0242=z(384, 704)
+LVD#W0243=z(416, 736)
+LVD#W0244=z(448, 768)
+LVD#W0245=z(480, 736)
+LVD#W0246=z(544, 704)
+LVD#W0247=z(544, 736)
+LVD#W0248=z(512, 704)
+LVD#W0249=z(512, 768)
+LVD#W0250=z(544, 768)
+LVD#W0251=z(512, 736)
+LVD#W0252=z(480, 768)
+LVD#W0253=z(480, 704)
+LVD#W0254=z(448, 704)
+LVD#W0255=z(448, 736)
+LVD#W0256=z(416, 704)
+LVD#W0257=z(416, 768)
+LVD#W0258=z(384, 768)
+LVD#W0259=z(384, 736)
+LVD#W0260=z(352, 768)
+LVD#W0261=z(320, 736)
+LVD#W0262=z(352, 704)
+LVD#W0263=z(320, 704)
+LVD#W0264=z(256, 704)
+LVD#W0265=z(288, 704)
+LVD#W0266=z(256, 736)
+LVD#W0267=z(256, 768)
+LVD#W0268=z(288, 768)
+LVD#W0269=z(992, 704)
+LVD#W0270=z(960, 736)
+LVD#W0271=z(928, 768)
+LVD#W0272=z(896, 736)
+LVD#W0273=z(864, 704)
+LVD#W0274=z(832, 736)
+LVD#W0275=z(800, 768)
+LVD#W0276=z(768, 736)
+LVD#W0277=z(736, 704)
+LVD#W0278=z(704, 736)
+LVD#W0279=z(672, 768)
+LVD#W0280=z(640, 736)
+LVD#W0281=z(608, 704)
+LVD#W0282=z(576, 736)
+LVD#W0283=z(576, 768)
+LVD#W0284=z(608, 768)
+LVD#W0285=z(608, 736)
+LVD#W0286=z(576, 704)
+LVD#W0287=z(640, 768)
+LVD#W0289=z(704, 704)
+LVD#W0290=z(736, 736)
+LVD#W0291=z(768, 768)
+LVD#W0292=z(800, 736)
+LVD#W0293=z(832, 704)
+LVD#W0294=z(864, 736)
+LVD#W0295=z(896, 768)
+LVD#W0296=z(928, 736)
+LVD#W0297=z(960, 704)
+LVD#W0298=z(992, 736)
+LVD#W0299=z(992, 768)
+LVD#W0300=z(960, 768)
+LVD#W0301=z(928, 704)
+LVD#W0302=z(896, 704)
+LVD#W0303=z(864, 768)
+LVD#W0304=z(832, 768)
+LVD#W0305=z(800, 704)
+LVD#W0306=z(768, 704)
+LVD#W0307=z(736, 768)
+LVD#W0308=z(704, 768)
+LVD#W0309=z(672, 736)
+LVD#W0311=z(672, 704)
+LVD#W0312=z(640, 704)
+
+<=======================================================>
+

@@ -1,0 +1,6 @@
+Current Game Version
+	v.0.2.7
+
+
+ ** Last Update Note:
+	The creation of CPU_Stalfos, literally just Stolfos but orange and will eventually track the player.
