@@ -74,3 +74,9 @@ class Main_Node(Node):
 
 	def get_defense(self):
 		return self._info.get_defense()
+
+
+	"""|--------------Setters--------------|#"""
+		#this is where a list of setters will go...
+	def set_myCorners(self, myCorner):
+		self._info.set_myCorners(myCorner)

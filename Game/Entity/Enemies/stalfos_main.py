@@ -32,8 +32,7 @@ class Stalfos_Main(Enemy_Main):
 		while occupied == False:
 			self.__x = int(self.__rand.randint((32+x), screenWidth-(32+x)))
 			self.__y = int(self.__rand.randint((32+x), screenHeight-(32+y)))
-			print(Image_Node.Render.bbox(self._info.get_ID()), 'hello?')
-			objects = self._cLogic.Check_forCollision(objectID=self._info.get_ID())
+			objects = self._cLogic.Check_forCollision(objCorners=(self.__x, self.__y, self.__x+x, self.__y+y))
 			# print(objects)
 			if objects != None and len(objects) >= 0:
 				print('someones here.')

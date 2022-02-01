@@ -8,21 +8,22 @@ from .button_main import Button_Main
 from .placed_imagemain import Placed_ImageMain
 
 class GUI_Events():
-	def __init__(self, iNode, cLogic, mainApp, color):
+	def __init__(self, Node, iNode, cLogic, mainApp, color):
 		self.__columnMax = 4
 		self.__column = 0
 		self.__rowMax = 10
 		self.__row	  = 1
 
 		#other classes
+		self.__color	= color
+		self.__Node		= Node()
 		self.__mainApp	= mainApp
 		self.__cLogic	= cLogic
 		self.__iNode	= iNode
-		self.__color	= color
 		self.__kNode	= Kinetics_Node()
 
 		#GUI vars
-		self.__isIMG		= False
+		self.__isImage		= False
 		self.__isDrag		= False
 		self.__isRotate		= False
 		self.__isMoving		= False
@@ -32,7 +33,7 @@ class GUI_Events():
 		self.__gridCoords	= []
 		self.__gridCorners	= []
 
-		self.__mapFiles = 'E:\Github\Repos_2\Game\levelDesigner\mapSaves'
+		self.__mapFiles = 'E:\Github\Repos_2\Game\levelDesigner\MapSave_Files'
 		self.__pngFiles = 'E:\Github\Repos_2\Game\z_Pictures\Walls'
 
 		'''#_IMAGE VARIABLES_#'''
@@ -45,8 +46,8 @@ class GUI_Events():
 		self.__placedImages 	= [] #Organizational reasons
 		self.__imageDICT			= {}
 		self.__IDcount			= 0
-		self.__CurIMG			= None
-		self.__tkIMG			= None
+		self.__curImage			= None
+		self.__tkImage			= None
 
 
 		#RAND VARS
@@ -64,22 +65,14 @@ class GUI_Events():
 			return
 
 		#Create Buttons Name
-		if self.__buttonCount <= 9:
-			button_ID = 'LVD#B00'+str(self.__buttonCount)
-		elif self.__buttonCount > 9 and self.__buttonCount <= 99:
-			button_ID = 'LVD#B0'+str(self.__buttonCount)
-		elif self.__buttonCount > 99 and self.__buttonCount <= 999:
-			button_ID = 'LVD#B'+str(self.__buttonCount)
-		else:
-			print('ERROR: To Manny Buttons')
+		self.__Node.Create_ObjectName('LVDB', self.__buttonCount)
 		self.__buttonCount += 1
-		print(button_ID)
 
 		#Create Button
-		image = self.__iNode.Img_Add(file)
-		widget_ID = Button(parent, image=image[2], bg=self.__color, activebackground=self.__color, command=lambda:self.Drag_Drop(button_ID))
-		self.__buttonDICT[button_ID] = Button_Main(button_ID, widget_ID)
-		self.__buttonDICT[button_ID].Image_Info(fileLoc=file, tkIMG=image[2], pilIMG=image[0], size=image[1])
+		image = self.__iNode.Image_Add(file)
+		widget_ID = Button(parent, image=image[2], bg=self.__color, activebackground=self.__color, command=lambda:self.Drag_Drop(buttonID))
+		self.__buttonDICT[buttonID] = Button_Main(buttonID, widget_ID)
+		self.__buttonDICT[buttonID].Image_Info(fileLoc=file, tkImage=image[2], pilImage=image[0], size=image[1])
 
 		#Place Button
 		widget_ID.grid(row=self.__row, column=self.__column)
@@ -89,84 +82,77 @@ class GUI_Events():
 			self.__column = 0
 			self.__row	  +=1
 
-	def Drag_Drop(self, button_ID):
+	def Drag_Drop(self, buttonID):
 		if self.__isDrag == False:
 			print("!#_ON_#!")
 			self.__isDrag = True
-			self.__CurIMG = self.__iNode.Img_Place(-50, -50, image=self.__buttonDICT[button_ID].get_tkIMG(), LVD='yes')
-			self.__mainApp.bind(('<Motion>'), lambda event, arg=button_ID: self.Move_Image(event, arg))
-			self.__mainApp.bind_all(('<MouseWheel>'), lambda event, arg=button_ID: self.Rotate_Image(event, arg))
+			self.__curImage = self.__iNode.Image_Place(-50, -50, image=self.__buttonDICT[buttonID].get_tkImage())
+			self.__mainApp.bind(('<Motion>'), lambda event, arg=buttonID: self.Move_Image(event, arg))
+			self.__mainApp.bind_all(('<MouseWheel>'), lambda event, arg=buttonID: self.Rotate_Image(event, arg))
 		else:
 			print('!#_OFF_#!')
 			self.__isDrag = False
 			self.__isRotate = False
 			self.__lastRotate = 0
-			self.__tkIMG	= None
-			Image_Node.Render.delete(self.__CurIMG)
+			self.__tkImage	= None
+			Image_Node.Render.delete(self.__curImage)
 			self.__mainApp.unbind(('<Motion>'))
 			self.__mainApp.unbind_all(('<MouseWheel>'))
 			Image_Node.Render.unbind(('<Button-1>'))
 
 
-	def Rotate_Image(self, event, button_ID):
+	def Rotate_Image(self, event, buttonID):
 		self.__lastRotate += 90
 		if self.__lastRotate == 360:
 			self.__lastRotate = 0
 		self.__isRotate = True
-		oldIMG = self.__CurIMG
-		self.__tkIMG = self.__iNode.Img_Rotate(self.__buttonDICT[button_ID].get_pilIMG(), self.__lastRotate)
+		oldImage = self.__curImage
+		self.__tkImage = self.__iNode.Image_Rotate(self.__buttonDICT[buttonID].get_pilImage(), self.__lastRotate)
 		x, y = self.__gridCoords[self.__hoverSquare]
-		self.__CurIMG = self.__iNode.Img_Place(x, y, self.__tkIMG, LVD='yes')
-		Image_Node.Render.delete(oldIMG)
+		self.__curImage = self.__iNode.Image_Place(x, y, self.__tkImage)
+		Image_Node.Render.delete(oldImage)
 
-	def Move_Image(self, event, button_ID):
+	def Move_Image(self, event, buttonID):
 		self.__isMoving = True
 		self.Find_Square(event)
 		self.Find_Widget()
 
 		if self.__hoverWidget == Image_Node.Render:
 			if self.__isDrag == True:
-				canvID = Image_Node.Render.find_withtag(self.__CurIMG)[0]
-				x, y = self.__gridCoords[self.__hoverSquare]
-				Image_Node.Render.coords(canvID, x, y)
-				Image_Node.Render.bind(('<Button-1>'), lambda event, arg=button_ID: self.Place_Image(event, arg))
+				if self.__curImage != None:
+					canvID = Image_Node.Render.find_withtag(self.__curImage)[0]
+					x, y = self.__gridCoords[self.__hoverSquare]
+					Image_Node.Render.coords(canvID, x, y)
+					Image_Node.Render.bind(('<Button-1>'), lambda event, arg=buttonID: self.Place_Image(event, arg))
 
-	def Place_Image(self, event, button_ID):
+	def Place_Image(self, event, buttonID):
 		self.Del_Image(event)
-		if self.__IDcount <= 9:
-			ID = 'LVD#W000'+str(self.__IDcount)
-		elif self.__IDcount > 9 and self.__IDcount <= 99:
-			ID = 'LVD#W00'+str(self.__IDcount)
-		elif self.__IDcount > 99 and self.__IDcount <= 999:
-			ID = 'LVD#W0'+str(self.__IDcount)
-		elif self.__IDcount > 999 and self.__IDcount <= 9999:
-			ID = 'LVD#W'+str(self.__IDcount)
-		else: #add more elif's above if needed
-			print('ERROR: To Manny Walls')
+		ID = self.__Node.Create_ObjectName('LVDW', self.__IDcount, LVLD=True)
 		self.__IDcount += 1
 
 		self.Find_Square(event)
 		x, y = self.__gridCoords[self.__hoverSquare]
 
+		# print(ID)
 		self.__placedImages.append(ID)
-		self.__placedImagesTK.append(self.__tkIMG)
-		self.__imageDICT[ID] = PLC_ImgMain(ID, button_ID)
-		self.__imageDICT[ID].Image_Info(self.__buttonDICT[button_ID].get_fileLoc(),
-									  self.__buttonDICT[button_ID].get_Size(),
+		self.__placedImagesTK.append(self.__tkImage)
+		self.__imageDICT[ID] = Placed_ImageMain(ID, buttonID)
+		self.__imageDICT[ID].Image_Info(self.__buttonDICT[buttonID].get_fileLoc(),
+									  self.__buttonDICT[buttonID].get_size(),
 									  (x, y), self.__lastRotate)
-		if self.__tkIMG == None:
-			self.__tkIMG = self.__buttonDICT[button_ID].get_tkIMG()
+		if self.__tkImage == None:
+			self.__tkImage = self.__buttonDICT[buttonID].get_tkImage()
 
-		self.__iNode.Img_Place(x, y, self.__tkIMG, LVD='yes', tag=[ID, self.__imageDICT[ID].get_group_ID()])
+		self.__iNode.Image_Place(x, y, self.__tkImage, tag=[ID, self.__imageDICT[ID].get_groupID()])
 
 	def Find_Image(self):
-		if self.__isIMG == False:
+		if self.__isImage == False:
 			print("!#_ON_#!")
-			self.__isIMG = True
-			self.__mainApp.bind_all("((<Button-1>))", self.Find_imgTag)
+			self.__isImage = True
+			self.__mainApp.bind_all("((<Button-1>))", self.Find_ImageTag)
 		else:
 			print('!#_OFF_#!')
-			self.__isIMG = False
+			self.__isImage = False
 			self.__mainApp.unbind_all("((<Button-1>))")
 
 	def Find_ImageTag(self, event):

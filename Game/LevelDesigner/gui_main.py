@@ -9,15 +9,15 @@ from .menu_main import Menu_Main
 
 class GUI_Main():
 	def __init__(self, cLogic, iNode, cNode, mainApp, color, mainMenu):
+		self.__mainMenu =mainMenu
+		self.__mainApp	= mainApp
 		self.__key 	  = 32
 		self.__iNode  = iNode
 		self.__kNode  = Kinetics_Node()
 		self.__cNode  = cNode
 		self.__cLogic = cLogic
-		self.__mainApp= mainApp
-		self.__mainMenu=mainMenu
 		self.__color  = color
-		self.__eGUI	  = GUI_Events(iNode, cLogic, mainApp, color)
+		self.__eGUI	  = GUI_Events(Node, iNode, cLogic, mainApp, color)
 		self.__siFILES= SI_Files(iNode, mainApp, color, self.__eGUI)
 
 		if mainMenu != None:
@@ -27,7 +27,7 @@ class GUI_Main():
 		#Frame Vars
 		self.__imageList= None
 
-		self.__defultButtons = 'E:\Github\Game_Repos_1\Game\lvlDesigner\ButtonLoadOut\Test1.txt'
+		self.__defultButtons = 'E:\Github\Repos_2\Game\LevelDesigner\ButtonSet_Files\Test1.txt'
 		#Button Vars
 		self.__import	 = None
 		self.__delKEY	 = None
@@ -49,10 +49,10 @@ class GUI_Main():
 		for frame in [self.__imageList, ]:
 			frame.grid_propagate(0)
 
-		self.__siFILES.set_imgFrame(self.__imageList)
+		self.__siFILES.set_imageFrame(self.__imageList)
 
 		"""#__Buttons from load__#"""
-		self.__siFILES.Button_Set(self.__DefultButtons)
+		self.__siFILES.Read_ButtonSet(DefaultBS=self.__defultButtons)
 
 		"""#__event Calls__#"""
 		# self.__mainApp.bind_all(('<Button-1>'), self.__eGUI.mousePosition)
@@ -62,7 +62,7 @@ class GUI_Main():
 		self.__import  = Button(self.__mainApp, text='Import Image', width=16, height=2, command=lambda:self.__eGUI.open_imgFiles(self.__imageList))
 		self.__delKEY  = Button(self.__mainApp, text='Map Wipe',	 width=16, height=2, command=self.__eGUI.Map_Wipe)
 		self.__delFILE = Button(self.__mainApp, text='Delete File',  width=16, height=2, command=self.__eGUI.Del_File)
-		self.__findImage = Button(self.__mainApp, text='Find IMG',	 width=16, height=2, command=self.__eGUI.FindIMG_Button)
+		self.__findImage = Button(self.__mainApp, text='Find IMG',	 width=16, height=2, command=self.__eGUI.Find_Image)
 
 		self.__import.grid(row=1, column=2)
 		self.__delKEY.grid(row=1, column=3)

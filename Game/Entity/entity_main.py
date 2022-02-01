@@ -54,9 +54,10 @@ class Entity_Main(Main_Node):
 	#OSC == Other Side of Collision, it represents the other object that collided with player
 	#OSA == Other Side's Attack, represents the other objects needed parameters.
 	def My_Collision(self, OSC=None, OSA=None, side=None, staticsList=None):
+		# print('My_Collision:\n\t', OSC)
 		if self._isHit == False:
 			if OSC == None:
-				pass
+				return
 			#__Other Side Collision: Static__#
 			elif OSC == 'Static':
 				for newSide in side:
@@ -69,10 +70,10 @@ class Entity_Main(Main_Node):
 					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), side, speed=self._info.get_speed())
 					self._info.set_myCoords(new_Coords)
 					self._info.set_myCorners(self._info.get_ID())
-			#__Other Side Collision: Enemy/Weapon__#
-		elif OSC == 'Enemy' or OSC == 'Weapon' or OSC == 'Friend':
+				#__Other Side Collision: Enemy/Weapon/Friend__#
+			elif OSC == 'Enemy' or OSC == 'Weapon' or OSC == 'Friend':
 				#---------------Math---------------#
-				if OCS != 'Friend':
+				if OSC != 'Friend':
 					self._myHealth -= OSA
 				for newSide in side:
 					if newSide == 'top':
@@ -92,10 +93,10 @@ class Entity_Main(Main_Node):
 								if obj != None:
 									if obj.get_groupID() in staticsList:
 										direction = self._cLogic.Side_Calc(self._cLogic.Tag_toObject(self._info.get_ID()))
-										self.My_Collision(OCS='Static', side=direction)
+										self.My_Collision(OSC='Static', side=direction)
 										return
 				#---------------Logic---------------#
-				if OCS != 'Friend':
+				if OSC != 'Friend':
 					self._isHit		= True
 					self._isAlive	= self.Check_Health()
 					self._saveTime	= Timer_Node.GameTime

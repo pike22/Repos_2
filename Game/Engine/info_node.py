@@ -87,7 +87,10 @@ class Info_Node():
 		self._canCollide = yes
 
 	def set_myCorners(self, objectName):
-		self._myCorners = Image_Node.Render.bbox(objectName)
+		if Image_Node.Render.bbox(objectName) != None:
+			self._myCorners = Image_Node.Render.bbox(objectName)
+		else:
+			self._myCorners = objectName
 
 	def set_myCoords(self, coords):
 		self._myCoords = coords

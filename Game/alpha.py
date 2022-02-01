@@ -14,8 +14,10 @@ class Alpha():
 	def __init__(self):
 		self.__screenWidth	 = 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.5]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.52]"
 
+		#Don't append till after SetUP is called
+		self.__everyRoster 		= [] #Allobject IDs
 		#---Entity ID Rosters---#
 		self.__stalfosRoster	= [] #Stalfos tags
 		self.__playerRoster		= [] #Player tags
@@ -92,6 +94,8 @@ class Alpha():
 		#__Projectiles__#
 		self.__cNode.set_projRoster(self.__projRoster)
 
+		self.__cNode.set_everyRoster(self.__everyRoster)
+
 		#---Temperary Variables---#
 		self.__loopCount = 33
 		self.__seconds   = 0
@@ -115,18 +119,22 @@ class Alpha():
 		self.__siFILES.Read_File(self.__levelTWO)
 		self.__imageDICT = self.__siFILES.get_imageDICT()
 
-		for tag in self.__imageDICT.keys():
-			self.__cLogic.Add_CollisionDict(tagOrId=tag, obj=self.__imageDICT[tag])
-			self.__cLogic.Add_Collision(LVD_Corner=self.__imageDICT[tag].get_myCorners())
-			self.__wallRoster.append(tag)
+		# print('image keys\n\t', self.__imageDICT.keys())
+		for key in self.__imageDICT.keys():
+			self.__cLogic.Add_CollisionDict(tagOrId=key, obj=self.__imageDICT[key])
+			self.__wallRoster.append(key)
+		self.__cLogic.Add_Collision(lvdCorners=self.__imageDICT)
 		self.__cNode.set_wallRoster(self.__wallRoster)
 
 		#Bellow is Entity set up
 		self.__Player.Player_SetUP(x=96, y=160)
+		self.__everyRoster.append(self.__Player.get_ID())
 		# self.__Player.Info_Print('PLayer')
 		self.__Sword.Sword_SetUP()
+		self.__everyRoster.append(self.__Sword.get_ID())
 		# self.__Sword.Info_Print('Sword')
 		self.__Bow.Bow_SetUP()
+		self.__everyRoster.append(self.__Bow.get_ID())
 		# self.__Bow.Info_Print('Bow')
 		self.__Player.set_weapons(sword=self.__Sword, bow=self.__Bow, )
 
@@ -137,18 +145,23 @@ class Alpha():
 				if re.search("(^ST#.{3})", self.__stalfosRoster[item]) != None:
 					Stal = COLDICT[re.search("(^ST#.{3})", self.__stalfosRoster[item]).group(1)]
 					Stal.Stalfos_SetUP(self.__screenWidth, self.__screenHeight)
+					self.__everyRoster.append(Stal.get_ID())
 					# dum_Stal.Info_Print('Stalfos')
 
 		COLDICT = self.__cLogic.get_collisionDict()
 		for item in range(len(self.__slimeRoster)):
 			if self.__slimeRoster[item] in COLDICT.keys():
 				if re.search("(^SL#.{3})", self.__slimeRoster[item]) != None:
-					slime = COLDICT[re.search("(^SL#.{3})", self.__slimeRoster[item]).group(1)]
-					slime.Slime_SetUP(self.__screenWidth, self.__screenHeight)
-					# cpu_Stal.Info_Print('Slime')
+					Slime = COLDICT[re.search("(^SL#.{3})", self.__slimeRoster[item]).group(1)]
+					Slime.Slime_SetUP(self.__screenWidth, self.__screenHeight)
+					self.__everyRoster.append(Slime.get_ID())
+					# Slime.Info_Print('Slime')
 
 
 		#_Weapon SETUP_#
+
+		#_Sets Every Roster_#
+		self.__cNode.set_everyRoster(self.__everyRoster)
 
 		#_CLOCK SETUP_#
 		self.__tNode.Game_Clock(GC_OFF)
@@ -180,17 +193,20 @@ class Alpha():
 
 			#_STALFOS_#
 		collisionDict = self.__cLogic.get_collisionDict()
-		for tag in self.__stalfosRoster:
-			stalfos = collisionDict[tag]
-			if stalfos.get_isAlive() == True:
-				stalfos.Movement_Controll()
-				# stalfos.Stal_Attack()
+		for key in self.__stalfosRoster:
+			if key in collisionDict:
+				stalfos = collisionDict[key]
+				if stalfos.get_isAlive() == True:
+					stalfos.Movement_Controll()
+					# stalfos.Stal_Attack()
+					pass
 			#_SLIME_#
-		collisionDict = self.__cLogic.get_collisionDict()
-		for tag in self.__slimeRoster:
-			slime = collisionDict[tag]
-			if slime.get_isAlive() == True:
-				slime.Movement_Controll(self.__Player.get_myCoords())
+		for key in self.__slimeRoster:
+			if key in collisionDict:
+				slime = collisionDict[key]
+				if slime.get_isAlive() == True:
+					slime.Movement_Controll(self.__Player.get_myCoords())
+					pass
 
 		#_Collision Logic functions_#
 		#_collisionDict is set up inside the alpha.__init__()
@@ -199,11 +215,13 @@ class Alpha():
 		list1 = []
 		list1 = [self.__Player.get_myCorners()]
 		for item in range(len(self.__stalfosRoster)):
-			c_Stal = self.__cLogic.Tag_toObject(self.__stalfosRoster[item]) #c_Stal == stalfos obj
-			list1.append(c_Stal.get_myCorners())
+			stal = self.__cLogic.Tag_toObject(self.__stalfosRoster[item])
+			if stal != None:
+				list1.append(stal.get_myCorners())
 		for item in range(len(self.__slimeRoster)):
-			cpu_Stal = self.__cLogic.Tag_toObject(self.__slimeRoster[item])
-			list1.append(cpu_Stal.get_myCorners())
+			slime = self.__cLogic.Tag_toObject(self.__slimeRoster[item])
+			if slime != None:
+				list1.append(slime.get_myCorners())
 
 		if self.__Sword.get_isActive() == True:
 			list1.append(self.__Sword.get_myCorners())
@@ -214,7 +232,8 @@ class Alpha():
 			if self.__Bow.get_projActive(item) == True:
 				list1.append(self.__Bow.get_projCorners(item))
 
-		self.__cNode.Use_Collision(list1, len(list1))
+		self.__cLogic.Add_Collision(list1)
+		self.__cNode.Use_Collision(len(list1))
 
 
 
@@ -235,17 +254,18 @@ class Alpha():
 
 		collisionDict = self.__cLogic.get_collisionDict()
 		for item in range(len(self.__stalfosRoster)):
-			result = collisionDict[self.__stalfosRoster[item]]
-			if result.get_isHit() == True:
-				print('got hit')
-				result.Reset_Hit(Name='Stalfos')
+			if self.__stalfosRoster[item] in collisionDict.keys():
+				result = collisionDict[self.__stalfosRoster[item]]
+				if result.get_isHit() == True:
+					print('got hit')
+					result.Reset_Hit(Name='Stalfos')
 
-		collisionDict = self.__cLogic.get_collisionDict()
 		for item in range(len(self.__slimeRoster)):
-			result = collisionDict[self.__slimeRoster[item]]
-			if result.get_isHit() == True:
-				print('got hit')
-				result.Reset_Hit(Name='Slime')
+			if self.__slimeRoster[item] in collisionDict.keys():
+				result = collisionDict[self.__slimeRoster[item]]
+				if result.get_isHit() == True:
+					print('got hit')
+					result.Reset_Hit(Name='Slime')
 
 
 		self.__mainApp.after(int(self.__tNode.get_FPS()), self.Game_Loop)

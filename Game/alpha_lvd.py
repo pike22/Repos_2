@@ -1,7 +1,7 @@
 #imports
 from PIL import ImageTk, Image
 # from alpha import Alpha
-from lvlDesigner import *
+from LevelDesigner import *
 from z_Pictures import *
 from colored import fg
 from tkinter import *
@@ -22,18 +22,18 @@ class Alpha_LVD():
 
 		"""Class Call's"""
 		self.__mainApp	= Tk()
-		self.__cLogic	= Collision_Logic(None)
+		self.__cLogic	= Collision_Logic()
 		self.__cNode	= Collision_Node(self.__cLogic)
 		self.__tNode	= Timer_Node(self.__mainApp)
 		self.__iNode	= Image_Node() #NOTHING TO NOTE
-		self.__kNode	= Kinetics_Node(self.__iNode)
+		self.__kNode	= Kinetics_Node()
 		self.__mainMenu = Menu_Main(self.__mainApp, self.__color)
-		self.__GUI		= GUI_Main(self.__cLogic, self.__iNode, self.__kNode, self.__cNode, self.__mainApp, 'Grey', self.__mainMenu)
+		self.__GUI		= GUI_Main(self.__cLogic, self.__iNode, self.__cNode, self.__mainApp, 'Grey', self.__mainMenu)
 
 		"""Widget Names"""
 		#frames
 		self.__projWindow = None
-		self.__ImgList	  = None
+		self.__imageList  = None
 
 		#buttons
 		self.__Import = None
@@ -46,7 +46,7 @@ class Alpha_LVD():
 	def tk_windowSETUP(self):
 		self.__mainApp.title(self.__version)
 		self.__mainApp.geometry(str(self.__screenWidth+260) + 'x' + str(self.__screenHeight))
-		self.__mainMenu.menu_setUP()
+		self.__mainMenu.Menu_SetUP()
 
 	def set_MainCanvas(self): #Set Renders HERE
 		self.__iNode.Create_Canvas(self.__mainApp, self.__screenHeight, self.__screenWidth, color=self.__color)

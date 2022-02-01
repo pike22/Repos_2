@@ -6,10 +6,12 @@ class Collision_Node():
 		self.__logic = clNode
 
 		#different obj needed for collision node
+		self.__arrowRoster	 = [] #Arrow tags
 		self.__stalfosRoster = None
 		self.__playerRoster  = None
 		self.__staticRoster	 = None
 		self.__weaponRoster	 = None
+		self.__everyRoster	 = None
 		self.__slimeRoster	 = None
 		self.__enemyRoster	 = None
 		self.__wallRoster	 = None
@@ -21,9 +23,7 @@ class Collision_Node():
 		self.__wallHIT = None
 
 
-	def Use_Collision(self, cornerList, totItemCount):
-		self.__logic.Add_Collision(listofCorners=cornerList)
-
+	def Use_Collision(self, totItemCount):
 		self.__result = None
 		for loopCount in range(totItemCount):
 			self.__result = self.__logic.Is_Collision(loopCount)
@@ -144,21 +144,25 @@ class Collision_Node():
 		self.__stalfosRoster = Roster
 		self.__logic.set_stalfosRoster(Roster)
 
-	def set_slimeRoster(self, Roster):
-		self.__slimeRoster = Roster
-		self.__logic.set_slimeRoster(Roster)
-
 	def set_weaponRoster(self, Roster):
 		self.__weaponRoster = Roster
 		self.__logic.set_weaponRoster(Roster)
 
-	def set_projRoster(self, Roster):
-		self.__projRoster = Roster
-		self.__logic.set_projRoster(Roster)
+	def set_slimeRoster(self, Roster):
+		self.__slimeRoster = Roster
+		self.__logic.set_slimeRoster(Roster)
+
+	def set_everyRoster(self, Roster):
+		self.__everyRoster = Roster
+		self.__logic.set_everyRoster(Roster)
 
 	def set_staticRoster(self, Roster):
 		self.__staticRoster = Roster
 		self.__logic.set_staticRoster(Roster)
+
+	def set_projRoster(self, Roster):
+		self.__projRoster = Roster
+		self.__logic.set_projRoster(Roster)
 
 	def set_wallRoster(self, Roster):
 		self.__wallRoster = Roster

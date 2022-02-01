@@ -8,9 +8,8 @@ class Image_Node():
 	def __init__(self):
 		self.__gridSizeX = 64
 		self.__gridSizeY = 64
-		self.__imageList    = [] #0 = PIL_img | #1 = size | #2 = TK_img
-		self.__placedImage  = None #this will replace the list varient
-		self.__placedCoord  = None #this will replace the list varient
+		self.__imageList = [] #0 = PIL_img | #1 = size | #2 = TK_img
+		self.__canvasID  = None #Tkinter ID for placed Images
 
 	def Image_Add(self, img_Location):
 		#takes in the initail img
@@ -38,32 +37,16 @@ class Image_Node():
 			tkImg  = ImageTk.PhotoImage(pilImg)
 			return tkImg
 
-	def Image_Place(self, x, y, image, LVD='no', tag=None): # !!returns a tuple!! #Tag needs to be a list
-		if LVD == 'no':
-			canvasID = Image_Node.Render.create_image((x, y), image=image, anchor="nw")
-			if tag != None:
-				if len(tag) > 1:
-					for item in range(len(tag)):
-						Image_Node.Render.addtag_withtag(tag[item], canvasID)
-				else:
-					Image_Node.Render.addtag_withtag(tag, canvasID)
-			self.__placedImage = canvasID
-			self.__placedCoord = (x, y)
-			#Why does this need to return anything? maybe the canvasID, that would be it.
-			# return self.__placedCoord
-
-		elif LVD != 'no': #this is for the level designer
-			canvasID = Image_Node.Render.create_image((x, y), image=image, anchor="nw")
-			if tag != None:
-				if len(tag) > 1:
-					for item in range(len(tag)):
-						Image_Node.Render.addtag_withtag(tag[item], canvasID)
-				else:
-					Image_Node.Render.addtag_withtag(tag, canvasID)
-			self.__placedImage = canvasID
-			self.__placedCoord = (x, y)
-			#Why does this need to return anything? maybe the canvasID, that would be it.
-			# return self.__placedImage
+	def Image_Place(self, x, y, image, tag=None): # !!returns a tuple!! #Tag needs to be a list
+		canvasID = Image_Node.Render.create_image((x, y), image=image, anchor="nw")
+		if tag != None:
+			if len(tag) > 1:
+				for item in range(len(tag)):
+					Image_Node.Render.addtag_withtag(tag[item], canvasID)
+			else:
+				Image_Node.Render.addtag_withtag(tag, canvasID)
+		self.__canvasID = canvasID
+		return self.__canvasID
 
 
 	def Create_Canvas(self, mainApp, height, width, color='Grey'):

@@ -25,8 +25,8 @@ class SI_Files():
 		self.__saveLevel	= None
 		self.__importLevel	= None
 
-		self.__mapFiles = 'E:\Github\Repos_2\Game\lvlDesigner\mapSaves'
-		self.__loadFile = 'E:\Github\Repos_2\Game\lvlDesigner\ButtonLoadOut'
+		self.__mapFiles = 'E:\Github\Repos_2\Game\LevelDesigner\MapSave_Files'
+		self.__loadFile = 'E:\Github\Repos_2\Game\LevelDesigner\ButtonSet_Files'
 		self.__pngFiles = 'E:\Github\Repos_2\Game\z_Pictures\Walls'
 
 		#WRITE FILE VARS
@@ -51,7 +51,7 @@ class SI_Files():
 
 		#OTHER VARS
 		self.list 		   = [] #when in need of a random list, clear before use.
-		self.__tkIMG	   = None
+		self.__tkImage	   = None
 		self.__isRotate	   = False
 		self.__stepCount   = 0
 		self.__lastRotate  = 0
@@ -112,7 +112,7 @@ class SI_Files():
 		for tag in self.__imageFileID:
 			#PULLS IN IMAGE AND ROTATES IF NEEDED
 			image = self.__iNode.Image_Add(self.__imageFileLoc[tag])
-			tkIMG = self.__iNode.Image_Rotate(image[0], int(self.__imageFileRot[tag]))
+			tkImage = self.__iNode.Image_Rotate(image[0], int(self.__imageFileRot[tag]))
 
 			#COORDS & CORNERS FROM FILE
 			coord = self.__imageFilePos[tag]
@@ -129,18 +129,18 @@ class SI_Files():
 			#PLACES THE IMAGES
 			self.__imageDICT[tag] = Placed_ImageMain(tag, None)
 			self.__imageDICT[tag].Image_Info(self.__imageFileLoc[tag], image[1], (x, y), self.__imageFileRot[tag])
-			self.__iNode.Image_Place(x, y, tkIMG, LVD='yes', tag=[tag, self.__imageDICT[tag].get_groupID()])
+			self.__iNode.Image_Place(x, y, tkImage, tag=[tag, self.__imageDICT[tag].get_groupID()])
 			self.__placedImageTag.append(tag)
-			self.__placedImageTK.append(tkIMG)
+			self.__placedImageTK.append(tkImage)
 
 
 		#INFO TO GUI_EVENT
 		if self.__imageFileID != []:
-			lastID  = re.search("^LVD#W(.{4})", self.__imageFileID[-1])
+			lastID  = re.search("^LVDW#(.{4})", self.__imageFileID[-1])
 			lastID2 = lastID.group(1)
 			self.__imageCount += int(lastID2)+1
 
-		# lastBID  = re.search("^LVD#B(.{4})", self.__bIDfile[len(self.__bIDfile)-1])
+		# lastBID  = re.search("^LVDB#(.{4})", self.__bIDfile[len(self.__bIDfile)-1])
 		# lastBID2 = lastBID.group(1)
 		# self.__buttonCount += int(lastBID2)+1
 
@@ -172,7 +172,7 @@ class SI_Files():
 		self.__column = 0
 		self.__buttonCount = 0
 
-		if Change == True:
+		if change == True:
 			self.Read_ButtonSet()
 		#this splits for easy use of the second half during boot up
 
@@ -203,11 +203,11 @@ class SI_Files():
 			# print(tag, 'button')
 
 			#CREATES BUTTON FROM SAVE FILE
-			self.Create_Button(self.__buttonFileLoc[tag], self.__imageFrame, button_ID=tag)
+			self.Create_Button(self.__buttonFileLoc[tag], self.__imageFrame, buttonID=tag)
 			# print(self.__buttonFileLoc[tag])
 
 		if self.__buttonFileID != []:
-			lastBID  = re.search("^LVD#B(.{3})", self.__buttonFileID[-1])
+			lastBID  = re.search("^LVDB#(.{3})", self.__buttonFileID[-1])
 			lastBID2 = lastBID.group(1)
 			self.__buttonCount += int(lastBID2)+1
 
@@ -217,24 +217,24 @@ class SI_Files():
 	'''<========================================================================>
 	#*************************#ShortCut functions#******************************#
 	<========================================================================>'''
-	def Create_Button(self, fileLoc, parent, button_ID, mainGame=None):
+	def Create_Button(self, fileLoc, parent, buttonID, mainGame=None):
 		image = self.__iNode.Image_Add(fileLoc)
 		if mainGame == None:
-			widget_ID = Button(parent, image=image[2], bg=self.__color, activebackground=self.__color, command=lambda:self.__eGUI.Drag_Drop(button_ID))
+			widgetID = Button(parent, image=image[2], bg=self.__color, activebackground=self.__color, command=lambda:self.__eGUI.Drag_Drop(buttonID))
 		else:
-			widget_ID = None
-		self.__buttonDICT[button_ID] = Button_Main(button_ID, widget_ID)
-		self.__buttonDICT[button_ID].Image_Data(fileLoc=fileLoc, tkIMG=image[2], pilIMG=image[0], size=image[1])
+			widgetID = None
+		self.__buttonDICT[buttonID] = Button_Main(buttonID, widgetID)
+		self.__buttonDICT[buttonID].Image_Data(fileLoc=fileLoc, tkImage=image[2], pilImage=image[0], size=image[1])
 
 		#Place Button
 		if mainGame == None:
-			widget_ID.grid(row=self.__row, column=self.__column)
+			widgetID.grid(row=self.__row, column=self.__column)
 			if self.__column <= self.__columnMax:
 				self.__column += 1
 			else:
 				self.__column = 0
 				self.__row	  +=1
-			self.__eGUI.set_RC_Info(column=self.__column, row=self.__row)
+			self.__eGUI.set_RowColumn(column=self.__column, row=self.__row)
 		self.__eGUI.set_buttonDICT(self.__buttonDICT)
 
 	'''===================READ LINE function==================='''
@@ -245,24 +245,24 @@ class SI_Files():
 	#fileType is defaulted in the function called before this one
 	def Read_Dict(self, curLine, step, type):
 		if type == 'LVD Maps':
-			if re.search("(^LVD#W.{4})", curLine) != None:
+			if re.search("(^LVDW#.{4})", curLine) != None:
 				if step == 1:
 					if re.search("=(.*/.*/.*$)", curLine) != None:
-						self.__imageFileLoc[re.search("(^LVD#W.{4})", curLine).group(1)] = re.search("=(.*/.*/.*$)", curLine).group(1)
+						self.__imageFileLoc[re.search("(^LVDW#.{4})", curLine).group(1)] = re.search("=(.*/.*/.*$)", curLine).group(1)
 						# print(self.__imageFileLoc)
 				elif step == 2:
 					if re.search("=z(.*$)", curLine) != None:
-						self.__imageFileRot[re.search("(^LVD#W.{4})", curLine).group(1)] = re.search("=z(.*$)", curLine).group(1)
+						self.__imageFileRot[re.search("(^LVDW#.{4})", curLine).group(1)] = re.search("=z(.*$)", curLine).group(1)
 						# print(self.__imageFileRot)
 				elif step == 3:
 					if re.search("=z(.*$)", curLine) != None:
-						self.__imageFilePos[re.search("(^LVD#W.{4})", curLine).group(1)] = re.search("=z(.*$)", curLine).group(1)
+						self.__imageFilePos[re.search("(^LVDW#.{4})", curLine).group(1)] = re.search("=z(.*$)", curLine).group(1)
 						# print(self.__imageFilePos)
 		else:
-			if re.search("(^LVD#B.{3})", curLine) != None:
+			if re.search("(^LVDB#.{3})", curLine) != None:
 				if step == 1:
 					if re.search("=(.*/.*/.*$)", curLine) != None:
-						self.__buttonFileLoc[re.search("(^LVD#B.{3})", curLine).group(1)] = re.search("=(.*/.*/.*$)", curLine).group(1)
+						self.__buttonFileLoc[re.search("(^LVDB#.{3})", curLine).group(1)] = re.search("=(.*/.*/.*$)", curLine).group(1)
 
 	def Read_Line(self, file, funct, fileTypes=None, listName=None):
 		for line in file:

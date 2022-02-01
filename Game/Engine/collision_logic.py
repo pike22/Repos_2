@@ -21,7 +21,9 @@ class Collision_Logic():
 		self.__staticRoster	 = None
 		self.__weaponRoster	 = None
 		self.__slimeRoster	 = None
+		self.__everyRoster	 = None
 		self.__enemyRoster	 = None
+		self.__arrowRoster	 = None
 		self.__wallRoster	 = None
 		self.__projRoster	 = None
 
@@ -52,15 +54,17 @@ class Collision_Logic():
 	#tagOrId == dictionary key
 	#object == The keys related class object
 	def Add_CollisionDict(self, tagOrId, obj):
-		self.__collisionDict[tagOrId] = obj
+		if tagOrId not in self.__collisionDict.keys():
+			self.__collisionDict[tagOrId] = obj
 
 	def Del_CollisionDict(self, tagOrId):
-		del self.__collisionDict[tagOrId]
+		if tagOrId in self.__collisionDict.keys():
+			del self.__collisionDict[tagOrId]
 
 	def Tag_toObject(self, tagOrId):
-		#output == tag's object
-		output = self.__collisionDict[tagOrId]
-		return output
+		if tagOrId in self.__collisionDict.keys():
+			object = self.__collisionDict[tagOrId]
+			return object
 
 	def Object_toTag(self, obj):
 		for key, object in self.__collisionDict.items():
@@ -74,25 +78,28 @@ class Collision_Logic():
 		return newList
 
 	'''#_COLLISON CALCULATION FUNCTIONS_#'''
-	def Add_Collision(self, listofCorners=None, LVD_Corner=None):
+	def Add_Collision(self, listofCorners=None, lvdCorners=None):
 		if listofCorners != None:
 			self.tempL = []
-			for item in range(len(listofCorners)):
-				self.tempL.append(listofCorners[item])
+			for tuple in listofCorners:
+				self.tempL.append(tuple)
 
-		if LVD_Corner != None:
-			self.__cornersLVD.append(LVD_Corner)
+		if lvdCorners != None:
+			for key in lvdCorners.keys():
+				x, y = lvdCorners[key].get_myCoords()
+				w, h = lvdCorners[key].get_size()
+				myCorner = (x, y, x+w, y+h)
+				lvdCorners[key].set_myCorners(myCorner)
+				self.__cornersLVD.append(myCorner)
 
 		self.__cornersALL = self.tempL + self.__cornersLVD
 
 
-	def Check_forCollision(self, targOBJ=None, objectID=None):
+	def Check_forCollision(self, targOBJ=None, objCorners=None):
 		if targOBJ != None:
-			x1, y1, x2, y2 = targOBJ.get_Corners()
-		if objectID != None:
-			print(objectID)
-			print(Image_Node.Render.bbox(objectID))
-			x1, y1, x2, y2 = Image_Node.Render.bbox(objectID)
+			x1, y1, x2, y2 = self.Tag_toObject(targOBJ).get_myCorners()
+		else:
+			x1, y1, x2, y2 = objCorners
 		collision = Image_Node.Render.find_overlapping(x1, y1, x2, y2)
 		# print(collision, 'ForT Collision')
 		if len(collision) > 1:
@@ -134,9 +141,7 @@ class Collision_Logic():
 			self.__collideList = []
 			self.__collisionList   = []
 
-
 		x1, y1, x2, y2 = self.__cornersALL[item]
-		print(self.__cornersALL[item])
 		collision = Image_Node.Render.find_overlapping(x1, y1, x2, y2)
 
 
@@ -423,17 +428,23 @@ class Collision_Logic():
 	def set_slimeRoster(self, Roster):
 		self.__cpstalfosRost = Roster
 
+	def set_weaponRoster(self, Roster):
+		self.__weaponRoster = Roster
+
 	def set_stalfosRoster(self, Roster):
 		self.__stalfosRoster = Roster
 
-	def set_weaponRoster(self, Roster):
-		self.__weaponRoster = Roster
+	def set_staticRoster(self, Roster):
+		self.__staticRoster = Roster
+
+	def set_everyRoster(self, Roster):
+		self.__everyRoster = Roster
 
 	def set_projRoster(self, Roster):
 		self.__projRoster = Roster
 
-	def set_staticRoster(self, Roster):
-		self.__staticRoster = Roster
+	def set_arrowRoster(self, Roster):
+		self.__arrowRoster = Roster
 
 	def set_wallRoster(self, Roster):
 		self.__wallRoster = Roster
