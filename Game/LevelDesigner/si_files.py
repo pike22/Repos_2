@@ -297,7 +297,7 @@ class SI_Files():
 		# print('saveDICT call', key)
 		#Location
 		if step == 1:
-			info = str(key)+'='+str(dict[key].get_imageFileLoc())+'\n'
+			info = str(key)+'='+str(dict[key].get_fileLoc())+'\n'
 			file.write(info)
 			if key == self.list[-1]:
 				print('lastKEY', key)
@@ -313,7 +313,7 @@ class SI_Files():
 				return
 		#Position
 		elif step == 3:
-			info = str(key)+'=z'+str(dict[key].get_Coords())+'\n'
+			info = str(key)+'=z'+str(dict[key].get_myCoords())+'\n'
 			file.write(info)
 			if key == self.list[-1]:
 				print('lastKEY')

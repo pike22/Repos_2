@@ -14,7 +14,7 @@ class Alpha():
 	def __init__(self):
 		self.__screenWidth	 = 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.52]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.8]"
 
 		#Don't append till after SetUP is called
 		self.__everyRoster 		= [] #Allobject IDs
@@ -59,8 +59,8 @@ class Alpha():
 		#__Import-Maps__#
 		self.__levelONE   = self.__Maps.get_levelONE()
 		self.__levelTWO   = self.__Maps.get_levelTWO()
-		# self.__levelTHREE = self.__Maps.get_levelTHREE()
-		# self.__levelFOUR  = self.__Maps.get_levelFOUR()
+		self.__levelTHREE = self.__Maps.get_levelTHREE()
+		self.__levelFOUR  = self.__Maps.get_levelFOUR()
 
 		#---Collision SETUP---#
 		"""Fills out the Collision_Logic and Collision_Node Classes"""
@@ -116,7 +116,7 @@ class Alpha():
 
 	def Game_SetUP(self, GC_OFF=False):
 		# #__Statics SETUP__#
-		self.__siFILES.Read_File(self.__levelTWO)
+		self.__siFILES.Read_File(self.__levelFOUR)
 		self.__imageDICT = self.__siFILES.get_imageDICT()
 
 		# print('image keys\n\t', self.__imageDICT.keys())
@@ -127,7 +127,7 @@ class Alpha():
 		self.__cNode.set_wallRoster(self.__wallRoster)
 
 		#Bellow is Entity set up
-		self.__Player.Player_SetUP(x=96, y=160)
+		self.__Player.Player_SetUP(self.__screenWidth, self.__screenHeight)
 		self.__everyRoster.append(self.__Player.get_ID())
 		# self.__Player.Info_Print('PLayer')
 		self.__Sword.Sword_SetUP()
@@ -185,10 +185,11 @@ class Alpha():
 			self.__Player.Player_MeleeAttack()
 			self.__Player.Player_RangedAttack()
 			# self.__cLogic.Check_forCollision(self.__Player)
-		if self.__Player.Player_MeleeAttack() == False and self.__Player.Player_RangedAttack() == False:
-			self.__Player.Movement_Controll()
+		if self.__Player.get_isAlive() == True:
+			if self.__Player.Player_MeleeAttack() == False and self.__Player.Player_RangedAttack() == False:
+				self.__Player.Movement_Controll()
 		else:
-			# print("dead? A#184")
+			# print("dead? A#192")
 			pass
 
 			#_STALFOS_#

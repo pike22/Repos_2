@@ -1,6 +1,7 @@
 Current Game Version
-	v.0.2.7
+	v.0.2.8
 
 
  ** Last Update Note:
-	The creation of CPU_Stalfos, literally just Stolfos but orange and will eventually track the player.
+ 		Slime's movement is now smooth and won't jitter back and fourth. Working on creating different levels of CPU controlled movement that is housed inside of Enemy_Main.
+		Should rethink how it is currently called.

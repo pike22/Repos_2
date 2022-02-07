@@ -11,10 +11,12 @@ class Player_Main(Entity_Main):
 		#----Class Calls----#
 		self.__Sword = None
 		self.__Bow	 = None
+		self.__x	 = 0
+		self.__y	 = 0
 
 
 	#seting up player bellow
-	def Player_SetUP(self, x, y):
+	def Player_SetUP(self, screenWidth, screenHeight):
 		print(self._kNode)
 		#img setup
 		print(self._iNode)
@@ -23,47 +25,39 @@ class Player_Main(Entity_Main):
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/purpuloniousthefirst.png')
 
 		#placing the img
-		self._iNode.Image_Place(x, y, self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
+		self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
+		self._iNode.Image_Place(self.__x, self.__y, self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to player
-		self._info.Player_Data(coords=(x, y), speed=7, health=10, defense=5, attack=0) #check player_info for well info.
+		self._info.Player_Data(coords=(self.__x, self.__y), speed=7, health=10, defense=5, attack=0) #check player_info for well info.
 		self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
 
 		#Active Parameters
 		self._myHealth = self._info.get_health()
 
 	def Movement_Controll(self):
-		if self._isStatic == False:
-			if keyboard.is_pressed(self._keyUP):
-				self._lastDir = 'up'
-				new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
-				self._info.set_myCoords(new_Coords)
-				self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-				self._isMoving = True
+		if keyboard.is_pressed(self._keyUP):
+			self._lastDir = 'up'
+			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
+			self.Move_Sets(newCoords)
 
-			if keyboard.is_pressed(self._keyDOWN):
-				self._lastDir = 'down'
-				new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
-				self._info.set_myCoords(new_Coords)
-				self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-				self._isMoving = True
+		if keyboard.is_pressed(self._keyDOWN):
+			self._lastDir = 'down'
+			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
+			self.Move_Sets(newCoords)
 
-			if keyboard.is_pressed(self._keyLEFT):
-				self._lastDir = 'left'
-				new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
-				self._info.set_myCoords(new_Coords)
-				self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-				self._isMoving = True
+		if keyboard.is_pressed(self._keyLEFT):
+			self._lastDir = 'left'
+			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
+			self.Move_Sets(newCoords)
 
-			if keyboard.is_pressed(self._keyRIGHT):
-				self._lastDir = 'right'
-				new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
-				self._info.set_myCoords(new_Coords)
-				self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-				self._isMoving = True
+		if keyboard.is_pressed(self._keyRIGHT):
+			self._lastDir = 'right'
+			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
+			self.Move_Sets(newCoords)
 
-			self._isMoving = False
-			return self._isMoving
+		self._isMoving = False
+		return self._isMoving
 
 	def Player_MeleeAttack(self):#melee Attack
 		if keyboard.is_pressed(self._melee) == True:

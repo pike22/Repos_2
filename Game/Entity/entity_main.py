@@ -9,7 +9,8 @@ import random
 class Entity_Main(Main_Node):
 	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None):
 		Main_Node.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode)
-		self._rand = random
+		self.__occupied	= False
+		self._rand		= random
 
 		#---Controlls---#
 		self._keyUP		= 'w'
@@ -23,12 +24,25 @@ class Entity_Main(Main_Node):
 		self._lastDir	= None #last Directions looked
 		self._myHealth	= 0
 
-		self._isStatic	= False
+		self.__isStatic	= False
 		self._isMoving	= False
 		self._isAttack	= False
 		self._isAlive	= True
 		self._isHit		= False
 
+
+	def Random_Place(self, size, screenWidth, screenHeight):
+		w, h = size
+		while self.__occupied == False:
+			x = int(self._rand.randint((48+w), screenWidth-(48+w)))
+			y = int(self._rand.randint((48+h), screenHeight-(48+h)))
+			objects = self._cLogic.Check_forCollision(objCorners=(x, y, x+w, y+h))
+			print(objects)
+			if objects != None and len(objects) >= 0:
+				print('someones here.')
+			else:
+				self.__occupied = True
+		return (x, y)
 
 	def Reset_Hit(self, Name=None):
 		if Timer_Node.GameTime == self._saveTime+5:
@@ -46,10 +60,7 @@ class Entity_Main(Main_Node):
 				self._cLogic.Del_CollisionDict(self._info.get_ID())
 				return False
 		elif self._isHit == False:
-			print("Error: 'self._isHit == False' \n\t Game\Entity\entity_main.py Check_Health #41")
-
-	def Self_Move(self, ):
-		pass
+			print("Error: 'self._isHit == False' \n\t Game\Entity\entity_main.py Check_Health #63")
 
 	#OSC == Other Side of Collision, it represents the other object that collided with player
 	#OSA == Other Side's Attack, represents the other objects needed parameters.
@@ -57,9 +68,13 @@ class Entity_Main(Main_Node):
 		# print('My_Collision:\n\t', OSC)
 		if self._isHit == False:
 			if OSC == None:
+				self.__isStatic = False
+				# print(self.__isStatic)
 				return
 			#__Other Side Collision: Static__#
 			elif OSC == 'Static':
+				self.__isStatic = True
+				# print(self.__isStatic)
 				for newSide in side:
 					if newSide == 'top':
 						side = 'up'
@@ -101,6 +116,11 @@ class Entity_Main(Main_Node):
 					self._isAlive	= self.Check_Health()
 					self._saveTime	= Timer_Node.GameTime
 
+	"""#|----------Extra Functions----------|#"""
+	def Move_Sets(self, newCoords):
+		self._info.set_myCoords(newCoords)
+		self._info.set_myCorners(self._info.get_ID())
+		self._isMoving = True
 
 	"""#|--------------Getters--------------|#"""
 		#this is where a list of getters will go...
@@ -111,10 +131,13 @@ class Entity_Main(Main_Node):
 		return self._isHit
 
 	def get_isMoving(self):
-		return self.__isMoving
+		return self._isMoving
 
 	def get_isAttack(self):
-		return self.__isAttack
+		return self._isAttack
+
+	def get_isStatic(self):
+		return self.__isStatic
 
 
 

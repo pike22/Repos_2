@@ -20,19 +20,7 @@ class Slime_Main(Enemy_Main):
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/slime.png')
 
 		#placing the img
-		self.__x = 0
-		self.__y = 0
-		x, y = self._info.get_size()
-		occupied = True
-		while occupied == True:
-			self.__x = int(self._rand.randint((32+x), screenWidth-(32+x)))
-			self.__y = int(self._rand.randint((x+32), screenHeight-(32+y)))
-			objects = self._cLogic.Check_forCollision(objCorners=(self.__x, self.__y, self.__x+x, self.__y+y))
-			# print(objects)
-			if objects != None and len(objects) >= 0:
-				print('someones here.')
-			else:
-				occupied = False
+		self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
 		self._iNode.Image_Place(x=self.__x, y=self.__y, image=self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to Slime
@@ -44,32 +32,7 @@ class Slime_Main(Enemy_Main):
 		self._myHealth = self._info.get_health()
 
 	def Movement_Controll(self, playerLoc):
-		my_x, my_y = self._info.get_myCoords()
-		pl_x, pl_y = playerLoc
-		if my_x > pl_x:
-			direction = 'left'
-			new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), direction, speed=self._info.get_speed())
-			self._info.set_myCoords(new_Coords)
-			self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-			self._isMoving = True
-		if my_x < pl_x:
-			direction = 'right'
-			new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), direction, speed=self._info.get_speed())
-			self._info.set_myCoords(new_Coords)
-			self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-			self._isMoving = True
-		if my_y > pl_y:
-			direction = 'up'
-			new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), direction, speed=self._info.get_speed())
-			self._info.set_myCoords(new_Coords)
-			self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-			self._isMoving = True
-		if my_y < pl_y:
-			direction = 'down'
-			new_Coords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), direction, speed=self._info.get_speed())
-			self._info.set_myCoords(new_Coords)
-			self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
-			self._isMoving = True
+		self.CPU_MoveControll(BPL='BPL=1', L1Pack=playerLoc)
 
 	def Stal_Attack(self):
 		pass

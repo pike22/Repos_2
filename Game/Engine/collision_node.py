@@ -44,7 +44,8 @@ class Collision_Node():
 					# print('\ttag: ', self.__result[item].get_ID())
 					# print('----------------------')
 
-					"""#__# PLAYER COL_LOGIC #__#"""
+
+					"""#__PLAYER COLLISION LOGIC__#"""
 					if self.__result[item].get_ID() in self.__playerRoster:
 						side = self.__logic.Side_Calc(self.__result[item])
 						if len(self.__result) >= 2:

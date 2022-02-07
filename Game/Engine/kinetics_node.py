@@ -16,6 +16,7 @@ class Kinetics_Node():
 		if direction == 'down':
 			y += 1 * speed
 
+		# print((x, y), ' :'+str(ID)+"'s Coords.")
 		Image_Node.Render.coords(ID, x, y)
 		return (x, y)
 
@@ -36,7 +37,7 @@ class Kinetics_Node():
 		return (x, y)
 
 	def Static_Hit(self, myCoords, ID, direction, speed):
-		# print(Cur_Coords, 'OLD COORDS')
+		# print(myCoords, 'OLD COORDS')
 		x, y = myCoords
 		if direction == 'left':
 			x -= 1 * speed
@@ -54,4 +55,3 @@ class Kinetics_Node():
 		Image_Node.Render.coords(ID, x, y)
 		# print((x, y), 'NEW COORDS')
 		return (x, y)
-		# return self.kinetics(Cur_Coords, img_ID, dir)

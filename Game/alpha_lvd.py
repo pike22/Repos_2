@@ -17,7 +17,7 @@ class Alpha_LVD():
 	def __init__(self, ):
 		self.__screenWidth	 = 1280
 		self.__screenHeight = 800
-		self.__version	 = "Level Designer [ALPHAv0.5]"
+		self.__version	 = "Level Designer [ALPHAv0.5.1]"
 		self.__color 	 = 'Grey'
 
 		"""Class Call's"""

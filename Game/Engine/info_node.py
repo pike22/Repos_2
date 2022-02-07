@@ -9,6 +9,7 @@ class Info_Node():
 		self._myCorners	= None #(x1, y1, x2, y2)
 		self._myCoords	= None #(x, y)
 		self._pilImage	= None
+		self._rotation	= None
 		self._tkImage	= None
 		self._fileLoc	= None
 		self._size		= None #(width, height)
@@ -50,6 +51,9 @@ class Info_Node():
 
 	def get_tkImage(self):
 		return self._tkImage
+
+	def get_rotation(self):
+		return self._rotation
 
 	def get_fileLoc(self):
 		return self._fileLoc
