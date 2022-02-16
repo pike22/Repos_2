@@ -26,7 +26,7 @@ class Stalfos_Main(Enemy_Main):
 		self._iNode.Image_Place(x=self.__x, y=self.__y, image=self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to stalfos numb.
-		self._info.Stalfos_Data(coords=(self.__x, self.__y), speed=5, health=10, defense=5, attack=2) #check stalfos_info for, well info.
+		self._info.Stalfos_Data(coords=(self.__x, self.__y), speed=5, health=10, defense=5, attack=2)
 		self._info.set_myCorners(self._info.get_ID())
 
 		#Active Parameters
@@ -34,6 +34,9 @@ class Stalfos_Main(Enemy_Main):
 
 	def Movement_Controll(self):
 		self.CPU_MoveControll() #BPL=0
+		collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
+		if collision == []:
+			self.My_Collision()
 
 	def Stal_Attack(self):
 		pass

@@ -1,7 +1,6 @@
 from LevelDesigner import *
 from PIL import ImageTk, Image
 from z_Pictures import *
-from colored import fg
 from tkinter import *
 from Weapons import *
 from Engine import *
@@ -12,9 +11,9 @@ import re
 
 class Alpha():
 	def __init__(self):
-		self.__screenWidth	 = 1280
+		self.__screenWidth	= 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.8]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.85]"
 
 		#Don't append till after SetUP is called
 		self.__everyRoster 		= [] #Allobject IDs
@@ -36,12 +35,13 @@ class Alpha():
 		#---Class Calls---#
 		self.__mainApp = Tk()
 		#__Engine__#
-		self.__Node    = Node(self.__mainApp) #other nodes are initialised in node.py: __init__()
-		self.__cLogic  = Collision_Logic() #cLogic has to be made before other Game_Classes.
-		self.__cNode   = Collision_Node(self.__cLogic)
-		self.__iNode   = Image_Node()
-		self.__tNode   = Timer_Node(self.__mainApp)
-		self.__Maps    = Maps_GetFile()
+		self.__Maps		= Maps_GetFile()
+		self.__Node		= Node(self.__mainApp) #other nodes are initialised in node.py: __init__()
+		self.__cLogic	= Collision_Logic() #cLogic has to be made before other Game_Classes.
+		self.__cNode	= Collision_Node(self.__cLogic)
+		self.__iNode	= Image_Node()
+		self.__tNode	= Timer_Node(self.__mainApp)
+		self.__pfNode	= PathFind_Node(self.__cLogic, self.__cNode, self.__iNode) #Path Finder
 		#__Entites__#
 		self.__Player	= Player_Main(self.__cLogic, self.__iNode)
 		#__Tools-Weapons__#
@@ -80,11 +80,11 @@ class Alpha():
 			stalMain = Stalfos_Main(ID=ID, cLogic=self.__cLogic, iNode=self.__iNode)
 			self.__cLogic.Add_CollisionDict(tagOrId=ID, obj=stalMain)
 		self.__cNode.set_stalfosRoster(self.__stalfosRoster)
-		#__CPU-Stalfos__#
+		#__Slime__#
 		for item in range(self.__stalfosCount):
 			ID = self.__Node.Create_ObjectName("SL", item)
 			self.__slimeRoster.append(ID)
-			slime = Slime_Main(ID=ID, cLogic=self.__cLogic, iNode=self.__iNode)
+			slime = Slime_Main(ID=ID, cLogic=self.__cLogic, pfNode=self.__pfNode, iNode=self.__iNode)
 			self.__cLogic.Add_CollisionDict(tagOrId=ID, obj=slime)
 		self.__cNode.set_slimeRoster(self.__slimeRoster)
 		#__Weapons__#
@@ -95,6 +95,9 @@ class Alpha():
 		self.__cNode.set_projRoster(self.__projRoster)
 
 		self.__cNode.set_everyRoster(self.__everyRoster)
+
+		#---Path Finder Setups---#
+		self.__pfNode.Path_Grid()
 
 		#---Temperary Variables---#
 		self.__loopCount = 33
@@ -198,7 +201,7 @@ class Alpha():
 			if key in collisionDict:
 				stalfos = collisionDict[key]
 				if stalfos.get_isAlive() == True:
-					stalfos.Movement_Controll()
+					# stalfos.Movement_Controll()
 					# stalfos.Stal_Attack()
 					pass
 			#_SLIME_#
@@ -293,7 +296,6 @@ class Alpha():
 		for item in listOfTags:
 			tag = Image_Node.Render.gettags(item)
 			if len(tag) > 0:
-				color = fg('light_cyan')
 				print(color + "Item", item, 'Has tag:', tag)
 
 	def Debug_CollisionDICT(self):

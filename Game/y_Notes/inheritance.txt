@@ -1,8 +1,0 @@
-Use Inheritance for repeated functions.
-	Reset_Hit()
-	Repeat get and set functions
-
-	All of the info files should use it.
-	This will centralise the functions making future edits far easier.
-
-	

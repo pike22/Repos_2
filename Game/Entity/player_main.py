@@ -56,6 +56,11 @@ class Player_Main(Entity_Main):
 			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
 			self.Move_Sets(newCoords)
 
+
+		collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
+		if collision == []:
+			self.My_Collision() #basically a variable reset.
+
 		self._isMoving = False
 		return self._isMoving
 

@@ -49,6 +49,8 @@ class Collision_Logic():
 		self.__CurrentSquare = None
 		self.__GRID = None
 		self.tempL  = []
+		self.oldList= []
+		self._var	= 0
 
 	'''#_COLLISION DICTIONARY FUNCTIONS_#'''
 	#tagOrId == dictionary key
@@ -112,14 +114,23 @@ class Collision_Logic():
 				self.__collisionList.append(tag[0])
 			# print(self.__collisionList, 'Colliding') #print Tags of Entity Colliding
 
+			self.oldList = []
 			self.oldList = self.__collisionList
 			self.__collisionList = []
-			for count in range(len(self.oldList)-1, -1, -1):
-				tagOrId = self.oldList[count]
-				if tagOrId not in self.__wallRoster:
-					self.__collisionList.append(tagOrId)
-				elif tagOrId in self.__wallRoster and self.__collisionList != []:
-					self.__collisionList.append(tagOrId)
+			for key in self.oldList:
+				if key in self.__wallRoster:
+					self._var += 1
+			if self._var == len(self.oldList):
+				for tag in self.oldList:
+					self.__collisionList.append(tag)
+			else:
+				for item in range(len(self.oldList)-1, -1, -1):
+					tagOrId = self.oldList[item]
+					if tagOrId not in self.__wallRoster:
+						self.__collisionList.append(tagOrId)
+					elif tagOrId in self.__wallRoster and self.__collisionList != []:
+						self.__collisionList.append(tagOrId)
+			# print(self.oldList, 'original collision list')
 			# print(self.__collisionList, 'new Colliding') #print Tags of Entity Colliding
 
 
@@ -132,6 +143,8 @@ class Collision_Logic():
 			self.__isCollision = True
 			# print(self.__collideList, 'objList')
 			return self.__collideList
+		else:
+			return []
 
 	#use this: .find_overlapping
 	# only outputs the last assigned var.
@@ -158,8 +171,8 @@ class Collision_Logic():
 
 			self.oldList = self.__collisionList
 			self.__collisionList = []
-			for count in range(len(self.oldList)-1, -1, -1):
-				tagOrId = self.oldList[count]
+			for item in range(len(self.oldList)-1, -1, -1):
+				tagOrId = self.oldList[item]
 				if tagOrId not in self.__wallRoster:
 					self.__collisionList.append(tagOrId)
 				elif tagOrId in self.__wallRoster and self.__collisionList != []:
@@ -415,6 +428,9 @@ class Collision_Logic():
 
 	def reset_collideList(self):
 		self.__collideList = []
+
+	def get_staticRoster(self):
+		return self.__staticRoster
 
 
 	"""|--------------Setters--------------|#"""

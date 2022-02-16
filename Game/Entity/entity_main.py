@@ -7,9 +7,9 @@ import random
 	#Player_Main
 
 class Entity_Main(Main_Node):
-	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None):
-		Main_Node.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode)
-		self.__occupied	= False
+	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
+		Main_Node.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
+		self.__occupied	= True
 		self._rand		= random
 
 		#---Controlls---#
@@ -29,19 +29,21 @@ class Entity_Main(Main_Node):
 		self._isAttack	= False
 		self._isAlive	= True
 		self._isHit		= False
+		self._side		= None
 
+		self._static = None
 
 	def Random_Place(self, size, screenWidth, screenHeight):
 		w, h = size
-		while self.__occupied == False:
+		while self.__occupied == True:
 			x = int(self._rand.randint((48+w), screenWidth-(48+w)))
 			y = int(self._rand.randint((48+h), screenHeight-(48+h)))
 			objects = self._cLogic.Check_forCollision(objCorners=(x, y, x+w, y+h))
-			print(objects)
-			if objects != None and len(objects) >= 0:
+			print(objects, 'LOC?')
+			if objects != [] and len(objects) >= 0:
 				print('someones here.')
 			else:
-				self.__occupied = True
+				self.__occupied = False
 		return (x, y)
 
 	def Reset_Hit(self, Name=None):
@@ -67,22 +69,27 @@ class Entity_Main(Main_Node):
 	def My_Collision(self, OSC=None, OSA=None, side=None, staticsList=None):
 		# print('My_Collision:\n\t', OSC)
 		if self._isHit == False:
-			if OSC == None:
-				self.__isStatic = False
+			if OSC == None: #Var Resets happen here.
+				self.__isStatic  = False
 				# print(self.__isStatic)
+
 				return
 			#__Other Side Collision: Static__#
 			elif OSC == 'Static':
+				# if self.__isStatic == False and self._varTrack == False:
+				# 	self._varTime = Timer_Node.GameTime
+				# 	self._varTime += 5
+				# 	self._varTrack = True
 				self.__isStatic = True
 				# print(self.__isStatic)
 				for newSide in side:
 					if newSide == 'top':
-						side = 'up'
+						self._side = 'up'
 					elif newSide == 'bottom':
-						side = 'down'
+						self._side = 'down'
 					else:
-						side = newSide
-					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), side, speed=self._info.get_speed())
+						self._side = newSide
+					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), self._side, speed=self._info.get_speed())
 					self._info.set_myCoords(new_Coords)
 					self._info.set_myCorners(self._info.get_ID())
 				#__Other Side Collision: Enemy/Weapon/Friend__#
@@ -99,17 +106,10 @@ class Entity_Main(Main_Node):
 						side = newSide
 					for time in range(50):
 						newCoords = self._kNode.Knock_Back(self._info.get_myCoords(), self._info.get_ID(), side)
-						self._info.set_myCoords(newCoords)
-						self._info.set_myCorners(self._info.get_ID())
-						possibleCollide = self._cLogic.Check_forCollision(self._info.get_ID())
-						if possibleCollide != None:
-							#print(possibleCollide, 'MyCollision')
-							for obj in possibleCollide:
-								if obj != None:
-									if obj.get_groupID() in staticsList:
-										direction = self._cLogic.Side_Calc(self._cLogic.Tag_toObject(self._info.get_ID()))
-										self.My_Collision(OSC='Static', side=direction)
-										return
+						self.Move_Sets(newCoords)
+						self.Posible_Collide()
+
+
 				#---------------Logic---------------#
 				if OSC != 'Friend':
 					self._isHit		= True
@@ -121,6 +121,18 @@ class Entity_Main(Main_Node):
 		self._info.set_myCoords(newCoords)
 		self._info.set_myCorners(self._info.get_ID())
 		self._isMoving = True
+
+	def Posible_Collide(self, staticsList=None):
+		possibleCollide = self._cLogic.Check_forCollision(self._info.get_ID())
+		if possibleCollide != None:
+			#print(possibleCollide, 'MyCollision')
+			for obj in possibleCollide:
+				if obj != None:
+					if obj.get_groupID() in self._cLogic.get_staticRoster():
+						direction = self._cLogic.Side_Calc(self._cLogic.Tag_toObject(self._info.get_ID()))
+						self.My_Collision(OSC='Static', side=direction)
+						return
+
 
 	"""#|--------------Getters--------------|#"""
 		#this is where a list of getters will go...
@@ -145,3 +157,6 @@ class Entity_Main(Main_Node):
 		#this is where a list of setters will go...
 	# def set_isAlive(self, isAlive):
 	# 	self._isAlive = isAlive
+
+	def set_isStatic(self, isStatic):
+		self.__isStatic = isStatic

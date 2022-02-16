@@ -2,12 +2,15 @@ from .kinetics_node import Kinetics_Node
 
 #Parent: None
 #Children:
+	#PathFind_Node
 	#Main_Node
 
 class Node():
-	def __init__(self, mainApp=None, cLogic=None, cNode=None, iNode=None, tNode=None):
+	def __init__(self, mainApp=None, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
 		#---Classes---#
 		"""#The Classes that the objects need#"""
+		self._mainApp = mainApp
+		self._pfNode = pfNode
 		self._cLogic = cLogic
 		self._cNode  = cNode
 		self._iNode  = iNode

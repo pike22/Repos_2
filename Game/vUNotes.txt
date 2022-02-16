@@ -1,7 +1,9 @@
 Current Game Version
-	v.0.2.8
+	v.0.2.85
 
 
  ** Last Update Note:
- 		Slime's movement is now smooth and won't jitter back and fourth. Working on creating different levels of CPU controlled movement that is housed inside of Enemy_Main.
-		Should rethink how it is currently called.
+ 		PATH FINDING:
+			Working on Breadth_First_Search and is proving to be difficult. Currently having trouble settings up the conversion from the
+			frontier dictionary to the reached dictionary. last error was that it every box had the same box number and it counted the
+			dict up to the matching box number then errors out.

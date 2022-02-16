@@ -9,10 +9,14 @@ from .kinetics_node import Kinetics_Node
 	#Placed_ImageMain
 
 class Main_Node(Node):
-	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None):
-		Node.__init__(self, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode)
+	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
+		Node.__init__(self, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
 		self._info = info
-		self._saveTime	= 0
+
+		#---TIME SAVE'S---#
+		self._saveTime	= 0 #Weapon Timers
+		self._varTime   = 0 #Movement Timers
+		self._varTrack	= False #is varTime used. set to false when unused.
 
 
 

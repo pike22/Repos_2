@@ -3,8 +3,8 @@ from .slime_info import Slime_Info
 from Engine import *
 
 class Slime_Main(Enemy_Main):
-	def __init__(self, ID, cLogic, iNode):
-		Enemy_Main.__init__(self, info=Slime_Info(ID), cLogic=cLogic, iNode=iNode)
+	def __init__(self, ID, cLogic, pfNode, iNode):
+		Enemy_Main.__init__(self, info=Slime_Info(ID), cLogic=cLogic, iNode=iNode, pfNode=pfNode)
 
 		#----Temp Var----#
 		self.__x	= 0
@@ -32,7 +32,10 @@ class Slime_Main(Enemy_Main):
 		self._myHealth = self._info.get_health()
 
 	def Movement_Controll(self, playerLoc):
-		self.CPU_MoveControll(BPL='BPL=1', L1Pack=playerLoc)
+		collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
+		self.CPU_MoveControll(BPL='BPL=3', L1Pack=playerLoc)
+		if collision == []:
+			self.My_Collision()
 
 	def Stal_Attack(self):
 		pass
