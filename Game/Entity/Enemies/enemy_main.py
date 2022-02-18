@@ -80,9 +80,9 @@ class Enemy_Main(Entity_Main):
 					self.Personal_Move('down')
 		elif BPL == 'BPL=3': #Breadth_First_Search
 			#tuples of the starting object and ending objects params.
-			arg1 = (self._info.get_myCoords(), self._info.get_ID())
-			arg2 = (pl_x, pl_y)
-			self._pfNode.Breadth_Search(startOBJ=arg1, endOBJ=arg2)
+			# arg1 = (self._info.get_myCoords(), self._info.get_ID())
+			# arg2 = (pl_x, pl_y)
+			# self._pfNode.Breadth_Search(startOBJ=arg1, endOBJ=arg2)
 			pass
 		elif BPL == 'BPL=4': #Dijkstra's Algorithm
 			pass

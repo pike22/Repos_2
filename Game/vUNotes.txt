@@ -1,9 +1,8 @@
 Current Game Version
-	v.0.2.85
+	v.0.2.87
 
 
  ** Last Update Note:
  		PATH FINDING:
-			Working on Breadth_First_Search and is proving to be difficult. Currently having trouble settings up the conversion from the
-			frontier dictionary to the reached dictionary. last error was that it every box had the same box number and it counted the
-			dict up to the matching box number then errors out.
+			Breadth First Search has basic functionality now. It has the ability to find and cover every square of free space and avoids walls. Currently is unable to identify anything beyond a wall.
+			Next will be implimenting identification of other entities and itself. Then Finding its target and the path needed to reach that target.

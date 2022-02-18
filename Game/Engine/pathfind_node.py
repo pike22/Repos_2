@@ -11,9 +11,9 @@ class PathFind_Node(Node):
 
 		#--Breadth Search--#
 		self.__frontier = {}
-		self.__reached	= {}
+		self.__reached	= {'Box*' : None}
 		self._lastBox	= None
-		self._numb		= 0
+		self._next		= 0
 
 		#--Grid Paramaters--#
 		self.__pathGRID = {}
@@ -21,7 +21,35 @@ class PathFind_Node(Node):
 		self._xPos = 0
 		self._yPos = 0
 
-	def Path_Grid(self, ):
+	def Map_Grid(self, colDict): #changes
+		for value in colDict.values():
+			# print(value.get_myCoords(), value.get_ID())
+			if value.get_myCoords() != None:
+				if len(value.get_ID()) >= 9:
+					# print('this is Wall')
+					# print(value.get_ID())
+					x, y = value.get_myCoords()
+					for key in self.__pathGRID.keys():
+						if (x, y) == self.__pathGRID[key][0]:
+							# print(self.__pathGRID[key][0], 'pathGRID coord')
+							# print((x, y), 'colDict coord')
+							self.__pathGRID[key] = [(x, y), 'wall*']
+							self.__frontier[key] = [(x, y), 'wall*']
+				else:
+					print(value.get_ID())
+					x, y = value.get_myCoords()
+					for key in self.__pathGRID.keys():
+						if (x, y) == self.__pathGRID[key][0]:
+							# print(self.__pathGRID[key][0], 'pathGRID coord')
+							# print((x, y), 'colDict coord')
+							self.__pathGRID[key] = [(x, y), 'other*']
+							self.__frontier[key] = [(x, y), 'other*']
+			# print('<------------------->\n')
+		# print('pathGRID', self.__pathGRID, '\n')
+
+
+
+	def System_Grid(self): #sets up the grid for all spaces centered around a target.
 		boxCountX = int(1280/self.__boxSize)
 		boxCountY = int(800/self.__boxSize)
 
@@ -36,8 +64,8 @@ class PathFind_Node(Node):
 				if y == (boxCountY):
 					self._yPos = 0
 				boxNumb+=1
-				self.__pathGRID[boxNumb] = (self._xPos, self._yPos)
-				self.__frontier[boxNumb] = (self._xPos, self._yPos)
+				self.__pathGRID[boxNumb] = [(self._xPos, self._yPos)]
+				self.__frontier[boxNumb] = [(self._xPos, self._yPos)]
 			# 	print((self._xPos, self._yPos), 'box coords\t', y)
 			# print('-----------------------------------------------')
 		# print(self.__pathGRID)
@@ -46,91 +74,130 @@ class PathFind_Node(Node):
 	#startOBJ == Target object to be moved
 	#endOBJ == Target object that startOBJ is moving to.
 	def Breadth_Search(self, startOBJ, endOBJ):
-		self._lastBox = None
-		print("#--Initial Prints--#")
-		my_x, my_y = startOBJ[0]
-		endCoords = endOBJ
+		# print("\n\n#--Initial Prints--#")
+		my_x, my_y = startOBJ.get_myCoords()
+		my_w, my_h = startOBJ.get_size()
+		ot_x, ot_y = endOBJ.get_myCoords()
 		# print((my_x, my_y), 'obj coords')
 
 		startBox = self.Find_mySquare((my_x, my_y)) #startOBJ's original box
-		# print(startBox, startOBJ[1],"'s box number")
+		# print(startBox, startOBJ.get_ID(),"'s box number")
 
 		self.__reached['Box0'] = startBox
-		print(self.__reached)
 		if startBox in self.__frontier:
 			del self.__frontier[startBox]
-		print('\n<------------------------>\n')
+		# print('<------------------------>\n')
 
 		# print(self.__pathGRID[self.__reached['Box0']], "Box0's coords")
+		count = 0
 		while self.__frontier != {}:
-			curBox = 'Box'+str(self._numb)
-			if self._lastBox == None:
-				self._lastBox = 'Box0'
-			else:
-				self._lastBox = curBox
-			if curBox in self.__reached:
-				self._lastBox = None
-				self.Find_Neighbors(self._numb, self._lastBox)
-			self._numb += 1
+			curBox = 'Box'+str(count)
 
+			print(count, '\tCurrent Box')
+			if curBox in self.__reached.keys():
+				print(self.__pathGRID[self.__reached[curBox]], '\t curBox')
+			print(self._next, '\tNext Empty Box')
+			print('<---------->\n')
 
-			# startBox = self.Find_mySquare((my_x, my_y))
-			if self._numb in self.__frontier:
-				del self.__frontier[self._numb]
-				print(len(self.__frontier), "Box's left")
+			if curBox == 'Box1066':
+				print("END OF THE ROAD")
 				return
 
-		# for key in self.__reached:
-		# 	x, y = self.__pathGRID[self.__reached[key]]
-		# 	Image_Node.Render.create_oval(x+15, y+15, x+25, y+25, fill='Blue')
+			#---Finds Neighbors and puts the square into self.__reached---#
+			newNumb = self.Find_Neighbors(curBox, self._next)
+			count += 1
+			self._next = newNumb
+
+			if self._next in self.__frontier:
+				del self.__frontier[self._next]
+				# print(len(self.__frontier), "Box's left")
 
 
 	"""#|----------Extra Functions----------|#"""
-	def Find_Neighbors(self, numb, lastBox): #this is used to find if neighboring boxes are used.
-		curBox = 'Box'+str(numb)
-		print(curBox, '\t\t:Current')
-		print(self._lastBox, '\t\t:Last')
+	def Find_Neighbors(self, curBox, next): #this is used to find if neighboring boxes are used.
+		# print('<---Find Neighbors--->')
+		# print(curBox, '\t\t:Current Box')
+		# print(self.__reached[curBox], '\t\t:Reached Box')
+		# print(self.__pathGRID[self.__reached[curBox]][0], '\t:Box Coords')
+		#----------------------------------------------------------------------#
+
 		if curBox in self.__reached:
-			print(self.__reached[curBox], '\t\t:Reached')
-		print(curCoords, '\t:Coords')
-		if curBox in self.__reached:
-			if self.__reached[curBox] in self.__pathGRID:
-				print(self.__pathGRID[self.__reached[curBox]], '\t:Box Coords')
-		curBoxNumb = self.Find_mySquare(curCoords)
-		self.__reached[curBox] = curBoxNumb
-		x, y = curCoords
-		if curBox not in self.__reached:
-			#next 4 squares, clockwise order starting at 6 o'clock and the current box
-			self.__reached['Box'+str(numb+0)] = (self.Find_mySquare((x, y))) #Current Box
-			self.__reached['Box'+str(numb+1)] = (self.Find_mySquare((x+self.__boxSize, y))) #North Side of curBox
-			self.__reached['Box'+str(numb+2)] = (self.Find_mySquare((x, y-self.__boxSize))) #West Side of curBox
-			self.__reached['Box'+str(numb+3)] = (self.Find_mySquare((x-self.__boxSize, y))) #East Side of curBox
-			self.__reached['Box'+str(numb+4)] = (self.Find_mySquare((x, y+self.__boxSize))) #South Side of curBox
-			print(self.__reached, 'not in reached')
-			print('\n<----------------------------->\n')
-			return
-		else:
-			print('Current Box has already ben reached.')
+			x, y = self.__pathGRID[self.__reached[curBox]][0]
+			# print('Current Box has already ben reached.')
 			#the four surrounding the current
-			# self.__reached['Box'+str(numb+1)] = (self.Find_mySquare((x+self.__boxSize, y))) #North Side of curBox
-			# self.__reached['Box'+str(numb+2)] = (self.Find_mySquare((x, y-self.__boxSize))) #West Side of curBox
-			# self.__reached['Box'+str(numb+3)] = (self.Find_mySquare((x-self.__boxSize, y))) #East Side of curBox
-			# self.__reached['Box'+str(numb+4)] = (self.Find_mySquare((x, y+self.__boxSize))) #South Side of curBox
-			print(self.__reached, 'in reached')
-			print('\n<----------------------------->\n')
-			return
+			if self.Find_mySquare((x+self.__boxSize, y)) not in self.__reached.values():
+				if len(self.__pathGRID[self.Find_mySquare((x+self.__boxSize, y))]) >= 2:
+					# print('wall here')
+					# next+=1
+					pass
+				else:
+					# print('no Wall')
+					next+=1
+					self.__reached['Box'+str(next)] = (self.Find_mySquare((x+self.__boxSize, y)))
+					# print(self.__reached['Box'+str(next)], 'Box'+str(next), )
+
+			if self.Find_mySquare((x, y-self.__boxSize)) not in self.__reached.values():
+				if len(self.__pathGRID[self.Find_mySquare((x, y-self.__boxSize))]) >= 2:
+					# print('wall here')
+					# next+=1
+					pass
+				else:
+					# print('no Wall')
+					next+=1
+					self.__reached['Box'+str(next)] = (self.Find_mySquare((x, y-self.__boxSize)))
+					# print(self.__reached['Box'+str(next)], 'Box'+str(next), )
+
+			if self.Find_mySquare((x-self.__boxSize, y)) not in self.__reached.values():
+				if len(self.__pathGRID[self.Find_mySquare((x-self.__boxSize, y))]) >= 2:
+					# print('wall here')
+					# next+=1
+					pass
+				else:
+					# print('no Wall')
+					next+=1
+					self.__reached['Box'+str(next)] = (self.Find_mySquare((x-self.__boxSize, y)))
+					# print(self.__reached['Box'+str(next)], 'Box'+str(next), )
+
+			if self.Find_mySquare((x, y+self.__boxSize)) not in self.__reached.values():
+				if len(self.__pathGRID[self.Find_mySquare((x, y+self.__boxSize))]) >= 2:
+					# print('wall here')
+					# next+=1
+					pass
+				else:
+					# print('no Wall')
+					next+=1
+					self.__reached['Box'+str(next)] = (self.Find_mySquare((x, y+self.__boxSize)))
+					# print(self.__reached['Box'+str(next)], 'Box'+str(next), )
+
+			# print(self.__reached, 'in reached')
+			# print('\n<----------------------------->\n')
+			return next
+		else:
+			# print('curBox not in reached', curBox)
+			return next
 
 
-	def Find_mySquare(self, objCoords):
+	def Find_mySquare(self, objCoords, RP=False):
 		x, y = objCoords
-		for key in self.__pathGRID:
-			xBox, yBox = self.__pathGRID[key]
+		for key in self.__pathGRID.keys():
+			xBox, yBox = self.__pathGRID[key][0]
 			xBox32, yBox32 = xBox+32, yBox+32
-			# print('\nTLC', (xBox, yBox), '\nBRC', (xBox32, yBox32), '\nOBJ', (x, y))
 			if x >= xBox and y >= yBox:
 				if x < xBox32 and y < yBox32:
-					print(key, 'Box number')
-					return key
+					# print('\nTLC', (xBox, yBox), '\nBRC', (xBox32, yBox32), '\nOBJ', (x, y))
+					# print(key, 'Box number', '\n<------------->\n')
+					if RP == False:
+						return key
+					else:
+						return self.__pathGRID[key][0]
+
+	def Show_Breadth(self, var):
+		box = 'Box'+str(var)
+		if box in self.__reached.keys():
+			# if len(self.__pathGRID[self.__reached[box]]) != 2:
+			x, y = self.__pathGRID[self.__reached[box]][0]
+			Image_Node.Render.create_text(x+16, y+16, text=str(var), fill='Blue')
+			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28)
 
 
 	'''#|--------------Getters--------------|#'''

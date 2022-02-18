@@ -9,6 +9,7 @@ import random
 class Entity_Main(Main_Node):
 	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
 		Main_Node.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
+		# print(pfNode, 'pfNode 2', self._info.get_ID())
 		self.__occupied	= True
 		self._rand		= random
 
@@ -38,6 +39,9 @@ class Entity_Main(Main_Node):
 		while self.__occupied == True:
 			x = int(self._rand.randint((48+w), screenWidth-(48+w)))
 			y = int(self._rand.randint((48+h), screenHeight-(48+h)))
+			if self._pfNode != None:
+				print(self._pfNode, 'pfNode RP')
+				x, y = self._pfNode.Find_mySquare((x, y), RP=True)
 			objects = self._cLogic.Check_forCollision(objCorners=(x, y, x+w, y+h))
 			print(objects, 'LOC?')
 			if objects != [] and len(objects) >= 0:

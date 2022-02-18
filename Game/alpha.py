@@ -97,7 +97,8 @@ class Alpha():
 		self.__cNode.set_everyRoster(self.__everyRoster)
 
 		#---Path Finder Setups---#
-		self.__pfNode.Path_Grid()
+		self.__pfNode.System_Grid()
+		self._collision_OnOff = 'On'
 
 		#---Temperary Variables---#
 		self.__loopCount = 33
@@ -117,8 +118,9 @@ class Alpha():
 			self.__mainApp.quit()
 			return True
 
-	def Game_SetUP(self, GC_OFF=False):
+	def Game_SetUP(self, GC_OFF=False, collision_OnOff='On'):
 		# #__Statics SETUP__#
+		self._collision_OnOff = collision_OnOff
 		self.__siFILES.Read_File(self.__levelFOUR)
 		self.__imageDICT = self.__siFILES.get_imageDICT()
 
@@ -141,6 +143,10 @@ class Alpha():
 		# self.__Bow.Info_Print('Bow')
 		self.__Player.set_weapons(sword=self.__Sword, bow=self.__Bow, )
 
+		#_Path Finding_#
+		self.g = -1
+		self.__pfNode.Map_Grid(self.__cLogic.get_collisionDict())
+
 		#__ENEMY Setup__#
 		COLDICT = self.__cLogic.get_collisionDict()
 		for item in range(len(self.__stalfosRoster)):
@@ -158,6 +164,7 @@ class Alpha():
 					Slime = COLDICT[re.search("(^SL#.{3})", self.__slimeRoster[item]).group(1)]
 					Slime.Slime_SetUP(self.__screenWidth, self.__screenHeight)
 					self.__everyRoster.append(Slime.get_ID())
+					self.__pfNode.Breadth_Search(startOBJ=Slime, endOBJ=self.__Player)
 					# Slime.Info_Print('Slime')
 
 
@@ -170,6 +177,7 @@ class Alpha():
 		self.__tNode.Game_Clock(GC_OFF)
 
 
+
 	#gameLoop def is for the classes use.
 	def Game_Loop(self):
 		#to kill the window
@@ -178,6 +186,11 @@ class Alpha():
 			return
 		# self.new_Player()
 
+		if self._collision_OnOff == 'Off':
+			if keyboard.is_pressed('g'):
+				# print("g")
+				self.g += 1
+				self.__pfNode.Show_Breadth(self.g)
 
 		#_loop Debug_#
 		# self.debug_collisionDict() #workes
@@ -190,7 +203,9 @@ class Alpha():
 			# self.__cLogic.Check_forCollision(self.__Player)
 		if self.__Player.get_isAlive() == True:
 			if self.__Player.Player_MeleeAttack() == False and self.__Player.Player_RangedAttack() == False:
-				self.__Player.Movement_Controll()
+				if self._collision_OnOff == 'On':
+					self.__Player.Movement_Controll()
+				pass
 		else:
 			# print("dead? A#192")
 			pass
@@ -201,7 +216,8 @@ class Alpha():
 			if key in collisionDict:
 				stalfos = collisionDict[key]
 				if stalfos.get_isAlive() == True:
-					# stalfos.Movement_Controll()
+					if self._collision_OnOff == 'On':
+						stalfos.Movement_Controll()
 					# stalfos.Stal_Attack()
 					pass
 			#_SLIME_#
@@ -209,7 +225,8 @@ class Alpha():
 			if key in collisionDict:
 				slime = collisionDict[key]
 				if slime.get_isAlive() == True:
-					slime.Movement_Controll(self.__Player.get_myCoords())
+					if self._collision_OnOff == 'On':
+						slime.Movement_Controll(self.__Player.get_myCoords())
 					pass
 
 		#_Collision Logic functions_#
@@ -236,8 +253,9 @@ class Alpha():
 			if self.__Bow.get_projActive(item) == True:
 				list1.append(self.__Bow.get_projCorners(item))
 
-		self.__cLogic.Add_Collision(list1)
-		self.__cNode.Use_Collision(len(list1))
+		if self._collision_OnOff == 'On':
+			self.__cLogic.Add_Collision(list1)
+			self.__cNode.Use_Collision(len(list1))
 
 
 
@@ -317,7 +335,7 @@ print('\n<<-----Initial Set UP------>>\n') #to make it easier to read in the com
 Game = Alpha()
 Game.Create_MainCanvas()
 Game.Window_SetUP()
-Game.Game_SetUP(False)
+Game.Game_SetUP(False, 'Off')
 # Game.Testing_Debug()
 print('\n<<-----Game Main Loop------>>\n')
 Game.Game_Loop()
