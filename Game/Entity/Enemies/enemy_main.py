@@ -79,10 +79,19 @@ class Enemy_Main(Entity_Main):
 				if my_y < pl_y or my_y < pl_y+my_h:
 					self.Personal_Move('down')
 		elif BPL == 'BPL=3': #Breadth_First_Search
-			#tuples of the starting object and ending objects params.
-			# arg1 = (self._info.get_myCoords(), self._info.get_ID())
-			# arg2 = (pl_x, pl_y)
-			# self._pfNode.Breadth_Search(startOBJ=arg1, endOBJ=arg2)
+			# Moves based on the created path.
+			path = self._pfNode.get_myPath()
+			for key in path.keys():
+				if path[key] == 'left':
+					self.Personal_Move('left', speed=32)
+				elif path[key] == 'right':
+					self.Personal_Move('right', speed=32)
+				elif path[key] == 'down':
+					self.Personal_Move('down', speed=32)
+				elif path[key] == 'up':
+					self.Personal_Move('up', speed=32)
+
+
 			pass
 		elif BPL == 'BPL=4': #Dijkstra's Algorithm
 			pass
@@ -92,6 +101,6 @@ class Enemy_Main(Entity_Main):
 
 
 	"""#|----------Extra Functions----------|#"""
-	def Personal_Move(self, dir):
-		newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), dir, speed=self._info.get_speed())
+	def Personal_Move(self, dir, speed=self._info.get_speed()):
+		newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), dir, speed=speed)
 		self.Move_Sets(newCoords)

@@ -5,4 +5,4 @@ Current Game Version
  ** Last Update Note:
  		PATH FINDING:
 			Breadth First Search has basic functionality now. It has the ability to find and cover every square of free space and avoids walls. Currently is unable to identify anything beyond a wall.
-			Next will be implimenting identification of other entities and itself. Then Finding its target and the path needed to reach that target.
+			Next will be implementing identification of other entities and itself. Then Finding its target and the path needed to reach that target.

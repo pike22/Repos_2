@@ -40,8 +40,8 @@ class Entity_Main(Main_Node):
 			x = int(self._rand.randint((48+w), screenWidth-(48+w)))
 			y = int(self._rand.randint((48+h), screenHeight-(48+h)))
 			if self._pfNode != None:
-				print(self._pfNode, 'pfNode RP')
-				x, y = self._pfNode.Find_mySquare((x, y), RP=True)
+				# print(self._pfNode, 'pfNode RP')
+				x, y = self._pfNode.Find_mySquare((x, y), RP=True) 
 			objects = self._cLogic.Check_forCollision(objCorners=(x, y, x+w, y+h))
 			print(objects, 'LOC?')
 			if objects != [] and len(objects) >= 0:

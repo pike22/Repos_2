@@ -189,8 +189,9 @@ class Alpha():
 		if self._collision_OnOff == 'Off':
 			if keyboard.is_pressed('g'):
 				# print("g")
-				self.g += 1
-				self.__pfNode.Show_Breadth(self.g)
+				while self.g != 2000:
+					self.g += 1
+					self.__pfNode.Show_Breadth(self.g)
 
 		#_loop Debug_#
 		# self.debug_collisionDict() #workes
@@ -335,7 +336,7 @@ print('\n<<-----Initial Set UP------>>\n') #to make it easier to read in the com
 Game = Alpha()
 Game.Create_MainCanvas()
 Game.Window_SetUP()
-Game.Game_SetUP(False, 'Off')
+Game.Game_SetUP(False, 'On')
 # Game.Testing_Debug()
 print('\n<<-----Game Main Loop------>>\n')
 Game.Game_Loop()

@@ -17,9 +17,9 @@ class Player_Main(Entity_Main):
 
 	#seting up player bellow
 	def Player_SetUP(self, screenWidth, screenHeight):
-		print(self._kNode)
+		# print(self._kNode, 'Player_SetUP')
 		#img setup
-		print(self._iNode)
+		# print(self._iNode, 'Player_SetUP')
 		ID = self._info.get_ID()
 		imageInfo = self._iNode.Image_Add('z_Pictures/purpuloniousthefirst.png')
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/purpuloniousthefirst.png')
