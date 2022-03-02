@@ -1,8 +1,8 @@
 Current Game Version
-	v.0.2.87
+	v.0.2.88
 
 
  ** Last Update Note:
  		PATH FINDING:
-			Breadth First Search has basic functionality now. It has the ability to find and cover every square of free space and avoids walls. Currently is unable to identify anything beyond a wall.
-			Next will be implementing identification of other entities and itself. Then Finding its target and the path needed to reach that target.
+			Breadth First Search has basic functionality now. Finding the path has been done, now getting the
+			slime to follow this path is proving to be difficult. 

@@ -10,6 +10,8 @@ class Enemy_Main(Entity_Main):
 	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
 		Entity_Main.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
 		self.Var = 1
+		self.loopCount = 0
+		self.zero = 10
 
 	#Brain Power Level [BPL]
 	def CPU_MoveControll(self, BPL='BPL=0', L1Pack=None, L2Pack=None):
@@ -81,18 +83,31 @@ class Enemy_Main(Entity_Main):
 		elif BPL == 'BPL=3': #Breadth_First_Search
 			# Moves based on the created path.
 			path = self._pfNode.get_myPath()
-			for key in path.keys():
-				if path[key] == 'left':
-					self.Personal_Move('left', speed=32)
-				elif path[key] == 'right':
-					self.Personal_Move('right', speed=32)
-				elif path[key] == 'down':
-					self.Personal_Move('down', speed=32)
-				elif path[key] == 'up':
-					self.Personal_Move('up', speed=32)
+			if self.loopCount == self.zero:
+				self.zero += 10
+				del path[-1]
+				print(path)
+				print('<--------------------------->')
+				return 'True'
+			if len(path) == 0:
+				# print("End Of Path")
+				return 'True'
+			else:
+				if path[-1][0] == 'left':
+					self.Personal_Move('left')
+
+				elif path[-1][0] == 'right':
+					self.Personal_Move('right')
+
+				elif path[-1][0] == 'down':
+					self.Personal_Move('down')
+
+				elif path[-1][0] == 'up':
+					self.Personal_Move('up')
+
+			self.loopCount += 1
 
 
-			pass
 		elif BPL == 'BPL=4': #Dijkstra's Algorithm
 			pass
 		elif BPL == 'BPL=A*': #A* method for ai mapping.
@@ -101,6 +116,9 @@ class Enemy_Main(Entity_Main):
 
 
 	"""#|----------Extra Functions----------|#"""
-	def Personal_Move(self, dir, speed=self._info.get_speed()):
+	def Personal_Move(self, dir, speed=None):
+		# print(dir, 'last moved')
+		if speed == None:
+			speed = self._info.get_speed()
 		newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), dir, speed=speed)
 		self.Move_Sets(newCoords)

@@ -13,7 +13,7 @@ class Alpha():
 	def __init__(self):
 		self.__screenWidth	= 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.85]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.88]"
 
 		#Don't append till after SetUP is called
 		self.__everyRoster 		= [] #Allobject IDs
@@ -218,16 +218,19 @@ class Alpha():
 				stalfos = collisionDict[key]
 				if stalfos.get_isAlive() == True:
 					if self._collision_OnOff == 'On':
-						stalfos.Movement_Controll()
-					# stalfos.Stal_Attack()
-					pass
+						# stalfos.Movement_Controll()
+						# stalfos.Stal_Attack()
+						pass
 			#_SLIME_#
 		for key in self.__slimeRoster:
 			if key in collisionDict:
 				slime = collisionDict[key]
 				if slime.get_isAlive() == True:
 					if self._collision_OnOff == 'On':
-						slime.Movement_Controll(self.__Player.get_myCoords())
+						reDraw = slime.Movement_Controll(self.__Player.get_myCoords())
+						print(reDraw, 'redraw?')
+						if reDraw == 'True':
+							self.__pfNode.Breadth_Search(startOBJ=slime, endOBJ=self.__Player)
 					pass
 
 		#_Collision Logic functions_#
@@ -336,7 +339,7 @@ print('\n<<-----Initial Set UP------>>\n') #to make it easier to read in the com
 Game = Alpha()
 Game.Create_MainCanvas()
 Game.Window_SetUP()
-Game.Game_SetUP(False, 'On')
+Game.Game_SetUP(False, 'Off')
 # Game.Testing_Debug()
 print('\n<<-----Game Main Loop------>>\n')
 Game.Game_Loop()
