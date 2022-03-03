@@ -1,8 +1,0 @@
-Current Game Version
-	v.0.2.88
-
-
- ** Last Update Note:
- 		PATH FINDING:
-			Breadth First Search has basic functionality now. Finding the path has been done, now getting the
-			slime to follow this path is proving to be difficult. 

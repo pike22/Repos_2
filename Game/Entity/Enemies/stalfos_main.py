@@ -22,7 +22,8 @@ class Stalfos_Main(Enemy_Main):
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/bloodboy.png')
 
 		#placing the img
-		self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
+		# self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
+		self.__x, self.__y = (64, 64)
 		self._iNode.Image_Place(x=self.__x, y=self.__y, image=self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to stalfos numb.

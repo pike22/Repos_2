@@ -77,11 +77,12 @@ class PathFind_Node(Node):
 	#basic path finding.
 	#startOBJ == Target object to be moved
 	#endOBJ == Target object that startOBJ is moving to.
-	def Breadth_Search(self, startOBJ, endOBJ):
+	def Breadth_Search(self, startOBJ=None, endOBJ=None):
 		# print("\n\n#--Initial Prints--#")
 		my_x, my_y = startOBJ.get_myCoords()
 		my_w, my_h = startOBJ.get_size()
-		self.end_x, self.end_y = endOBJ.get_myCoords()
+		# x, y = endOBJ.get_myCoords()
+		self.end_x, self.end_y = self.__pathGRID[self.Find_mySquare(endOBJ.get_myCoords())][0]
 		# print((my_x, my_y), 'obj coords')
 
 		startBox = self.Find_mySquare((my_x, my_y)) #startOBJ's original box
@@ -107,6 +108,9 @@ class PathFind_Node(Node):
 
 			if curBox == 'Box1066':
 				print("END OF THE ROAD")
+				break
+			if self.__pathGRID[self.__reached[curBox]][0] == (self.end_x, self.end_y):
+				print("FOUND EM")
 				break
 
 			#---Finds Neighbors and puts the square into self.__reached---#
@@ -227,6 +231,11 @@ class PathFind_Node(Node):
 					else:
 						return self.__pathGRID[key][0]
 
+
+	def Clear_Path(self):
+		self.__path = []
+
+
 	def Show_Breadth(self, var):
 		box = 'Box'+str(var)
 		if box in self.__reached.keys():
@@ -241,9 +250,15 @@ class PathFind_Node(Node):
 				Image_Node.Render.create_oval(x+4, y+4, x+24, y+8, fill='Green')
 			if self.__cameFrom[self.__reached[box]] == 'down':
 				Image_Node.Render.create_oval(x+4, y+20, x+24, y+24, fill='Pink')
-				
+
 			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28)
-			end_x, end_y = self.__pathGRID[self.Find_mySquare((self.end_x, self.end_y))][0]
+			self.Show_Ends()
+
+	def Show_Ends(self, var=None):
+		end_x, end_y = self.__pathGRID[self.Find_mySquare((self.end_x, self.end_y))][0]
+		if var != None:
+			Image_Node.Render.create_oval(end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var, fill='Red')
+		else:
 			Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red')
 
 

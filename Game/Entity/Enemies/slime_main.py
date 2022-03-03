@@ -33,12 +33,16 @@ class Slime_Main(Enemy_Main):
 
 	def Movement_Controll(self, playerLoc):
 		collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
-		self.CPU_MoveControll(BPL='BPL=3', L1Pack=playerLoc)
+		reDrawl = self.CPU_MoveControll(BPL='BPL=3', L1Pack=playerLoc)
 		if collision == []:
 			self.My_Collision()
+		return self.get_reDrawl()
 
 	def Stal_Attack(self):
 		pass
+
+	def Misc_Any(self):
+		self.Mics_Any()
 
 
 	"""#|--------------Getters--------------|#"""
