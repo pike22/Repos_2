@@ -10,9 +10,9 @@ class Enemy_Main(Entity_Main):
 	def __init__(self, info, cLogic=None, cNode=None, iNode=None, tNode=None, pfNode=None):
 		Entity_Main.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
 		self.__reDrawl = False
-		self.Var = 1
 		self.loopCount = 0
-		self.zero = 0
+		self.zero	   = None
+		self.Var 	   = 1
 
 	#Brain Power Level [BPL]
 	def CPU_MoveControll(self, BPL='BPL=0', L1Pack=None, L2Pack=None):
@@ -87,24 +87,33 @@ class Enemy_Main(Entity_Main):
 			path = self._pfNode.get_myPath()
 			if len(path) > 0:
 				if self.loopCount == self.zero:
-					self.zero += int(self._pfNode._boxSize / self._info.get_speed()) +2
-					del path[-1]
-					print(path)
-					print('<--------------------------->')
-				else:
+					self.zero += int(self._pfNode._boxSize / self._info.get_speed())
+
+					x, y = path[-1][1]
 					if path[-1][0] == 'left':
-						self.Personal_Move('left')
-
+						x -= my_w
 					elif path[-1][0] == 'right':
-						self.Personal_Move('right')
-
+						x += my_w
 					elif path[-1][0] == 'down':
-						self.Personal_Move('down')
-
+						x += my_h
 					elif path[-1][0] == 'up':
-						self.Personal_Move('up')
+						x -= my_h
+					print(path[-1][1], 'original coord')
+					print((x, y), 'changed', path[-1][0])
+					print((x, y, x+my_w, y+my_h), 'corners')
+					print('Collision?', self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)))
+					if self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)) != []:
+						if len(path) >= 2:
+							self.Personal_Move(str(path[-2][0]))
+							print('\nMove Little\n<---------->')
+					else:
+						del path[-1]
+						print('\n',path)
+						print('<--------------------------->')
+				else:
+					self.Personal_Move(path[-1][0])
 			else:
-				print('no more path')
+				# print('no more path')
 				self.__reDrawl = True
 
 			self.loopCount += 1
@@ -126,7 +135,7 @@ class Enemy_Main(Entity_Main):
 		self.Move_Sets(newCoords)
 
 	def Mics_Any(self):
-		self.zero = int(self._pfNode._boxSize / self._info.get_speed()) +2
+		self.zero = self._pfNode._boxSize / self._info.get_speed()
 		# print(self.zero, 'zero')
 
 

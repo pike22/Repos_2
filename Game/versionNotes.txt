@@ -1,5 +1,5 @@
 Current Game Version
-	v.0.2.892
+	v.0.2.894
 
 
  ** Last Update Note:

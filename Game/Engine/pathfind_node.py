@@ -109,9 +109,10 @@ class PathFind_Node(Node):
 			if curBox == 'Box1066':
 				print("END OF THE ROAD")
 				break
-			if self.__pathGRID[self.__reached[curBox]][0] == (self.end_x, self.end_y):
-				print("FOUND EM")
-				break
+			if curBox in self.__reached:
+				if self.__pathGRID[self.__reached[curBox]][0] == (self.end_x, self.end_y):
+					print("FOUND EM")
+					break
 
 			#---Finds Neighbors and puts the square into self.__reached---#
 			newNumb = self.Find_Neighbors(curBox, self._next)
@@ -240,26 +241,26 @@ class PathFind_Node(Node):
 		box = 'Box'+str(var)
 		if box in self.__reached.keys():
 			x, y = self.__pathGRID[self.__reached[box]][0]
-			Image_Node.Render.create_text(x+16, y+16, text=str(var), fill='Blue')
+			# Image_Node.Render.create_text(x+16, y+16, text=str(var), fill='Blue')
 
 			if self.__cameFrom[self.__reached[box]] == 'right':
-				Image_Node.Render.create_oval(x+20, y+4, x+24, y+24, fill='Yellow')
+				Image_Node.Render.create_oval(x+20, y+13, x+24, y+17, fill='Yellow', tag='BFS')
 			if self.__cameFrom[self.__reached[box]] == 'left':
-				Image_Node.Render.create_oval(x+4, y+4, x+8, y+24, fill='Orange')
+				Image_Node.Render.create_oval(x+10, y+13, x+14, y+17, fill='Orange', tag='BFS')
 			if self.__cameFrom[self.__reached[box]] == 'up':
-				Image_Node.Render.create_oval(x+4, y+4, x+24, y+8, fill='Green')
+				Image_Node.Render.create_oval(x+14, y+10, x+18, y+14, fill='Green', tag='BFS')
 			if self.__cameFrom[self.__reached[box]] == 'down':
-				Image_Node.Render.create_oval(x+4, y+20, x+24, y+24, fill='Pink')
+				Image_Node.Render.create_oval(x+14, y+20, x+18, y+24, fill='Pink', tag='BFS')
 
-			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28)
+			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28, tag='BFS')
 			self.Show_Ends()
 
 	def Show_Ends(self, var=None):
 		end_x, end_y = self.__pathGRID[self.Find_mySquare((self.end_x, self.end_y))][0]
 		if var != None:
-			Image_Node.Render.create_oval(end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var, fill='Red')
+			Image_Node.Render.create_oval(end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var, fill='Red', tag='BFS')
 		else:
-			Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red')
+			Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red', tag='BFS')
 
 
 	'''#|--------------Getters--------------|#'''

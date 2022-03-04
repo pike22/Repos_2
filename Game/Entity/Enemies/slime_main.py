@@ -24,7 +24,7 @@ class Slime_Main(Enemy_Main):
 		self._iNode.Image_Place(x=self.__x, y=self.__y, image=self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to Slime
-		self._info.Slime_Data(coords=(self.__x, self.__y), speed=5, health=10, defense=5, attack=2) #check Slime_info for well info.
+		self._info.Slime_Data(coords=(self.__x, self.__y), speed=4, health=10, defense=5, attack=2) #check Slime_info for well info.
 		Image_Node.Render.addtag_withtag(group_ID, self._info.get_ID())
 		self._info.set_myCorners(Image_Node.Render.bbox(self._info.get_ID()))
 
