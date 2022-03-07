@@ -38,6 +38,9 @@ class Collision_Node():
 
 
 			"""Col_Dict = self.__logic.get_Col_Dict() #this may not be needed"""
+			if self.__result == 'BFS':
+				print("BFS!!")
+				return
 			if self.__result != []:
 				for item in range(len(self.__result)):
 					# print('\titem:', item)

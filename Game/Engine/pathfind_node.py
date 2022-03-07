@@ -16,6 +16,7 @@ class PathFind_Node(Node):
 		self.__path		= [] #Path the entity will take.
 		self._lastBox	= None
 		self._next		= 0
+		self._shownList = []
 
 		#--Grid Paramaters--#
 		self.__pathGRID = {} # NumValue : (x, y)
@@ -242,25 +243,33 @@ class PathFind_Node(Node):
 		if box in self.__reached.keys():
 			x, y = self.__pathGRID[self.__reached[box]][0]
 			# Image_Node.Render.create_text(x+16, y+16, text=str(var), fill='Blue')
+			self._cLogic.Add_CollisionDict(tagOrId='BFS', obj="PASS")
 
 			if self.__cameFrom[self.__reached[box]] == 'right':
 				Image_Node.Render.create_oval(x+20, y+13, x+24, y+17, fill='Yellow', tag='BFS')
+				self._shownList.append((x+20, y+13, x+24, y+17))
 			if self.__cameFrom[self.__reached[box]] == 'left':
 				Image_Node.Render.create_oval(x+10, y+13, x+14, y+17, fill='Orange', tag='BFS')
+				self._shownList.append((x+10, y+13, x+14, y+17))
 			if self.__cameFrom[self.__reached[box]] == 'up':
 				Image_Node.Render.create_oval(x+14, y+10, x+18, y+14, fill='Green', tag='BFS')
+				self._shownList.append((x+14, y+10, x+18, y+14))
 			if self.__cameFrom[self.__reached[box]] == 'down':
 				Image_Node.Render.create_oval(x+14, y+20, x+18, y+24, fill='Pink', tag='BFS')
+				self._shownList.append((x+14, y+20, x+18, y+24))
 
 			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28, tag='BFS')
+			self._shownList.append((x+4, y+4, x+28, y+28))
 			self.Show_Ends()
 
 	def Show_Ends(self, var=None):
 		end_x, end_y = self.__pathGRID[self.Find_mySquare((self.end_x, self.end_y))][0]
 		if var != None:
 			Image_Node.Render.create_oval(end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var, fill='Red', tag='BFS')
+			self._shownList.append((end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var))
 		else:
 			Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red', tag='BFS')
+			self._shownList.append((end_x+8, end_y +8, end_x+16, end_y +16))
 
 
 	'''#|--------------Getters--------------|#'''
@@ -270,6 +279,9 @@ class PathFind_Node(Node):
 
 	def get_myPath(self, ):
 		return self.__path
+
+	def get_shownList(self):
+		return self._shownList
 
 
 	'''#|--------------Setters--------------|#'''

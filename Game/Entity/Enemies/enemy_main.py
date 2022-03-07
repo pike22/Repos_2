@@ -88,6 +88,8 @@ class Enemy_Main(Entity_Main):
 			if len(path) > 0:
 				if self.loopCount == self.zero:
 					self.zero += int(self._pfNode._boxSize / self._info.get_speed())
+					for item in range(100):
+						print(item)
 
 					x, y = path[-1][1]
 					if path[-1][0] == 'left':
@@ -98,9 +100,9 @@ class Enemy_Main(Entity_Main):
 						x += my_h
 					elif path[-1][0] == 'up':
 						x -= my_h
-					print(path[-1][1], 'original coord')
-					print((x, y), 'changed', path[-1][0])
-					print((x, y, x+my_w, y+my_h), 'corners')
+					# print(path[-1][1], 'original coord')
+					# print((x, y), 'changed', path[-1][0])
+					# print((x, y, x+my_w, y+my_h), 'corners')
 					print('Collision?', self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)))
 					if self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)) != []:
 						if len(path) >= 2:

@@ -1,10 +1,9 @@
 Current Game Version
-	v.0.2.894
+	v.0.2.896
 
 
  ** Last Update Note:
  		PATH FINDING:
-			The search engine now will exit early if it finds its target. The self.__cameFrom dictionary is helping create a path, but sometimes the slime
-			moves too far or too little and gets stuck on walls. Second, if the slime "reaches" its target a variable that gets passed has the Search Engine
-			launch again. Every time this has overloaded Tkinter and has crashed. Tomorrow I plan to look more into moving too far/little and then continue to
-			work on the 'reDrawl' as I call it.
+			The slimes planned path now shows while slime moves. Current bug is that the slime is moving to little
+			and isn't fully making it to the end of the path each time. Changing how to switch to the next step is
+			calculated and the bug should go away.

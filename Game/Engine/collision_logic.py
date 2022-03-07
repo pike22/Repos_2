@@ -6,6 +6,7 @@ class Collision_Logic():
 		self.__collisionDict = {}
 		self.__collisionList = []
 		self.__collideList	 = []
+		self.__showBFS		 = []
 		self.__cornersLVD	 = []
 		self.__cornersALL	 = []
 		self.__isCollision   = False
@@ -80,11 +81,16 @@ class Collision_Logic():
 		return newList
 
 	'''#_COLLISON CALCULATION FUNCTIONS_#'''
-	def Add_Collision(self, listofCorners=None, lvdCorners=None):
+	def Add_Collision(self, listofCorners=None, lvdCorners=None, bfsCorners=None):
 		if listofCorners != None:
 			self.tempL = []
 			for tuple in listofCorners:
 				self.tempL.append(tuple)
+
+		if bfsCorners != None:
+			for tuple in bfsCorners:
+				self.__showBFS.append(tuple)
+				# print(self.__showBFS)
 
 		if lvdCorners != None:
 			for key in lvdCorners.keys():
@@ -94,7 +100,8 @@ class Collision_Logic():
 				lvdCorners[key].set_myCorners(myCorner)
 				self.__cornersLVD.append(myCorner)
 
-		self.__cornersALL = self.tempL + self.__cornersLVD
+		self.__cornersALL = self.tempL + self.__cornersLVD + self.__showBFS
+		# print('list-o-Corners', self.__cornersALL, '\n\n')
 
 
 	def Check_forCollision(self, targOBJ=None, objCorners=None):
@@ -107,11 +114,12 @@ class Collision_Logic():
 		if len(collision) > 1:
 			self.__collideList = []
 			self.__collisionList   = []
-			for count in range(len(collision)):
-				# print('item:', item, 'CL#113')
-				tag = Image_Node.Render.gettags(collision[count])
-				# print(tag, 'tag CL#100')
-				self.__collisionList.append(tag[0])
+			for count in collision:
+				# print('count:', count, 'CL#112')
+				if count < len(collision):
+					tag = Image_Node.Render.gettags(collision[count])
+					# print(tag, 'tag CL#114')
+					self.__collisionList.append(tag[0])
 			# print(self.__collisionList, 'Colliding') #print Tags of Entity Colliding
 
 			self.oldList = []
@@ -183,8 +191,9 @@ class Collision_Logic():
 			for count in range(len(self.__collisionList)):
 				tagOrId = self.__collisionList[count]
 				obj = self.__collisionDict[tagOrId]
-				# print(obj.get_myCoords(), tagOrId, 'objCoords')
-				self.__collideList.append(obj)
+				if obj != "PASS":
+					# print(obj.get_myCoords(), tagOrId, 'objCoords')
+					self.__collideList.append(obj)
 
 
 

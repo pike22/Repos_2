@@ -103,6 +103,7 @@ class Alpha():
 		#---Temperary Variables---#
 		self.__loopCount = 33
 		self.__seconds   = 0
+		self.is_g = False
 
 
 	def Window_SetUP(self):
@@ -167,7 +168,7 @@ class Alpha():
 					self.__pfNode.Breadth_Search(startOBJ=Slime, endOBJ=self.__Player)
 					# Slime.Info_Print('Slime')
 					Slime.Misc_Any()
-					self.__pfNode.Show_Ends(32)
+					# self.__pfNode.Show_Ends(32)
 
 
 		#_Weapon SETUP_#
@@ -188,12 +189,12 @@ class Alpha():
 			return
 		# self.new_Player()
 
-		if self._collision_OnOff == 'Off':
-			if keyboard.is_pressed('g'):
-				# print("g")
-				while self.g != 2000:
-					self.g += 1
-					self.__pfNode.Show_Breadth(self.g)
+		# if self._collision_OnOff == 'Off':
+		# if keyboard.is_pressed('g'):
+		# 	self.is_g = True
+		while self.g != 2000:
+			self.g += 1
+			self.__pfNode.Show_Breadth(self.g)
 
 		#_loop Debug_#
 		# self.debug_collisionDict() #workes
@@ -228,12 +229,12 @@ class Alpha():
 			if key in collisionDict:
 				slime = collisionDict[key]
 				if slime.get_isAlive() == True:
-					if self._collision_OnOff == 'On':
-						reDraw = slime.Movement_Controll(self.__Player.get_myCoords())
-						# print(reDraw, 'redraw?')
-						# if reDraw == True:
-						# 	self.__pfNode.Clear_Path()
-						# 	self.__pfNode.Breadth_Search(startOBJ=slime, endOBJ=self.__Player)
+					# if self._collision_OnOff == 'On':
+					reDraw = slime.Movement_Controll(self.__Player.get_myCoords())
+					# print(reDraw, 'redraw?')
+					# if reDraw == True:
+					# 	self.__pfNode.Clear_Path()
+					# 	self.__pfNode.Breadth_Search(startOBJ=slime, endOBJ=self.__Player)
 					pass
 
 		#_Collision Logic functions_#
@@ -260,9 +261,11 @@ class Alpha():
 			if self.__Bow.get_projActive(item) == True:
 				list1.append(self.__Bow.get_projCorners(item))
 
-		if self._collision_OnOff == 'On':
-			self.__cLogic.Add_Collision(list1)
-			self.__cNode.Use_Collision(len(list1))
+		self.__cLogic.Add_Collision(bfsCorners=self.__pfNode.get_shownList())
+
+
+		self.__cLogic.Add_Collision(list1)
+		self.__cNode.Use_Collision(len(list1))
 
 
 
@@ -342,7 +345,7 @@ print('\n<<-----Initial Set UP------>>\n') #to make it easier to read in the com
 Game = Alpha()
 Game.Create_MainCanvas()
 Game.Window_SetUP()
-Game.Game_SetUP(False, 'Off')
+Game.Game_SetUP(False, 'On')
 # Game.Testing_Debug()
 print('\n<<-----Game Main Loop------>>\n')
 Game.Game_Loop()
