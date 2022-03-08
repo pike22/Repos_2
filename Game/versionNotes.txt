@@ -1,9 +1,10 @@
 Current Game Version
-	v.0.2.896
+	v.0.2.897
 
 
  ** Last Update Note:
  		PATH FINDING:
-			The slimes planned path now shows while slime moves. Current bug is that the slime is moving to little
-			and isn't fully making it to the end of the path each time. Changing how to switch to the next step is
-			calculated and the bug should go away.
+			Working on the timing of when the slime switches to the next box for movement. Currently the initial position of the slime isn't
+			saved to the path list. So I need to artificially push the slime to the next box to have it move. Right now the Find_mySquare function
+			is based around the center of the slime. That point may need to be adapted to be placed differently based on its next moves.
+			All because the slime can get clipped on edges due to not moveing far enough before picking its next direction. 

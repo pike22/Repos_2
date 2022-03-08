@@ -82,9 +82,13 @@ class PathFind_Node(Node):
 		# print("\n\n#--Initial Prints--#")
 		my_x, my_y = startOBJ.get_myCoords()
 		my_w, my_h = startOBJ.get_size()
-		# x, y = endOBJ.get_myCoords()
-		self.end_x, self.end_y = self.__pathGRID[self.Find_mySquare(endOBJ.get_myCoords())][0]
+		x, y = endOBJ.get_myCoords()
+		w, h = endOBJ.get_size()
+		x += int(w/2)
+		y += int(h/2)
+		self.end_x, self.end_y = self.__pathGRID[self.Find_mySquare((x, y))][0]
 		# print((my_x, my_y), 'obj coords')
+		Image_Node.Render.create_rectangle(my_x, my_y, my_x+32, my_y+32, fill='Aqua', tag='BFS')
 
 		startBox = self.Find_mySquare((my_x, my_y)) #startOBJ's original box
 		# print(startBox, startOBJ.get_ID(),"'s box number")
@@ -264,12 +268,8 @@ class PathFind_Node(Node):
 
 	def Show_Ends(self, var=None):
 		end_x, end_y = self.__pathGRID[self.Find_mySquare((self.end_x, self.end_y))][0]
-		if var != None:
-			Image_Node.Render.create_oval(end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var, fill='Red', tag='BFS')
-			self._shownList.append((end_x+8-var, end_y+8-var, end_x+16-var, end_y+16-var))
-		else:
-			Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red', tag='BFS')
-			self._shownList.append((end_x+8, end_y +8, end_x+16, end_y +16))
+		Image_Node.Render.create_oval(end_x+8, end_y +8, end_x+16, end_y +16, fill='Red', tag='BFS')
+		self._shownList.append((end_x+8, end_y +8, end_x+16, end_y +16))
 
 
 	'''#|--------------Getters--------------|#'''

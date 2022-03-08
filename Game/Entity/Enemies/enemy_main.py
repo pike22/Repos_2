@@ -86,32 +86,27 @@ class Enemy_Main(Entity_Main):
 			# Moves based on the created path.
 			path = self._pfNode.get_myPath()
 			if len(path) > 0:
-				if self.loopCount == self.zero:
-					self.zero += int(self._pfNode._boxSize / self._info.get_speed())
-					for item in range(100):
-						print(item)
-
-					x, y = path[-1][1]
-					if path[-1][0] == 'left':
-						x -= my_w
-					elif path[-1][0] == 'right':
-						x += my_w
-					elif path[-1][0] == 'down':
-						x += my_h
-					elif path[-1][0] == 'up':
-						x -= my_h
-					# print(path[-1][1], 'original coord')
-					# print((x, y), 'changed', path[-1][0])
-					# print((x, y, x+my_w, y+my_h), 'corners')
-					print('Collision?', self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)))
-					if self._cLogic.Check_forCollision(objCorners=(x, y, x+my_w, y+my_h)) != []:
-						if len(path) >= 2:
-							self.Personal_Move(str(path[-2][0]))
-							print('\nMove Little\n<---------->')
-					else:
-						del path[-1]
-						print('\n',path)
-						print('<--------------------------->')
+				x, y = my_x, my_y
+				x += int(my_w/2)
+				y += int(my_h/2)
+				if path[-1][0] == 'left':
+					x -= my_w
+				if path[-1][0] == 'right':
+					x += my_w
+				if path[-1][0] == 'down':
+					y += my_h
+				if path[-1][0] == 'up':
+					y -= my_h
+				mySquare = self._pfNode.Find_mySquare((x, y))
+				curSquare = self._pfNode.Find_mySquare((path[-1][1]))
+				Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
+				print(mySquare, ':mySquare\n curSquare:', curSquare)
+				print((x, y), ':myCoords\n curCoords:', path[-1][1])
+				if mySquare != curSquare:
+					print(self.loopCount)
+					del path[-1]
+					print('\n',path)
+					print('<--------------------------->')
 				else:
 					self.Personal_Move(path[-1][0])
 			else:
