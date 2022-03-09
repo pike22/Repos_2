@@ -3,8 +3,12 @@ Current Game Version
 
 
  ** Last Update Note:
+ 		Collision:
+			It has come to my attention that my method of collision is very inefficient and should be re-worked. The basic plan for that is to switch off
+			of a graphics based system and more into the CPU side of things. This will prevent my game slowing down while testing the path finding. This re-work
+			is for another time though and probably won't get done till after Breadth First Search works more smoothly.
  		PATH FINDING:
-			Working on the timing of when the slime switches to the next box for movement. Currently the initial position of the slime isn't
-			saved to the path list. So I need to artificially push the slime to the next box to have it move. Right now the Find_mySquare function
-			is based around the center of the slime. That point may need to be adapted to be placed differently based on its next moves.
-			All because the slime can get clipped on edges due to not moveing far enough before picking its next direction. 
+			Currently when the path moves right and down. The movement of my enemy is perfect to how I want him to move. Its to the left and up that is
+			currently causing some different problems. The solution to my problem that I believe to work should be move my (x, y) coords on the enemy.
+			This though has caused a series of problems. First being the enemy won't move but the path continues properly. The other thing is that when moveing
+			left or up while using the top left corner of the enemy causes him to move in a direction early. 

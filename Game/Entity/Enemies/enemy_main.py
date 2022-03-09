@@ -86,11 +86,23 @@ class Enemy_Main(Entity_Main):
 			# Moves based on the created path.
 			path = self._pfNode.get_myPath()
 			if len(path) > 0:
-				x, y = my_x, my_y
-				x += int(my_w/2)
-				y += int(my_h/2)
+				x, y = self._info.get_myCoords()
+				# if path[-1][0] == 'up':
+				# 	y += my_h
+				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
+				# elif path[-1][0] == 'left':
+				# 	x += my_w
+				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
+
+				if path[-1][0] == 'down' or path[-1][0] == 'right':
+					b, a = self._info.get_myCoords()
+					if (b, a) != (x, y):
+						x, y = self._info.get_myCoords()
+					Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
+
+
 				if path[-1][0] == 'left':
-					x -= my_w
+					x -= 2*my_w
 				if path[-1][0] == 'right':
 					x += my_w
 				if path[-1][0] == 'down':
@@ -99,14 +111,14 @@ class Enemy_Main(Entity_Main):
 					y -= my_h
 				mySquare = self._pfNode.Find_mySquare((x, y))
 				curSquare = self._pfNode.Find_mySquare((path[-1][1]))
-				Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
-				print(mySquare, ':mySquare\n curSquare:', curSquare)
-				print((x, y), ':myCoords\n curCoords:', path[-1][1])
+				# print(mySquare, ':mySquare\n pathSquare:', curSquare, '\n')
+				# print((x, y), ':myCoords\n pathCoords:', path[-1][1], '\n')
 				if mySquare != curSquare:
-					print(self.loopCount)
+					Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
+					# print(self.loopCount)
 					del path[-1]
 					print('\n',path)
-					print('<--------------------------->')
+					print('<--------------------------->\n')
 				else:
 					self.Personal_Move(path[-1][0])
 			else:
