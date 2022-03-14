@@ -11,6 +11,7 @@ class Enemy_Main(Entity_Main):
 		Entity_Main.__init__(self, info=info, cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode, pfNode=pfNode)
 		self.__reDrawl = False
 		self.loopCount = 0
+		self.lastSquare= None
 		self.zero	   = None
 		self.Var 	   = 1
 
@@ -26,6 +27,8 @@ class Enemy_Main(Entity_Main):
 		#General Info
 		my_w, my_h = self._info.get_size()
 		my_x, my_y = self._info.get_myCoords()
+		my_x += 2
+		my_y += 2
 		if L1Pack != None:
 			pl_x, pl_y = L1Pack
 
@@ -86,7 +89,6 @@ class Enemy_Main(Entity_Main):
 			# Moves based on the created path.
 			path = self._pfNode.get_myPath()
 			if len(path) > 0:
-				x, y = self._info.get_myCoords()
 				# if path[-1][0] == 'up':
 				# 	y += my_h
 				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
@@ -94,33 +96,60 @@ class Enemy_Main(Entity_Main):
 				# 	x += my_w
 				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
 
-				if path[-1][0] == 'down' or path[-1][0] == 'right':
-					b, a = self._info.get_myCoords()
-					if (b, a) != (x, y):
-						x, y = self._info.get_myCoords()
-					Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
+				if path[-1][0] == 'left':
+					my_x += (my_w-4)
+					# Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
+				if path[-1][0] == 'up':
+					my_y += (my_h-4)
+					# Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
+				# if path[-1][0] == 'right':
+				# 	# my_x += (my_w-4)
+				# 	Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
+				# if path[-1][0] == 'down':
+				# 	# my_x += (my_h-4)
+				# 	Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
+
 
 
 				if path[-1][0] == 'left':
-					x -= 2*my_w
+					my_x -= my_w
 				if path[-1][0] == 'right':
-					x += my_w
+					my_x += my_w
 				if path[-1][0] == 'down':
-					y += my_h
+					my_y += my_h
 				if path[-1][0] == 'up':
-					y -= my_h
-				mySquare = self._pfNode.Find_mySquare((x, y))
+					my_y -= my_h
+				mySquare = self._pfNode.Find_mySquare((my_x, my_y))
 				curSquare = self._pfNode.Find_mySquare((path[-1][1]))
-				# print(mySquare, ':mySquare\n pathSquare:', curSquare, '\n')
-				# print((x, y), ':myCoords\n pathCoords:', path[-1][1], '\n')
 				if mySquare != curSquare:
-					Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
-					# print(self.loopCount)
-					del path[-1]
-					print('\n',path)
+					if self.lastSquare == None:
+						self.lastSquare = mySquare
+						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square?')
+						print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square?')
+					elif self.lastSquare != mySquare:
+						self.lastSquare = mySquare
+						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
+						del path[-1]
+						if len(path) != 0:
+							print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+					else:
+						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
+						del path[-1]
+						if len(path) != 0:
+							print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+						return
+					# Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
+
+					# print('\n',len(path), 'Directions')
+					print(path)
 					print('<--------------------------->\n')
 				else:
 					self.Personal_Move(path[-1][0])
+					print('Moved...', path[-1][0])
+					# if len(path) > 2:
+					# 	if path[-2][0] != path[-1][0]:
+					# 		self.Personal_Move(path[-1][0])
+					# 		print('Moved..', path[-1][0])
 			else:
 				# print('no more path')
 				self.__reDrawl = True

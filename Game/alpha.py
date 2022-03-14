@@ -13,7 +13,7 @@ class Alpha():
 	def __init__(self):
 		self.__screenWidth	= 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.897]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.91]"
 
 		#Don't append till after SetUP is called
 		self.__everyRoster 		= [] #Allobject IDs
@@ -192,9 +192,9 @@ class Alpha():
 		# if self._collision_OnOff == 'Off':
 		# if keyboard.is_pressed('g'):
 		# 	self.is_g = True
-		while self.g != 2000:
-			self.g += 1
-			self.__pfNode.Show_Breadth(self.g)
+		# while self.g != 2000:
+		# 	self.g += 1
+		# 	self.__pfNode.Show_Breadth(self.g)
 
 		#_loop Debug_#
 		# self.debug_collisionDict() #workes

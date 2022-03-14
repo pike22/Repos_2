@@ -1,5 +1,5 @@
 Current Game Version
-	v.0.2.897
+	v.0.2.91
 
 
  ** Last Update Note:
@@ -8,7 +8,8 @@ Current Game Version
 			of a graphics based system and more into the CPU side of things. This will prevent my game slowing down while testing the path finding. This re-work
 			is for another time though and probably won't get done till after Breadth First Search works more smoothly.
  		PATH FINDING:
-			Currently when the path moves right and down. The movement of my enemy is perfect to how I want him to move. Its to the left and up that is
-			currently causing some different problems. The solution to my problem that I believe to work should be move my (x, y) coords on the enemy.
-			This though has caused a series of problems. First being the enemy won't move but the path continues properly. The other thing is that when moveing
-			left or up while using the top left corner of the enemy causes him to move in a direction early. 
+			Works in all directions, now I need to reverse my collision so that it doesn't error out when I don't
+			show the boxes in BFS. It turns out I was deleting from my path list to fast and it caused me to move one
+			short. Some of the previous fixes I used actually hurt more than helped. The reason right and down
+			didn't have any problems was because even though I deleted early when I hadn't moved out of Box0 was due
+			to where tkinter originally drawls the coord point. Which caused a strange edge case for moving left and up.

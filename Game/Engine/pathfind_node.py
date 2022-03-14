@@ -158,9 +158,11 @@ class PathFind_Node(Node):
 				current = self.Find_mySquare((x, y-self._boxSize))
 				# print(current, 'Next Box')
 			# print(current, self.__reached['Box0'])
-		print('<-------------->')
-		print(len(self.__path))
-		print(self.__path)
+		# print('<-------------->')
+		# print(len(self.__path))
+		# print(self.__path)
+		# print(self.__path[-1][1])
+		# print(self.Find_mySquare((self.__path[-1][1])))
 
 
 	"""#|----------Extra Functions----------|#"""
@@ -246,8 +248,8 @@ class PathFind_Node(Node):
 		box = 'Box'+str(var)
 		if box in self.__reached.keys():
 			x, y = self.__pathGRID[self.__reached[box]][0]
-			# Image_Node.Render.create_text(x+16, y+16, text=str(var), fill='Blue')
-			self._cLogic.Add_CollisionDict(tagOrId='BFS', obj="PASS")
+			# self._cLogic.Add_CollisionDict(tagOrId='BFS', obj="PASS")
+			Image_Node.Render.create_text(x+16, y+16, text=str(self.__reached[box]), fill='Blue', tag='BFS')
 
 			if self.__cameFrom[self.__reached[box]] == 'right':
 				Image_Node.Render.create_oval(x+20, y+13, x+24, y+17, fill='Yellow', tag='BFS')
@@ -262,7 +264,7 @@ class PathFind_Node(Node):
 				Image_Node.Render.create_oval(x+14, y+20, x+18, y+24, fill='Pink', tag='BFS')
 				self._shownList.append((x+14, y+20, x+18, y+24))
 
-			Image_Node.Render.create_rectangle(x+4, y+4, x+28, y+28, tag='BFS')
+			Image_Node.Render.create_rectangle(x, y, x+32, y+32, tag='BFS')
 			self._shownList.append((x+4, y+4, x+28, y+28))
 			self.Show_Ends()
 

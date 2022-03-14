@@ -7,8 +7,8 @@ class Slime_Main(Enemy_Main):
 		Enemy_Main.__init__(self, info=Slime_Info(ID), cLogic=cLogic, iNode=iNode, pfNode=pfNode)
 
 		#----Temp Var----#
-		self.__x	= 0
-		self.__y	= 0
+		self.__x	= 960
+		self.__y	= 320
 		self.__var	= 1
 		self._randNum = None
 
