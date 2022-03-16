@@ -72,7 +72,7 @@ class PathFind_Node(Node):
 				self.__pathGRID[boxNumb] = [(self._xPos, self._yPos)]
 				self.__frontier[boxNumb] = [(self._xPos, self._yPos)]
 			# 	print((self._xPos, self._yPos), 'box coords\t', y)
-			# print('-----------------------------------------------')
+			# print('<----------------------------------------->')
 		# print(self.__pathGRID)
 
 	#basic path finding.

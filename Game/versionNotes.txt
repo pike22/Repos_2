@@ -1,15 +1,11 @@
 Current Game Version
-	v.0.2.91
+	v.0.2.92
 
 
  ** Last Update Note:
  		Collision:
-			It has come to my attention that my method of collision is very inefficient and should be re-worked. The basic plan for that is to switch off
-			of a graphics based system and more into the CPU side of things. This will prevent my game slowing down while testing the path finding. This re-work
-			is for another time though and probably won't get done till after Breadth First Search works more smoothly.
+			Started a new branch to rework collision. Now going to use a more mechanically based collision rather
+			than using a graphics based collision.
+
  		PATH FINDING:
-			Works in all directions, now I need to reverse my collision so that it doesn't error out when I don't
-			show the boxes in BFS. It turns out I was deleting from my path list to fast and it caused me to move one
-			short. Some of the previous fixes I used actually hurt more than helped. The reason right and down
-			didn't have any problems was because even though I deleted early when I hadn't moved out of Box0 was due
-			to where tkinter originally drawls the coord point. Which caused a strange edge case for moving left and up.
+			Works in all directions
