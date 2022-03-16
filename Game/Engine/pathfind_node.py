@@ -88,7 +88,7 @@ class PathFind_Node(Node):
 		y += int(h/2)
 		self.end_x, self.end_y = self.__pathGRID[self.Find_mySquare((x, y))][0]
 		# print((my_x, my_y), 'obj coords')
-		Image_Node.Render.create_rectangle(my_x, my_y, my_x+32, my_y+32, fill='Aqua', tag='BFS')
+		# Image_Node.Render.create_rectangle(my_x, my_y, my_x+32, my_y+32, fill='Aqua', tag='BFS')
 
 		startBox = self.Find_mySquare((my_x, my_y)) #startOBJ's original box
 		# print(startBox, startOBJ.get_ID(),"'s box number")
@@ -244,25 +244,26 @@ class PathFind_Node(Node):
 		self.__path = []
 
 
-	def Show_Breadth(self, var):
+	def Show_Breadth(self, var, showDir):
 		box = 'Box'+str(var)
 		if box in self.__reached.keys():
 			x, y = self.__pathGRID[self.__reached[box]][0]
-			# self._cLogic.Add_CollisionDict(tagOrId='BFS', obj="PASS")
+			self._cLogic.Add_CollisionDict(tagOrId='BFS', obj="PASS")
 			Image_Node.Render.create_text(x+16, y+16, text=str(self.__reached[box]), fill='Blue', tag='BFS')
 
-			if self.__cameFrom[self.__reached[box]] == 'right':
-				Image_Node.Render.create_oval(x+20, y+13, x+24, y+17, fill='Yellow', tag='BFS')
-				self._shownList.append((x+20, y+13, x+24, y+17))
-			if self.__cameFrom[self.__reached[box]] == 'left':
-				Image_Node.Render.create_oval(x+10, y+13, x+14, y+17, fill='Orange', tag='BFS')
-				self._shownList.append((x+10, y+13, x+14, y+17))
-			if self.__cameFrom[self.__reached[box]] == 'up':
-				Image_Node.Render.create_oval(x+14, y+10, x+18, y+14, fill='Green', tag='BFS')
-				self._shownList.append((x+14, y+10, x+18, y+14))
-			if self.__cameFrom[self.__reached[box]] == 'down':
-				Image_Node.Render.create_oval(x+14, y+20, x+18, y+24, fill='Pink', tag='BFS')
-				self._shownList.append((x+14, y+20, x+18, y+24))
+			if showDir == True:
+				if self.__cameFrom[self.__reached[box]] == 'right':
+					Image_Node.Render.create_oval(x+20, y+13, x+24, y+17, fill='Yellow', tag='BFS')
+					self._shownList.append((x+20, y+13, x+24, y+17))
+				if self.__cameFrom[self.__reached[box]] == 'left':
+					Image_Node.Render.create_oval(x+10, y+13, x+14, y+17, fill='Orange', tag='BFS')
+					self._shownList.append((x+10, y+13, x+14, y+17))
+				if self.__cameFrom[self.__reached[box]] == 'up':
+					Image_Node.Render.create_oval(x+14, y+10, x+18, y+14, fill='Green', tag='BFS')
+					self._shownList.append((x+14, y+10, x+18, y+14))
+				if self.__cameFrom[self.__reached[box]] == 'down':
+					Image_Node.Render.create_oval(x+14, y+20, x+18, y+24, fill='Pink', tag='BFS')
+					self._shownList.append((x+14, y+20, x+18, y+24))
 
 			Image_Node.Render.create_rectangle(x, y, x+32, y+32, tag='BFS')
 			self._shownList.append((x+4, y+4, x+28, y+28))

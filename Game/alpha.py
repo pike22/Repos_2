@@ -194,7 +194,7 @@ class Alpha():
 		# 	self.is_g = True
 		# while self.g != 2000:
 		# 	self.g += 1
-		# 	self.__pfNode.Show_Breadth(self.g)
+		# 	self.__pfNode.Show_Breadth(self.g, showDir=False)
 
 		#_loop Debug_#
 		# self.debug_collisionDict() #workes
@@ -229,12 +229,7 @@ class Alpha():
 			if key in collisionDict:
 				slime = collisionDict[key]
 				if slime.get_isAlive() == True:
-					# if self._collision_OnOff == 'On':
 					reDraw = slime.Movement_Controll(self.__Player.get_myCoords())
-					# print(reDraw, 'redraw?')
-					# if reDraw == True:
-					# 	self.__pfNode.Clear_Path()
-					# 	self.__pfNode.Breadth_Search(startOBJ=slime, endOBJ=self.__Player)
 					pass
 
 		#_Collision Logic functions_#
@@ -261,7 +256,7 @@ class Alpha():
 			if self.__Bow.get_projActive(item) == True:
 				list1.append(self.__Bow.get_projCorners(item))
 
-		self.__cLogic.Add_Collision(bfsCorners=self.__pfNode.get_shownList())
+		# self.__cLogic.Add_Collision(bfsCorners=self.__pfNode.get_shownList())
 
 
 		self.__cLogic.Add_Collision(list1)
