@@ -89,28 +89,13 @@ class Enemy_Main(Entity_Main):
 			# Moves based on the created path.
 			path = self._pfNode.get_myPath()
 			if len(path) > 0:
-				# if path[-1][0] == 'up':
-				# 	y += my_h
-				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
-				# elif path[-1][0] == 'left':
-				# 	x += my_w
-				# 	Image_Node.Render.create_oval(x, y, x+2, y+2, fill='red', tag='BFS')
-
+				#draw shift
 				if path[-1][0] == 'left':
 					my_x += (my_w-4)
-					# Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
 				if path[-1][0] == 'up':
 					my_y += (my_h-4)
-					# Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
-				# if path[-1][0] == 'right':
-				# 	# my_x += (my_w-4)
-				# 	Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
-				# if path[-1][0] == 'down':
-				# 	# my_x += (my_h-4)
-				# 	Image_Node.Render.create_oval(my_x, my_y, my_x+2, my_y+2, fill='red', tag='BFS')
 
-
-
+				#next direction
 				if path[-1][0] == 'left':
 					my_x -= my_w
 				if path[-1][0] == 'right':
@@ -124,28 +109,28 @@ class Enemy_Main(Entity_Main):
 				if mySquare != curSquare:
 					if self.lastSquare == None:
 						self.lastSquare = mySquare
-						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square?')
-						print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square?')
+						# print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square?')
+						# print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square?')
 					elif self.lastSquare != mySquare:
 						self.lastSquare = mySquare
-						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
+						# print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
 						del path[-1]
 						if len(path) != 0:
-							print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+							# print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
 					else:
-						print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
+						# print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
 						del path[-1]
 						if len(path) != 0:
-							print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+							# print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
 						return
 					# Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
 
 					# print('\n',len(path), 'Directions')
-					print(path)
-					print('<--------------------------->\n')
+					# print(path)
+					# print('<--------------------------->\n')
 				else:
 					self.Personal_Move(path[-1][0])
-					print('Moved...', path[-1][0])
+					# print('Moved...', path[-1][0])
 					# if len(path) > 2:
 					# 	if path[-2][0] != path[-1][0]:
 					# 		self.Personal_Move(path[-1][0])

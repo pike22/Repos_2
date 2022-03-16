@@ -59,6 +59,7 @@ class Collision_Logic():
 	def Add_CollisionDict(self, tagOrId, obj):
 		if tagOrId not in self.__collisionDict.keys():
 			self.__collisionDict[tagOrId] = obj
+			# print('Collision Dict', self.__collisionDict.keys())
 
 	def Del_CollisionDict(self, tagOrId):
 		if tagOrId in self.__collisionDict.keys():
@@ -190,10 +191,11 @@ class Collision_Logic():
 
 			for count in range(len(self.__collisionList)):
 				tagOrId = self.__collisionList[count]
-				obj = self.__collisionDict[tagOrId]
-				if obj != "PASS":
-					# print(obj.get_myCoords(), tagOrId, 'objCoords')
-					self.__collideList.append(obj)
+				if tagOrId != 'BFS':
+					obj = self.__collisionDict[tagOrId]
+					if obj != "PASS":
+						# print(obj.get_myCoords(), tagOrId, 'objCoords')
+						self.__collideList.append(obj)
 
 
 
