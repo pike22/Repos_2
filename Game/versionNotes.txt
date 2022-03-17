@@ -1,11 +1,12 @@
 Current Game Version
-	v.0.2.92
+	v.0.2.93
 
 
  ** Last Update Note:
- 		Collision:
-			Started a new branch to rework collision. Now going to use a more mechanically based collision rather
-			than using a graphics based collision.
+ 		Collision: Collision Re-work
+			Base rework has been started. The use of a grid in collision is a massive simplification to Tkinters method of collision. I may no longer
+			need to have a separate function for Side Calculation and the same goes for the Collision Node. Most of what I do could now be done in one
+			function instead of two. Still in early stages of rework and nothing has been tested.
 
  		PATH FINDING:
 			Works in all directions

@@ -13,7 +13,7 @@ class Alpha():
 	def __init__(self):
 		self.__screenWidth	= 1280
 		self.__screenHeight = 800
-		self.__version	 = "Stab Simulator [ALPHAv0.2.92]"
+		self.__version	 = "Stab Simulator [ALPHAv0.2.93]"
 
 		#Don't append till after SetUP is called
 		self.__everyRoster 		= [] #Allobject IDs

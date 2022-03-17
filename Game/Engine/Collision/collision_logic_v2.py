@@ -1,0 +1,96 @@
+import re
+
+class Collision_Logic_v2():
+	def __init__(self):
+
+
+		#--Grid Dictionaries--#
+		self.__collisionMap	= {} #Used map spaces.
+		self.__collisionObj = {} #Object Stored in that map square.
+		self.__gridMap		= {} #The Grid, key=BoxNumb & value=(x, y)POS
+		#--Grid Parameters--#
+		self._heightSC	= 800
+		self._widthSC	= 1280
+		self._boxSize	= 32
+		self._xPos		= 0
+		self._yPos		= 0
+
+
+	#--Collision's Engine--#
+	def Create_Grid(self, ):
+		boxCountX = int(self._widthSC/self._boxSize)
+		boxCountY = int(self._heightSC/self._boxSize)
+
+		boxNumb = 0
+		for x in range(boxCountX+1):
+			if x == 0:
+				self._xPos = 0
+			else:
+				self._xPos += self._boxSize
+			for y in range(boxCountY+1):
+				if y == (boxCountY):
+					self._yPos = 0
+				boxNumb+=1
+				self.__gridMap[boxNumb] = (self._xPos, self._yPos)
+				print((self._xPos, self._yPos), 'box coords\t', y)
+				self._yPos += self._boxSize
+			print('<----------------------------------------->')
+
+	def Add_Collision(self, pos, obj, tag):
+		x, y = pos
+		for key, value in self.__gridMap.items():
+			val_x, val_y = value
+			if x >= val_x and x < val_x+self._boxSize:
+				if y >= val_y and y < val_y+self._boxSize:
+					print('Box Number', key)
+					self.__collisionMap[tag] = key
+					self.__collisionObj[tag] = obj
+					print('New Collision Obj', self.__collisionObj[tag])
+					print('New Collision Pos', self.__collisionMap[tag])
+
+
+	def Del_Collision(self, tag):
+		if tag in self.__collisionMap and tag in self.__collisionObj:
+			del self.__collisionMap[tag]
+			del self.__collisionObj[tag]
+
+	def Tag_toObject(self, tag):
+		for key in self.__collisionObj.keys():
+			if key == tag:
+				return key
+			else:
+				print('Key not found \n\tFunc: Tag_toObject')
+
+	def Object_toTag(self, object):
+		for value in self.__collisionObj.values():
+			if value == object:
+				return value
+			else:
+				print('Object not found \n\tFunc: Object_toTag')
+
+
+	def Check_ifUsed(self, ):
+		pass
+
+
+	#Currently set up for a one-to-one collision.
+	def Is_Collision(self, tag):
+		for key in self.__collisionMap.keys():
+			if key != tag:
+				if self.__collisionMap[key] == self.__collisionMap[tag]:
+					print('Two Objects in One Square')
+					objMain = self.__collisionObj[tag] #Focused object
+					objNext = self.__collisionObj[key] #Colliding with their obj
+		Main_x, Main_y = objMain.get_myCoords()
+		Next_x, Next_y = objNext.get_myCoords()
+		if Main_x < Next_x: #referance Side_Calculate
+
+
+	"""|--------------Getters--------------|#"""
+		#this is where a list of getters will go...
+	# def get_...
+
+
+	"""|--------------Setters--------------|#"""
+		#this is where a list of setters will go...
+	# def set_...
