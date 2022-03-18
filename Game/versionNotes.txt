@@ -1,12 +1,13 @@
 Current Game Version
-	v.0.2.93
+	[v.0.2.935]
 
 
  ** Last Update Note:
  		Collision: Collision Re-work
-			Base rework has been started. The use of a grid in collision is a massive simplification to Tkinters method of collision. I may no longer
-			need to have a separate function for Side Calculation and the same goes for the Collision Node. Most of what I do could now be done in one
-			function instead of two. Still in early stages of rework and nothing has been tested.
+			Most of the base line has been completed, some of Collison Node has been reformed. I found it better to keep it separate to reduce clutter.
+			I got stuck remaking the same logic for CL_v2 and reusing code from my graphics based collision. Where not I can just look at the 8 surrounding
+			boxes to my target object and check for free spaces. Rather than using coordinates to find where objects are. This could change some of how CN_v2
+			works as well. So I have plans to fix that and then implement this into my code and start testing my collision objects v2.
 
  		PATH FINDING:
 			Works in all directions

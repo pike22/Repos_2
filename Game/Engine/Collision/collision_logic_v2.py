@@ -3,7 +3,6 @@ import re
 class Collision_Logic_v2():
 	def __init__(self):
 
-
 		#--Grid Dictionaries--#
 		self.__collisionMap	= {} #Used map spaces.
 		self.__collisionObj = {} #Object Stored in that map square.
@@ -75,15 +74,40 @@ class Collision_Logic_v2():
 
 	#Currently set up for a one-to-one collision.
 	def Is_Collision(self, tag):
+		objMain 	= self.__collisionObj[tag] #Focused object
+		collResult	= [objMain]
+		sideResult	= {} #For Side Calc
 		for key in self.__collisionMap.keys():
+			print('Target:', tag)
+			print('Looking at:', key)
 			if key != tag:
 				if self.__collisionMap[key] == self.__collisionMap[tag]:
 					print('Two Objects in One Square')
-					objMain = self.__collisionObj[tag] #Focused object
 					objNext = self.__collisionObj[key] #Colliding with their obj
-		Main_x, Main_y = objMain.get_myCoords()
-		Next_x, Next_y = objNext.get_myCoords()
-		if Main_x < Next_x: #referance Side_Calculate
+					collResult.append(objNext)
+
+					"""look at the sorrounding 8 squares rather than coordinate position. !!!!!!!!!!!!!
+					#<--Side Calculation-->#
+					#<-------------------->#
+					# Coord/Heights #
+					Main_x, Main_y = objMain.get_myCoords()
+					Main_w, main_h = objMain.get_size()
+					Next_x, Next_y = objNext.get_myCoords()
+					Main_w, main_h = objNext.get_size()
+					#<-------------------------------------------->#
+					if (Main_y+Main_h) <= Next_y+int(Next_h*0.2):
+						sideResult[objNext.get_ID()] = 'up'
+					elif (Next_y+Next_h) <= Main_y+int(Main_h*0.2):
+						sideResult[objNext.get_ID()] = 'down'
+					else:
+						if Main_x > Next_x:
+							sideResult[objNext.get_ID()] = 'right'
+						elif Main_x < Next_x:
+							sideResult[objNext.get_ID()] = 'left'
+					"""
+
+		#<--Using Collision-->#
+		return (collResult, sideResult)
 
 
 	"""|--------------Getters--------------|#"""
