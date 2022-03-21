@@ -37,64 +37,68 @@ class Alpha():
 		#__Engine__#
 		self.__Maps		= Maps_GetFile()
 		self.__Node		= Node(self.__mainApp) #other nodes are initialised in node.py: __init__()
-		self.__cLogic	= Collision_Logic() #cLogic has to be made before other Game_Classes.
-		self.__cNode	= Collision_Node(self.__cLogic)
+		# self.__cLogic	= Collision_Logic() #cLogic has to be made before other Game_Classes.
+		self.__cLogic_v2= Collision_Logic_v2()
+		# self.__cNode	= Collision_Node(self.__cLogic)
+		self.__cNode_v2 = Collision_Node_v2(self.__cLogic_v2)
 		self.__iNode	= Image_Node()
 		self.__tNode	= Timer_Node(self.__mainApp)
-		self.__pfNode	= PathFind_Node(self.__cLogic, self.__cNode, self.__iNode) #Path Finder
+		self.__pfNode	= PathFind_Node(self.__cLogic_v2, self.__cNode_v2, self.__iNode) #Path Finder
 		#__Entites__#
-		self.__Player	= Player_Main(self.__cLogic, self.__iNode)
+		self.__Player	= Player_Main(self.__cLogic_v2, self.__iNode)
 		#__Tools-Weapons__#
-		self.__Sword	= Sword_Main(cLogic=self.__cLogic, iNode=self.__iNode)
-		self.__Bow		= Bow_Main(cLogic=self.__cLogic, cNode=self.__cNode, iNode=self.__iNode, tNode=self.__tNode)
+		self.__Sword	= Sword_Main(cLogic=self.__cLogic_v2, iNode=self.__iNode)
+		self.__Bow		= Bow_Main(cLogic=self.__cLogic_v2, cNode=self.__cNode_v2, iNode=self.__iNode, tNode=self.__tNode)
 		#__Level-Designer__#
-		self.__GUI		= GUI_Main(self.__cLogic, self.__iNode, self.__cNode, self.__mainApp, color=None, mainMenu=None)
+		self.__GUI		= GUI_Main(self.__cLogic_v2, self.__iNode, self.__cNode_v2, self.__mainApp, color=None, mainMenu=None)
 		self.__eGUI		= self.__GUI.get_eGUI()
 		self.__siFILES	= self.__GUI.get_siFILE()
 
 		#__Additional-Parameter-SetUP__#
 		self.__GUI.gridSETUP()
-		self.__cLogic.set_grid(self.__eGUI.get_grid())
+		# self.__cLogic.set_grid(self.__eGUI.get_grid())
 
+		self.__imageDICT = None
 		#__Import-Maps__#
 		self.__levelONE   = self.__Maps.get_levelONE()
 		self.__levelTWO   = self.__Maps.get_levelTWO()
 		self.__levelTHREE = self.__Maps.get_levelTHREE()
 		self.__levelFOUR  = self.__Maps.get_levelFOUR()
 
+		"""
 		#---Collision SETUP---#
-		"""Fills out the Collision_Logic and Collision_Node Classes"""
+		#Fills out the Collision_Logic and Collision_Node Classes#
 		#__Player__#
-		self.__cLogic.Add_CollisionDict(tagOrId=self.__Player.get_ID(), obj=self.__Player)
+		self.__cLogic_v2.Add_Collision(pos=self.__Player.get_myCoords(), tag=self.__Player.get_ID(), obj=self.__Player)
 		self.__playerRoster.append(self.__Player.get_ID())
-		self.__cNode.set_playerRoster(self.__playerRoster)
+		self.__cNode_v2.set_playerRoster(self.__playerRoster)
 		#__Statics__#
-		self.__imageDICT = None
-		self.__cNode.set_staticRoster(self.__staticRoster)
+		self.__cNode_v2.set_staticRoster(self.__staticRoster)
 		#__Enemies__#
-		self.__cNode.set_enemyRoster(self.__enemyRoster)
+		self.__cNode_v2.set_enemyRoster(self.__enemyRoster)
 		#__Stalfos__#
 		for item in range(self.__stalfosCount):
 			ID = self.__Node.Create_ObjectName("ST", item)
 			self.__stalfosRoster.append(ID)
-			stalMain = Stalfos_Main(ID=ID, cLogic=self.__cLogic, iNode=self.__iNode)
-			self.__cLogic.Add_CollisionDict(tagOrId=ID, obj=stalMain)
-		self.__cNode.set_stalfosRoster(self.__stalfosRoster)
+			stalMain = Stalfos_Main(ID=ID, cLogic=self.__cLogic_v2, iNode=self.__iNode)
+			self.__cLogic_v2.Add_Collision(pos=stalMain.get_myCoords(), tag=ID, obj=stalMain)
+		self.__cNode_v2.set_stalfosRoster(self.__stalfosRoster)
 		#__Slime__#
 		for item in range(self.__stalfosCount):
 			ID = self.__Node.Create_ObjectName("SL", item)
 			self.__slimeRoster.append(ID)
-			slime = Slime_Main(ID=ID, cLogic=self.__cLogic, pfNode=self.__pfNode, iNode=self.__iNode)
-			self.__cLogic.Add_CollisionDict(tagOrId=ID, obj=slime)
-		self.__cNode.set_slimeRoster(self.__slimeRoster)
+			slime = Slime_Main(ID=ID, cLogic=self.__cLogic_v2, pfNode=self.__pfNode, iNode=self.__iNode)
+			self.__cLogic_v2.Add_Collision(pos=slime.get_myCoords(), tag=ID, obj=slime)
+		self.__cNode_v2.set_slimeRoster(self.__slimeRoster)
 		#__Weapons__#
-		self.__cLogic.Add_CollisionDict(self.__Sword.get_ID(), self.__Sword)#Subject to Change
-		self.__cLogic.Add_CollisionDict(self.__Bow.get_ID(), self.__Bow) 	 #Subject to Change
-		self.__cNode.set_weaponRoster(self.__weaponRoster)
+		# self.__cLogic_v2.Add_Collision(pos=self.__Sword.get_myCoords(), tag=self.__Sword.get_ID(), obj=self.__Sword)#Subject to Change
+		# self.__cLogic_v2.Add_Collision(pos=self.__Bow.get_myCoords(), tag=self.__Bow.get_ID(), obj=self.__Bow) 	 #Subject to Change
+		self.__cNode_v2.set_weaponRoster(self.__weaponRoster)
 		#__Projectiles__#
-		self.__cNode.set_projRoster(self.__projRoster)
+		self.__cNode_v2.set_projRoster(self.__projRoster)
 
-		self.__cNode.set_everyRoster(self.__everyRoster)
+		self.__cNode_v2.set_everyRoster(self.__everyRoster)
+		"""
 
 		#---Path Finder Setups---#
 		self.__pfNode.System_Grid()
@@ -125,56 +129,55 @@ class Alpha():
 		self.__siFILES.Read_File(self.__levelFOUR)
 		self.__imageDICT = self.__siFILES.get_imageDICT()
 
-		# print('image keys\n\t', self.__imageDICT.keys())
-		for key in self.__imageDICT.keys():
-			self.__cLogic.Add_CollisionDict(tagOrId=key, obj=self.__imageDICT[key])
-			self.__wallRoster.append(key)
-		self.__cLogic.Add_Collision(lvdCorners=self.__imageDICT)
-		self.__cNode.set_wallRoster(self.__wallRoster)
+		# print('image keys\n', self.__imageDICT.keys())
+		# for key, value in self.__imageDICT.items():
+		# 	self.__cLogic_v2.Add_Collision(pos=value.get_myCoords(), tag=key, obj=value)
+		# 	self.__wallRoster.append(key)
+		# self.__cNode_v2.set_wallRoster(self.__wallRoster)
 
-		#Bellow is Entity set up
-		self.__Player.Player_SetUP(self.__screenWidth, self.__screenHeight)
-		self.__everyRoster.append(self.__Player.get_ID())
-		# self.__Player.Info_Print('PLayer')
-		self.__Sword.Sword_SetUP()
-		self.__everyRoster.append(self.__Sword.get_ID())
-		# self.__Sword.Info_Print('Sword')
-		self.__Bow.Bow_SetUP()
-		self.__everyRoster.append(self.__Bow.get_ID())
-		# self.__Bow.Info_Print('Bow')
-		self.__Player.set_weapons(sword=self.__Sword, bow=self.__Bow, )
-
-		#_Path Finding_#
-		self.g = -1
-		self.__pfNode.Map_Grid(self.__cLogic.get_collisionDict())
-
-		#__ENEMY Setup__#
-		COLDICT = self.__cLogic.get_collisionDict()
-		for item in range(len(self.__stalfosRoster)):
-			if self.__stalfosRoster[item] in COLDICT.keys():
-				if re.search("(^ST#.{3})", self.__stalfosRoster[item]) != None:
-					Stal = COLDICT[re.search("(^ST#.{3})", self.__stalfosRoster[item]).group(1)]
-					Stal.Stalfos_SetUP(self.__screenWidth, self.__screenHeight)
-					self.__everyRoster.append(Stal.get_ID())
-					# dum_Stal.Info_Print('Stalfos')
-
-		COLDICT = self.__cLogic.get_collisionDict()
-		for item in range(len(self.__slimeRoster)):
-			if self.__slimeRoster[item] in COLDICT.keys():
-				if re.search("(^SL#.{3})", self.__slimeRoster[item]) != None:
-					Slime = COLDICT[re.search("(^SL#.{3})", self.__slimeRoster[item]).group(1)]
-					Slime.Slime_SetUP(self.__screenWidth, self.__screenHeight)
-					self.__everyRoster.append(Slime.get_ID())
-					self.__pfNode.Breadth_Search(startOBJ=Slime, endOBJ=self.__Player)
-					# Slime.Info_Print('Slime')
-					Slime.Misc_Any()
-					# self.__pfNode.Show_Ends(32)
+		# #Bellow is Entity set up
+		# self.__Player.Player_SetUP(self.__screenWidth, self.__screenHeight)
+		# self.__everyRoster.append(self.__Player.get_ID())
+		# # self.__Player.Info_Print('PLayer')
+		# self.__Sword.Sword_SetUP()
+		# self.__everyRoster.append(self.__Sword.get_ID())
+		# # self.__Sword.Info_Print('Sword')
+		# self.__Bow.Bow_SetUP()
+		# self.__everyRoster.append(self.__Bow.get_ID())
+		# # self.__Bow.Info_Print('Bow')
+		# self.__Player.set_weapons(sword=self.__Sword, bow=self.__Bow, )
+		#
+		# #_Path Finding_#
+		# self.g = -1
+		# self.__pfNode.Map_Grid(self.__cLogic_v2.get_collisionDict())
+		#
+		# #__ENEMY Setup__#
+		# COLDICT = self.__cLogic_v2.get_collisionDict()
+		# for item in range(len(self.__stalfosRoster)):
+		# 	if self.__stalfosRoster[item] in COLDICT.keys():
+		# 		if re.search("(^ST#.{3})", self.__stalfosRoster[item]) != None:
+		# 			Stal = COLDICT[re.search("(^ST#.{3})", self.__stalfosRoster[item]).group(1)]
+		# 			Stal.Stalfos_SetUP(self.__screenWidth, self.__screenHeight)
+		# 			self.__everyRoster.append(Stal.get_ID())
+		# 			# dum_Stal.Info_Print('Stalfos')
+		#
+		# COLDICT = self.__cLogic_v2.get_collisionDict()
+		# for item in range(len(self.__slimeRoster)):
+		# 	if self.__slimeRoster[item] in COLDICT.keys():
+		# 		if re.search("(^SL#.{3})", self.__slimeRoster[item]) != None:
+		# 			Slime = COLDICT[re.search("(^SL#.{3})", self.__slimeRoster[item]).group(1)]
+		# 			Slime.Slime_SetUP(self.__screenWidth, self.__screenHeight)
+		# 			self.__everyRoster.append(Slime.get_ID())
+		# 			self.__pfNode.Breadth_Search(startOBJ=Slime, endOBJ=self.__Player)
+		# 			# Slime.Info_Print('Slime')
+		# 			Slime.Misc_Any()
+		# 			# self.__pfNode.Show_Ends(32)
 
 
 		#_Weapon SETUP_#
 
 		#_Sets Every Roster_#
-		self.__cNode.set_everyRoster(self.__everyRoster)
+		# self.__cNode_v2.set_everyRoster(self.__everyRoster)
 
 		#_CLOCK SETUP_#
 		self.__tNode.Game_Clock(GC_OFF)
@@ -204,7 +207,7 @@ class Alpha():
 		if self.__Player.get_attack() == True:
 			self.__Player.Player_MeleeAttack()
 			self.__Player.Player_RangedAttack()
-			# self.__cLogic.Check_forCollision(self.__Player)
+			# self.__cLogic_v2.Check_forCollision(self.__Player)
 		if self.__Player.get_isAlive() == True:
 			if self.__Player.Player_MeleeAttack() == False and self.__Player.Player_RangedAttack() == False:
 				if self._collision_OnOff == 'On':
@@ -215,7 +218,7 @@ class Alpha():
 			pass
 
 			#_STALFOS_#
-		collisionDict = self.__cLogic.get_collisionDict()
+		collisionDict = self.__cLogic_v2.get_collisionDict()
 		for key in self.__stalfosRoster:
 			if key in collisionDict:
 				stalfos = collisionDict[key]
@@ -236,31 +239,31 @@ class Alpha():
 		#_collisionDict is set up inside the alpha.__init__()
 
 		#only one Player should be here (IGNORE MULTIPLAYER)
-		list1 = []
-		list1 = [self.__Player.get_myCorners()]
-		for item in range(len(self.__stalfosRoster)):
-			stal = self.__cLogic.Tag_toObject(self.__stalfosRoster[item])
-			if stal != None:
-				list1.append(stal.get_myCorners())
-		for item in range(len(self.__slimeRoster)):
-			slime = self.__cLogic.Tag_toObject(self.__slimeRoster[item])
-			if slime != None:
-				list1.append(slime.get_myCorners())
+		# list1 = []
+		# list1 = [self.__Player.get_myCorners()]
+		# for item in range(len(self.__stalfosRoster)):
+		# 	stal = self.__cLogic_v2.Tag_toObject(self.__stalfosRoster[item])
+		# 	if stal != None:
+		# 		list1.append(stal.get_myCorners())
+		# for item in range(len(self.__slimeRoster)):
+		# 	slime = self.__cLogic_v2.Tag_toObject(self.__slimeRoster[item])
+		# 	if slime != None:
+		# 		list1.append(slime.get_myCorners())
+		#
+		# if self.__Sword.get_isActive() == True:
+		# 	list1.append(self.__Sword.get_myCorners())
+		# if self.__Bow.get_isActive() == True:
+		# 	list1.append(self.__Bow.get_myCorners())
+		# for item in range(len(self.__Bow.get_projID())):
+		# 	# print(self.__Bow.get_projID(item), 'proj ID, A#189')
+		# 	if self.__Bow.get_projActive(item) == True:
+		# 		list1.append(self.__Bow.get_projCorners(item))
 
-		if self.__Sword.get_isActive() == True:
-			list1.append(self.__Sword.get_myCorners())
-		if self.__Bow.get_isActive() == True:
-			list1.append(self.__Bow.get_myCorners())
-		for item in range(len(self.__Bow.get_projID())):
-			# print(self.__Bow.get_projID(item), 'proj ID, A#189')
-			if self.__Bow.get_projActive(item) == True:
-				list1.append(self.__Bow.get_projCorners(item))
-
-		# self.__cLogic.Add_Collision(bfsCorners=self.__pfNode.get_shownList())
+		# self.__cLogic_v2.Add_Collision(bfsCorners=self.__pfNode.get_shownList())
 
 
-		self.__cLogic.Add_Collision(list1)
-		self.__cNode.Use_Collision(len(list1))
+		# self.__cLogic_v2.Add_Collision(list1)
+		# self.__cNode_v2.Use_Collision(len(list1))
 
 
 
@@ -279,7 +282,7 @@ class Alpha():
 		if self.__Player.get_isHit() == True:
 			self.__Player.Reset_Hit(Name='Player')
 
-		collisionDict = self.__cLogic.get_collisionDict()
+		collisionDict = self.__cLogic_v2.get_collisionDict()
 		for item in range(len(self.__stalfosRoster)):
 			if self.__stalfosRoster[item] in collisionDict.keys():
 				result = collisionDict[self.__stalfosRoster[item]]
@@ -323,9 +326,9 @@ class Alpha():
 
 	def Debug_CollisionDICT(self):
 		if keyboard.is_pressed('t'):
-			self.__cLogic.print_collisionDict()
-			self.__cLogic.del_collisionDict(self.__Player.get_ID())
-			self.__cLogic.print_collisionDict()
+			self.__cLogic_v2.print_collisionDict()
+			self.__cLogic_v2.del_collisionDict(self.__Player.get_ID())
+			self.__cLogic_v2.print_collisionDict()
 
 	#this is a function call for test prints to make sure things work
 	def Testing_Debug(self):

@@ -8,11 +8,11 @@ class Timer_Node():
 		self.__frameCount 	  = 33
 
 
-	def Game_Clock(self, OFF=False):
+	def Game_Clock(self, showTime=False):
 		Timer_Node.GameTime += 1
 		if Timer_Node.GameTime == self.__frameCount:
 			self.__seconds += 1
-			if OFF == True:
+			if showTime == True:
 				print(self.__seconds, 'seconds')
 			self.__frameCount += 33
 

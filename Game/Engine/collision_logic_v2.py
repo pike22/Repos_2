@@ -75,46 +75,67 @@ class Collision_Logic_v2():
 	#Currently set up for a one-to-one collision.
 	def Is_Collision(self, tag):
 		objMain 	= self.__collisionObj[tag] #Focused object
-		collResult	= [objMain]
-		sideResult	= {} #For Side Calc
-		for key in self.__collisionMap.keys():
-			print('Target:', tag)
-			print('Looking at:', key)
-			if key != tag:
-				if self.__collisionMap[key] == self.__collisionMap[tag]:
-					print('Two Objects in One Square')
-					objNext = self.__collisionObj[key] #Colliding with their obj
-					collResult.append(objNext)
+		mapMain		= self.__collisionMap[tag] #objects map location
+		# collResult	= [objMain]
+		# sideResult	= {} #For Side Calc
 
-					"""look at the sorrounding 8 squares rather than coordinate position. !!!!!!!!!!!!!
-					#<--Side Calculation-->#
-					#<-------------------->#
-					# Coord/Heights #
-					Main_x, Main_y = objMain.get_myCoords()
-					Main_w, main_h = objMain.get_size()
-					Next_x, Next_y = objNext.get_myCoords()
-					Main_w, main_h = objNext.get_size()
-					#<-------------------------------------------->#
-					if (Main_y+Main_h) <= Next_y+int(Next_h*0.2):
-						sideResult[objNext.get_ID()] = 'up'
-					elif (Next_y+Next_h) <= Main_y+int(Main_h*0.2):
-						sideResult[objNext.get_ID()] = 'down'
-					else:
-						if Main_x > Next_x:
-							sideResult[objNext.get_ID()] = 'right'
-						elif Main_x < Next_x:
-							sideResult[objNext.get_ID()] = 'left'
-					"""
+		dict = {}
 
-		#<--Using Collision-->#
-		return (collResult, sideResult)
+		x, y = self.__gridMap[mapMain]
+		for key, value in self.__gridMap.items():
+			if (x+self._boxSize, y) == value:
+				print('1 right')
+				print('Box Numb:', key)
+				dict['right'] = self.__collisionObj[key]
+
+			if (x-self._boxSize, y) == value:
+				print('1 left')
+				print('Box Numb:', key)
+				dict['left'] = self.__collisionObj[key]
+
+			if (x, y+self._boxSize) == value:
+				print('1 down')
+				print('Box Numb:', key)
+				dict['down'] = self.__collisionObj[key]
+
+			if (x, y-self._boxSize) == value:
+				print('1 up')
+				print('Box Numb:', key)
+				dict['up'] = self.__collisionObj[key]
+
+			if (x+self._boxSize, y+self._boxSize) == value:
+				print('1 right and down')
+				print('Box Numb:', key)
+				dict['rightDown'] = self.__collisionObj[key]
+
+			if (x+self._boxSize, y-self._boxSize) == value:
+				print('1 right and up')
+				print('Box Numb:', key)
+				dict['rightUp'] = self.__collisionObj[key]
+
+			if (x-self._boxSize, y+self._boxSize) == value:
+				print('1 left and down')
+				print('Box Numb:', key)
+				dict['leftDown'] = self.__collisionObj[key]
+
+			if (x-self._boxSize, y-self._boxSize) == value:
+				print('1 left and up')
+				print('Box Numb:', key)
+				dict['leftUp'] = self.__collisionObj[key]
 
 
-	"""|--------------Getters--------------|#"""
+		return dict
+
+	"""#|-----------Ext_Functions-----------|#"""
+		#this is home of extra functions...
+	# def xxx(self, ):
+
+
+	"""#|--------------Getters--------------|#"""
 		#this is where a list of getters will go...
 	# def get_...
 
 
-	"""|--------------Setters--------------|#"""
+	"""#|--------------Setters--------------|#"""
 		#this is where a list of setters will go...
 	# def set_...

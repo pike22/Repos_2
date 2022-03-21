@@ -117,11 +117,13 @@ class Enemy_Main(Entity_Main):
 						del path[-1]
 						if len(path) != 0:
 							# print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+							pass
 					else:
 						# print(self._pfNode.Find_mySquare((path[-1][1])), 'last Square')
 						del path[-1]
 						if len(path) != 0:
 							# print(self._pfNode.Find_mySquare((path[-1][1])), 'next Square')
+							pass
 						return
 					# Image_Node.Render.create_rectangle(path[-1][1][0]+10, path[-1][1][1]+10, path[-1][1][0]+20, path[-1][1][1]+20, fill='Black', tag='BFS')
 

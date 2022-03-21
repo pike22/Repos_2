@@ -417,6 +417,7 @@ class Collision_Logic():
 
 
 	def Find_Square(self, x, y):
+		#this is staple for when I need to know what square my mouse is in.
 		for item in range(len(self.__GRID)):
 			if x > self.__GRID[item][0] and y > self.__GRID[item][1]:
 				if x < self.__GRID[item][2] and y < self.__GRID[item][3]:

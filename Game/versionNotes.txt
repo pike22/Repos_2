@@ -1,13 +1,10 @@
 Current Game Version
-	[v.0.2.935]
+	[v.0.2.941]
 
 
  ** Last Update Note:
  		Collision: Collision Re-work
-			Most of the base line has been completed, some of Collison Node has been reformed. I found it better to keep it separate to reduce clutter.
-			I got stuck remaking the same logic for CL_v2 and reusing code from my graphics based collision. Where not I can just look at the 8 surrounding
-			boxes to my target object and check for free spaces. Rather than using coordinates to find where objects are. This could change some of how CN_v2
-			works as well. So I have plans to fix that and then implement this into my code and start testing my collision objects v2.
-
- 		PATH FINDING:
-			Works in all directions
+			Side quest: Re-work to alpha.py | Done except for having my entities actually print to screen other than the walls.
+			Plan to create a function in collision node to make setting up entity's collision clutter less of alpha.py.
+			When alpha_v2.py is completely worked out it will replace the original alpha.py Once the mini rework is done I will return to collision
+			to flush out the rest of its bugs. Future problems will hopefully have a simpler time to debug.
