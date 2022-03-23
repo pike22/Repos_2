@@ -65,7 +65,7 @@ class Alpha():
 		self.__levelTHREE = self.__Maps.get_levelTHREE()
 		self.__levelFOUR  = self.__Maps.get_levelFOUR()
 
-		"""
+
 		#---Collision SETUP---#
 		#Fills out the Collision_Logic and Collision_Node Classes#
 		#__Player__#
@@ -98,7 +98,7 @@ class Alpha():
 		self.__cNode_v2.set_projRoster(self.__projRoster)
 
 		self.__cNode_v2.set_everyRoster(self.__everyRoster)
-		"""
+		
 
 		#---Path Finder Setups---#
 		self.__pfNode.System_Grid()

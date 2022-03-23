@@ -6,7 +6,7 @@ class Sword_Main(Weapons_Main):
 	def __init__(self, ID=None, cLogic=None, cNode=None, iNode=None, tNode=None):
 		Weapons_Main.__init__(self, info=Sword_Info(ID='W#S001'), cLogic=cLogic, cNode=cNode, iNode=iNode, tNode=tNode)
 
-	def Sword_SetUP(self):
+	def Sword_Setup(self):
 		#img setup
 		imageInfo = self._iNode.Image_Add('z_Pictures/notasword.png')
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/notasword.png')

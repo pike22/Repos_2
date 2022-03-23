@@ -15,7 +15,7 @@ class Bow_Main(Weapons_Main):
 		self.__projID	  = []
 
 
-	def Bow_SetUP(self):
+	def Bow_Setup(self):
 		#img setup
 		imageInfo = self._iNode.Image_Add('z_Pictures/bow_.png')
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/bow_.png')

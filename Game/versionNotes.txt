@@ -1,10 +1,9 @@
 Current Game Version
-	[v.0.2.941]
+	[v.0.2.944]
 
 
  ** Last Update Note:
  		Collision: Collision Re-work
-			Side quest: Re-work to alpha.py | Done except for having my entities actually print to screen other than the walls.
-			Plan to create a function in collision node to make setting up entity's collision clutter less of alpha.py.
-			When alpha_v2.py is completely worked out it will replace the original alpha.py Once the mini rework is done I will return to collision
-			to flush out the rest of its bugs. Future problems will hopefully have a simpler time to debug.
+			Cleaned up alpha.py in its v2. have now begun to rework the collision to work between player and walls. This is be the first step to re-creating
+			the collision. Next will be to re-implement collision between entities and re-establish the weapons. The weapon Classes may need to be Cleaned
+			up as well seeing as they hadn't had a touch up since the stone ages.

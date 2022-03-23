@@ -11,14 +11,14 @@ import re
 
 class Alpha_v2():
 	def __init__(self):
-		#<--|Tkinter window information\-->#
+		#<--\Tkinter window information\-->#
 		self.__screenWidth	= 1280
 		self.__screenHeight	= 800
 		self.__loopCount	= 33
 		self.__seconds		= 0
-		self.__version		= "Stab Simulator [ALPHA v0.2.941]"
+		self.__version		= "Stab Simulator [ALPHA v0.2.944]"
 
-		#<--|Rosters Of All Entities\-->#
+		#<--\Rosters Of All Entities\-->#
 		self.__staticRoster	= [] #Statics can't move alone.
 		self.__playerRoster	= []
 		self.__weaponRoster	= []
@@ -27,23 +27,23 @@ class Alpha_v2():
 		self.__wallRoster	= ['#wall', '#floor', ] #Walls don't move period.
 		self.__projRoster	= ['#arrow', ]
 
-		#<--|Class Creation/Assignments\-->#
+		#<--\Class Creation/Assignments\-->#
 		self.__mainApp 		= Tk()
 		#Engine#
 		self.__Maps 		= Maps_GetFile()
 		self.__Node 		= Node(self.__mainApp)
-		self.__cLogic_v2 	= Collision_Logic_v2()
-		self.__cNode_v2 	= Collision_Node_v2(self.__cLogic_v2)
+		self.__cLogic		= Collision_Logic_v2()
+		self.__cNode		= Collision_Node_v2(self.__cLogic)
 		self.__iNode 		= Image_Node()
 		self.__tNode 		= Timer_Node(self.__mainApp)
-		self.__pfNode 		= PathFind_Node(self.__cLogic_v2, self.__cNode_v2, self.__iNode)
+		self.__pfNode 		= PathFind_Node(self.__cLogic, self.__cNode, self.__iNode)
 		#Entities#
-		self.__Player 		= Player_Main(self.__cLogic_v2, self.__iNode)
-		self.__Sword 		= Sword_Main(cLogic=self.__cLogic_v2, iNode=self.__iNode)
-		self.__Bow			= Bow_Main(cLogic=self.__cLogic_v2, cNode=self.__cNode_v2, iNode=self.__iNode, tNode=self.__tNode)
+		self.__Player 		= Player_Main(self.__cLogic, self.__iNode)
+		self.__Sword 		= Sword_Main(cLogic=self.__cLogic, iNode=self.__iNode)
+		self.__Bow			= Bow_Main(cLogic=self.__cLogic, cNode=self.__cNode, iNode=self.__iNode, tNode=self.__tNode)
 			#more latter is needed. Weapons may go here
 		#Level Designer#
-		self.__GUI 			= GUI_Main(self.__cLogic_v2, self.__iNode, self.__cNode_v2, self.__mainApp, color=None, mainMenu=None)
+		self.__GUI 			= GUI_Main(self.__cLogic, self.__iNode, self.__cNode, self.__mainApp, color=None, mainMenu=None)
 		self.__eGUI 		= self.__GUI.get_eGUI()
 		self.__siFiles 		= self.__GUI.get_siFILE()
 		self.__imageDICT 	= None
@@ -53,11 +53,11 @@ class Alpha_v2():
 		self.__levelTHREE	= self.__Maps.get_levelTHREE()
 		self.__levelFOUR  	= self.__Maps.get_levelFOUR()
 
-		#<--|Path Finder Setup\-->#
+		#<--\Path Finder Setup\-->#
 		self.__pfNode.System_Grid()
 
 
-		#<--|Collision Setups\-->#
+		#<--\Collision Setups\-->#
 		self.__collision_OnOff = 'On' #Defults to On.
 
 		#<-Temporary Variables->#
@@ -69,6 +69,7 @@ class Alpha_v2():
 
 	def Create_MainCanvas(self): #Set Renders HERE
 		self.__iNode.Create_Canvas(self.__mainApp, self.__screenHeight, self.__screenWidth)
+		self.__cLogic.Create_Grid()
 
 
 	def Close_Window(self):
@@ -81,8 +82,30 @@ class Alpha_v2():
 		self.__collision_OnOff = collision_OnOff
 		self.__siFiles.Read_File(self.__levelFOUR)
 		self.__imageDICT = self.__siFiles.get_imageDICT()
+		# print(self.__imageDICT)
 
-		#<--|Clock Setup\-->#
+		#<--\Entity Setups\-->#
+		self.__Player.Player_Setup(self.__screenWidth, self.__screenHeight)
+		# self.__Player.set_weapons(self.__Sword, self.__Bow)
+
+
+		#<--\Weapon Setups\-->#
+		print("Weapons Need rework with collision")
+		print("They have anchent code.")
+		print()
+		# self.__Sword.Sword_Setup()
+		# self.__Bow.Bow_Setup()
+
+		#<--\Collision Setup\-->#
+		#Add_Collision(self, pos, obj, tag)
+		self.__cLogic.Add_Collision(pos=self.__Player.get_myCoords(), obj=self.__Player, tag=self.__Player.get_ID())
+		for key, value in self.__imageDICT.items():
+			self.__cLogic.Add_Collision(pos=value.get_myCoords(), obj=value, tag=key)
+			# print()
+		# self.__cLogic.Check_ifUsed()
+
+
+		#<--\Clock Setup\-->#
 		self.__tNode.Game_Clock(showTime)
 
 
@@ -92,27 +115,23 @@ class Alpha_v2():
 		if kill == True:
 			return
 
-		#some stuffs here when made good,
-		#	yes yes.
+		#<--\Stuffs\-->#
+		self.__cLogic.Is_Collision(self.__Player.get_ID())
+
+
+		#<--\Entity\-->#
+		#
+		#Player
+		self.__Player.Movement_Controll()
+		#
+		#
+
+		#<--\Combat\-->#
 		#
 		#
 		#
 		#
-
-		#<--|Combat\-->#
-		if self.__Sword.get_isActive() == True:
-			self.__Sword.Weapon_Active()
-
-		if self.__Bow.get_isActive() == True:
-			self.__Bow.Weapon_Active()
-
-		for item in range(len(self.__Bow.get_projID())):
-			# print('Active?', 'l#235')
-			if self.__Bow.get_projActive(item) == True:
-				self.__Bow.Proj_Active(item)
-
-		if self.__Player.get_isHit() == True:
-			self.__Player.Reset_Hit(Name='Player')
+		#
 
 
 		self.__mainApp.after(int(self.__tNode.get_FPS()), self.Game_Loop)

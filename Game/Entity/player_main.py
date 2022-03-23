@@ -11,12 +11,12 @@ class Player_Main(Entity_Main):
 		#----Class Calls----#
 		self.__Sword = None
 		self.__Bow	 = None
-		self.__x	 = 0
-		self.__y	 = 0
+		self.__x	 = 320
+		self.__y	 = 320
 
 
 	#seting up player bellow
-	def Player_SetUP(self, screenWidth, screenHeight):
+	def Player_Setup(self, screenWidth, screenHeight):
 		# print(self._kNode, 'Player_SetUP')
 		#img setup
 		# print(self._iNode, 'Player_SetUP')
@@ -25,7 +25,7 @@ class Player_Main(Entity_Main):
 		self._info.Image_Data(size=imageInfo[1], pilImage=imageInfo[0], tkImage=imageInfo[2], fileLoc='z_Pictures/purpuloniousthefirst.png')
 
 		#placing the img
-		self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
+		# self.__x, self.__y = self.Random_Place(self._info.get_size(), screenWidth, screenHeight)
 		self._iNode.Image_Place(self.__x, self.__y, self._info.get_tkImage(), tag=[ID, self._info.get_groupID()])
 
 		#final set of information save to player
@@ -57,9 +57,9 @@ class Player_Main(Entity_Main):
 			self.Move_Sets(newCoords)
 
 
-		collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
-		if collision == []:
-			self.My_Collision() #basically a variable reset.
+		# collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
+		# if collision == []:
+		# 	self.My_Collision() #basically a variable reset.
 
 		self._isMoving = False
 		return self._isMoving
@@ -104,12 +104,17 @@ class Player_Main(Entity_Main):
 			# print(self._isAttack)
 			return self._isAttack
 
+	def Player_Attack(self):
+		self.Player_MeleeAttack()
+		self.Player_RangedAttack()
+
 
 
 
 	"""#|--------------Getters--------------|#"""
 		#this is where a list of getters will go...
-	# def get_
+	def get_weaponOut(self):
+		return self._isAttack
 
 
 	"""#|--------------Setters--------------|#"""
