@@ -1,9 +1,10 @@
 import re
+from .image_node import Image_Node
 
 class Collision_Logic_v2():
 	def __init__(self):
-		#--Collision Dictionary--#
-		self.dict = {}
+		#--Collision Dictionaries--#
+		self.__entityRoster = None
 		#--Grid Dictionaries--#
 		self.__collisionMap	= {} #Used map spaces.
 		self.__collisionObj = {} #Object Stored in that map square.
@@ -14,10 +15,12 @@ class Collision_Logic_v2():
 		self._boxSize	= 32
 		self._xPos		= 0
 		self._yPos		= 0
+		self._lineX		= 0
+		self._lineY		= 0
 
 
 	#--Collision's Engine--#
-	def Create_Grid(self, ):
+	def Create_Grid(self, lines=False):
 		boxCountX = int(self._widthSC/self._boxSize)
 		boxCountY = int(self._heightSC/self._boxSize)
 
@@ -36,17 +39,58 @@ class Collision_Logic_v2():
 				self._yPos += self._boxSize
 			# print('<----------------------------------------->')
 
-	def Add_Collision(self, pos, obj, tag):
-		x, y = pos
-		for key, value in self.__gridMap.items():
-			val_x, val_y = value
-			if x >= val_x and x < val_x+self._boxSize:
-				if y >= val_y and y < val_y+self._boxSize:
-					# print('Box Number', key)
-					self.__collisionMap[tag] = key
-					self.__collisionObj[tag] = obj
-					# print('New Collision Obj', self.__collisionObj[tag])
-					# print('New Collision Pos', self.__collisionMap[tag])
+		if lines == True:
+			for item in range(boxCountX+1):
+				Image_Node.Render.create_line(self._lineX, 0, self._lineX, 800)
+				self._lineX += self._boxSize
+			for item in range(boxCountY+1):
+				Image_Node.Render.create_line(0, self._lineY, 1280, self._lineY)
+				self._lineY += self._boxSize
+
+	def Update_Collision(self, pos, obj):
+		self.Add_Collision(pos, obj)
+
+
+	def Add_Collision(self, pos, obj):
+		# print(tag, 'added to collision')
+		keyList = []
+		if obj.get_groupID() == self.__entityRoster:
+			print("entity Pass")
+			#Four Points
+			for count in range(4):
+				x, y = pos
+				w, h = obj.get_size() #this may be changed.
+				if count == 0:		#Top Left
+					pass
+				elif count == 1:	#Top Right
+					x += w
+				elif count == 2:	#Bottom Left
+					y += h
+				elif count == 3:	#Bottom Right
+					x += w
+					y += h
+				Image_Node.Render.create_oval(x-1, y-1, x+1, y+1, fill='Red')
+				for key, value in self.__gridMap.items():
+					val_x, val_y = value
+					if x >= val_x and x < val_x+self._boxSize:
+						if y >= val_y and y < val_y+self._boxSize:
+							# print('Box Number', key)
+							keyList.append(key)
+							self.__collisionObj[obj.get_ID()] = obj
+							# print('New Collision Obj', self.__collisionObj[obj.get_ID()])
+			self.__collisionMap[obj.get_ID()] = keyList
+		else:
+			print('everything else')
+			x, y = pos
+			for key, value in self.__gridMap.items():
+				val_x, val_y = value
+				if x >= val_x and x < val_x+self._boxSize:
+					if y >= val_y and y < val_y+self._boxSize:
+						# print('Box Number', key)
+						self.__collisionMap[obj.get_ID()] = key
+						self.__collisionObj[obj.get_ID()] = obj
+						# print('New Collision Obj', self.__collisionObj[obj.get_ID()])
+						# print('New Collision Map', self.__collisionMap[obj.get_ID()])
 
 
 	def Del_Collision(self, tag):
@@ -73,8 +117,8 @@ class Collision_Logic_v2():
 
 	def Check_ifUsed(self, tag=None):
 		print('\n<|---------Check If Used---------|>')
-		print('Collision Obj:\n', self.__collisionObj)
-		print('Collision Map:\n', self.__collisionMap)
+		# print('Collision Obj:\n', self.__collisionObj)
+		# print('Collision Map:\n', self.__collisionMap)
 		print()
 		if tag != None:
 			print('Target Saved In CollisionObj?\n\t', self.__collisionObj[tag])
@@ -86,59 +130,63 @@ class Collision_Logic_v2():
 	#Currently set up for a one-to-one collision.
 	def Is_Collision(self, tag):
 		objMain 	= self.__collisionObj[tag] #Focused object
-		mapMain		= self.__collisionMap[tag] #objects map location
-		# collResult	= [objMain]
 		# sideResult	= {} #For Side Calc
 
 
-		x, y = self.__gridMap[mapMain]
-		for key, value in self.__gridMap.items():
-			if (x+self._boxSize, y) == value:
-				print('1 right')
-				print('Box Numb:', key)
-				self.dict['right'] = self.__collisionObj[key]
+		x, y = objMain.get_myCoords()
+		w, h = objMain.get_size()
+		# points = self.Find_myPoints(x, y, x+w, y+h)
+		# print((x, y), 'Coords')
+		# print(self.__collisionMap[tag], 'box(s)')
 
-			if (x-self._boxSize, y) == value:
-				print('1 left')
-				print('Box Numb:', key)
-				self.dict['left'] = self.__collisionObj[key]
-
-			if (x, y+self._boxSize) == value:
-				print('1 down')
-				print('Box Numb:', key)
-				self.dict['down'] = self.__collisionObj[key]
-
-			if (x, y-self._boxSize) == value:
-				print('1 up')
-				print('Box Numb:', key)
-				self.dict['up'] = self.__collisionObj[key]
-
-			if (x+self._boxSize, y+self._boxSize) == value:
-				print('1 right and down')
-				print('Box Numb:', key)
-				self.dict['rightDown'] = self.__collisionObj[key]
-
-			if (x+self._boxSize, y-self._boxSize) == value:
-				print('1 right and up')
-				print('Box Numb:', key)
-				self.dict['rightUp'] = self.__collisionObj[key]
-
-			if (x-self._boxSize, y+self._boxSize) == value:
-				print('1 left and down')
-				print('Box Numb:', key)
-				self.dict['leftDown'] = self.__collisionObj[key]
-
-			if (x-self._boxSize, y-self._boxSize) == value:
-				print('1 left and up')
-				print('Box Numb:', key)
-				self.dict['leftUp'] = self.__collisionObj[key]
+		#everything is set up to use boxes for collision. somehow in here
+		#I will need to check for boxes used vs the target box. To then determin
+		#where other objects are for collision. ## NOTE: This is a reminder for the next day.
+		boxList = []
+		for key in self.__collisionMap.keys():
+			if key != tag:
+				if self.__collisionMap[tag] == self.__collisionMap[key]:
+					print(key)
+					boxList.append(self.__collisionMap[key])
+		# print([self.__collisionMap[tag], self.__collisionMap[key]])
+		if boxList != []:
+			print(objMain.get_ID(), boxList)
 
 
-		return self.dict
+
+
+
+
+
+
+
+
 
 	"""#|-----------Ext_Functions-----------|#"""
 		#this is home of extra functions...
-	# def xxx(self, ):
+	def Find_myPoints(self, x1, y1, x2, y2):
+		saved = []
+		print((x2, y2), '(x2, y2)')
+		for xPoint in range(int(x2-x1+1)):
+			xPos = x1+xPoint
+			for yPoint in range(int(y2-y1+1)):
+				yPos = y1+yPoint
+				# print((xPos, yPos))
+				saved.append((xPos, yPos))
+
+		# 		if xPos == x1 or xPos == x2:
+		# 			# Image_Node.Render.create_oval(xPos, yPos, xPos+1, yPos+1)
+		# 			saved.append((xPos, yPos))
+		# 		elif yPos == y1 or yPos == y2:
+		# 			# Image_Node.Render.create_oval(xPos, yPos, xPos+1, yPos+1)
+		# 			saved.append((xPos, yPos))
+		#
+		#
+		# for value in saved:
+		# 	pass
+
+		return saved #returns list of coords within the square
+
 
 
 	"""#|--------------Getters--------------|#"""
@@ -148,4 +196,5 @@ class Collision_Logic_v2():
 
 	"""#|--------------Setters--------------|#"""
 		#this is where a list of setters will go...
-	# def set_...
+	def set_entityRoster(self, Roster):
+		self.__entityRoster = Roster

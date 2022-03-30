@@ -40,28 +40,30 @@ class Player_Main(Entity_Main):
 			self._lastDir = 'up'
 			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
 			self.Move_Sets(newCoords)
+			self._isMoving = True
 
 		if keyboard.is_pressed(self._keyDOWN):
 			self._lastDir = 'down'
 			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
 			self.Move_Sets(newCoords)
+			self._isMoving = True
 
 		if keyboard.is_pressed(self._keyLEFT):
 			self._lastDir = 'left'
 			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
 			self.Move_Sets(newCoords)
+			self._isMoving = True
 
 		if keyboard.is_pressed(self._keyRIGHT):
 			self._lastDir = 'right'
 			newCoords = self._kNode.Controlled_Move(self._info.get_myCoords(), self._info.get_ID(), self._lastDir, speed=self._info.get_speed())
 			self.Move_Sets(newCoords)
+			self._isMoving = True
 
+		if keyboard.is_pressed(self._keyUP) == False and keyboard.is_pressed(self._keyDOWN) == False:
+			if keyboard.is_pressed(self._keyRIGHT) == False and keyboard.is_pressed(self._keyLEFT) == False:
+				self._isMoving = False
 
-		# collision = self._cLogic.Check_forCollision(objCorners=self._info.get_myCorners())
-		# if collision == []:
-		# 	self.My_Collision() #basically a variable reset.
-
-		self._isMoving = False
 		return self._isMoving
 
 	def Player_MeleeAttack(self):#melee Attack

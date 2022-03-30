@@ -77,11 +77,11 @@ class GUI_Main():
 		segment_y = int(800/32)
 		for item in range(segment_x+1):
 			if gridPrint == True:
-				lineID = Image_Node.Render.create_line(self.__linex, 0, self.__linex, 800, tag='G#line')
+				lineID = Image_Node.Render.create_line(self.__linex, 0, self.__linex, 800)
 			self.__linex += self.__key
 		for item in range(segment_y+1):
 			if gridPrint == True:
-				lineID = Image_Node.Render.create_line(0, self.__liney, 1280, self.__liney, tag='G#line')
+				lineID = Image_Node.Render.create_line(0, self.__liney, 1280, self.__liney)
 			self.__liney += self.__key
 
 		for xPos in range(segment_x+1):

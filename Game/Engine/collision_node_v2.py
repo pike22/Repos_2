@@ -6,6 +6,7 @@ class Collision_Node_v2():
 		self.__logic = cLogic
 
 		#<--Rosters-->#
+		self.__entityRoster = None #All Entities\if move then here.
 		self.__staticRoster	= None #Tags that can't move, Exclude Walls
 		self.__playerRoster	= None #Player Tags
 		self.__weaponRoster	= None #Any Weapons Tags
@@ -65,6 +66,10 @@ class Collision_Node_v2():
 
 	"""#|--------------Setters--------------|#"""
 		#this is where a list of setters will go...
+	def set_entityRoster(self, Roster):
+		self.__entityRoster = Roster
+		self.__logic.set_entityRoster(Roster)
+		
 	def set_playerRoster(self, Roster):
 		self.__playerRoster = Roster
 

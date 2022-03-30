@@ -16,13 +16,14 @@ class Alpha_v2():
 		self.__screenHeight	= 800
 		self.__loopCount	= 33
 		self.__seconds		= 0
-		self.__version		= "Stab Simulator [ALPHA v0.2.944]"
+		self.__version		= "Stab Simulator [ALPHA v0.2.951]"
 
 		#<--\Rosters Of All Entities\-->#
+		self.__entityRoster	= ['#player', '#stalfos', '#slime', ]
 		self.__staticRoster	= [] #Statics can't move alone.
-		self.__playerRoster	= []
+		self.__playerRoster	= ['#player']
 		self.__weaponRoster	= []
-		self.__everyRoster	= []
+		self.__everyRoster	= ['#player', '#stalfos', '#slime', '#wall', '#floor', '#arrow', ]
 		self.__enemyRoster	= ['#stalfos', '#slime', ]
 		self.__wallRoster	= ['#wall', '#floor', ] #Walls don't move period.
 		self.__projRoster	= ['#arrow', ]
@@ -69,7 +70,7 @@ class Alpha_v2():
 
 	def Create_MainCanvas(self): #Set Renders HERE
 		self.__iNode.Create_Canvas(self.__mainApp, self.__screenHeight, self.__screenWidth)
-		self.__cLogic.Create_Grid()
+		self.__cLogic.Create_Grid(True) # NOTE: Set true for grid lines
 
 
 	def Close_Window(self):
@@ -96,13 +97,19 @@ class Alpha_v2():
 		# self.__Sword.Sword_Setup()
 		# self.__Bow.Bow_Setup()
 
+		#<--\Roster Additions\-->#
+		self.__cNode.set_entityRoster(self.__entityRoster)
+		#add more when needed
+
 		#<--\Collision Setup\-->#
-		#Add_Collision(self, pos, obj, tag)
-		self.__cLogic.Add_Collision(pos=self.__Player.get_myCoords(), obj=self.__Player, tag=self.__Player.get_ID())
+		#Add_Collision(self, pos, obj)
+		self.__cLogic.Add_Collision(pos=self.__Player.get_myCoords(), obj=self.__Player)
 		for key, value in self.__imageDICT.items():
-			self.__cLogic.Add_Collision(pos=value.get_myCoords(), obj=value, tag=key)
+			self.__cLogic.Add_Collision(pos=value.get_myCoords(), obj=value)
 			# print()
-		# self.__cLogic.Check_ifUsed()
+		# self.__cLogic.Check_ifUsed(self.__Player.get_ID())
+		# for obj in self.__imageDICT.values():
+		# 	self.__cLogic.Check_ifUsed(obj.get_ID())
 
 
 		#<--\Clock Setup\-->#
@@ -122,8 +129,10 @@ class Alpha_v2():
 		#<--\Entity\-->#
 		#
 		#Player
-		self.__Player.Movement_Controll()
-		#
+		isMove = self.__Player.Movement_Controll()
+		# print(move, ':isMove?')
+		if isMove == True:
+			self.__cLogic.Update_Collision(self.__Player.get_myCoords(), self.__Player)
 		#
 
 		#<--\Combat\-->#
@@ -163,7 +172,7 @@ class Alpha_v2():
 
 
 print('|You wanted to theroise creating functions within one of the collision classes to make setting up entities much easier|')
-print("|I hope you run this tomorrow, probably will due to writing this. DON'T FORGET")
+print("|I hope you run this tomorrow, probably will due to writing this. DON'T FORGET, I've forgot")
 print("\n<<-----Initial Setup----->>\n")
 Game = Alpha_v2()
 Game.Create_MainCanvas()
