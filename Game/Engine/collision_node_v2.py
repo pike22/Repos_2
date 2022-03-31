@@ -24,37 +24,44 @@ class Collision_Node_v2():
 		self.__wallHit = None
 
 
-	def Use_Collision(self, tag):
+	def Collision_Result(self, cResult, objMain):
 		#cResult is a dictionary
-		self.__cResult = self.__logic.Is_Collision(tag)
-		print('Dict of objects in relation to mainObj=tag\n', self.__cResult)
+		self.__cResult = cResult #List of objects that are colliding with given objMain.
+
+		if self.__cResult == []:
+			objMain.My_Collision()
+
+		limit = len(self.__cResult)
+		timer = 0
+		print('limit:', limit)
+		for obj in self.__cResult:
+			timer += 1
+			print('Timer:', timer)
+			if obj.get_groupID() in self.__entityRoster:
+				print('entity')
+				#if 'friend':
+				#	OSC='friend'
+				#else:
+				#	OSC='enemy'
+
+			elif obj.get_groupID() in self.__wallRoster:
+				print('wall', obj.get_ID())
+				objMain.My_Collision(OSC='Static', side=['down'])
+
+			elif obj.get_groupID() in self.__weaponRoster:
+				print('weapon')
+
+			elif obj.get_groupID() in self.__projRoster:
+				print('arrow')
+
+			elif obj.get_groupID() in self.__staticRoster:
+				print('statics')
+
+			if timer == limit:
+				print('End')
+				break
 
 
-		for key, value in self.__cResult.items():
-			print('keys=Direction', key)
-			print('values=Object', value)
-
-
-
-			#<--Player_Collision-->#
-			if value.get_ID() in self.__playerRoster:
-				print("Player")
-
-			#<--Enemy_Collision-->#
-			if value.get_ID() in self.__enemyRoster:
-				print("Enemy")
-
-			#<--Weapon_Collision-->#
-			if value.get_ID() in self.__weaponRoster:
-				print("Weapon")
-
-			#<--Static_Collision-->#
-			if value.get_ID() in self.__staticRoster:
-				print("Statics")
-
-			#<--Wall_Collision-->#
-			if value.get_ID() in self.__wallRoster:
-				print("Walls")
 
 
 
@@ -69,7 +76,7 @@ class Collision_Node_v2():
 	def set_entityRoster(self, Roster):
 		self.__entityRoster = Roster
 		self.__logic.set_entityRoster(Roster)
-		
+
 	def set_playerRoster(self, Roster):
 		self.__playerRoster = Roster
 

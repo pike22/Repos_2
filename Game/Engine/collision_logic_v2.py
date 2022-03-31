@@ -18,6 +18,9 @@ class Collision_Logic_v2():
 		self._lineX		= 0
 		self._lineY		= 0
 
+		#--Public Variables--#
+		self.boxList = []
+
 
 	#--Collision's Engine--#
 	def Create_Grid(self, lines=False):
@@ -54,8 +57,7 @@ class Collision_Logic_v2():
 	def Add_Collision(self, pos, obj):
 		# print(tag, 'added to collision')
 		keyList = []
-		if obj.get_groupID() == self.__entityRoster:
-			print("entity Pass")
+		if str(obj.get_groupID()) in self.__entityRoster:
 			#Four Points
 			for count in range(4):
 				x, y = pos
@@ -80,7 +82,6 @@ class Collision_Logic_v2():
 							# print('New Collision Obj', self.__collisionObj[obj.get_ID()])
 			self.__collisionMap[obj.get_ID()] = keyList
 		else:
-			print('everything else')
 			x, y = pos
 			for key, value in self.__gridMap.items():
 				val_x, val_y = value
@@ -115,21 +116,29 @@ class Collision_Logic_v2():
 				print('Object not found \n\tFunc: Object_toTag')
 
 
-	def Check_ifUsed(self, tag=None):
-		print('\n<|---------Check If Used---------|>')
-		# print('Collision Obj:\n', self.__collisionObj)
-		# print('Collision Map:\n', self.__collisionMap)
-		print()
-		if tag != None:
-			print('Target Saved In CollisionObj?\n\t', self.__collisionObj[tag])
-			print('Target Saved In CollisionMap?\n\t', self.__collisionMap[tag])
-			if tag in self.__collisionMap and tag in self.__collisionObj:
-				return True
+	def Check_ifUsed(self, tag=None, boxNumb=None, GC=True): #GC = Game Check
+		if GC == False:
+			print('\n<|---------Check If Used---------|>')
+			# print('Collision Obj:\n', self.__collisionObj)
+			# print('Collision Map:\n', self.__collisionMap)
+			print()
+			if tag != None:
+				print('Target Saved In CollisionObj?\n\t', self.__collisionObj[tag])
+				print('Target Saved In CollisionMap?\n\t', self.__collisionMap[tag])
+				if tag in self.__collisionMap and tag in self.__collisionObj:
+					return True
+		else:
+			if tag != None and boxNumb != None:
+				for key, value in self.__collisionMap.items():
+					if key != tag and boxNumb == value:
+						self.boxList.append(self.__collisionObj[key])
 
 
 	#Currently set up for a one-to-one collision.
 	def Is_Collision(self, tag):
 		objMain 	= self.__collisionObj[tag] #Focused object
+		mapMain		= self.__collisionMap[tag] #Map
+		# print(mapMain)
 		# sideResult	= {} #For Side Calc
 
 
@@ -142,16 +151,16 @@ class Collision_Logic_v2():
 		#everything is set up to use boxes for collision. somehow in here
 		#I will need to check for boxes used vs the target box. To then determin
 		#where other objects are for collision. ## NOTE: This is a reminder for the next day.
-		boxList = []
-		for key in self.__collisionMap.keys():
-			if key != tag:
-				if self.__collisionMap[tag] == self.__collisionMap[key]:
-					print(key)
-					boxList.append(self.__collisionMap[key])
-		# print([self.__collisionMap[tag], self.__collisionMap[key]])
-		if boxList != []:
-			print(objMain.get_ID(), boxList)
 
+		for box in mapMain:
+			self.Check_ifUsed(objMain.get_ID(), box)
+
+		# if self.boxList != []:
+			# print(self.boxList)
+
+		returnVar = self.boxList
+		self.boxList = []
+		return returnVar
 
 
 

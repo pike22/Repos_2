@@ -41,7 +41,7 @@ class Entity_Main(Main_Node):
 			y = int(self._rand.randint((48+h), screenHeight-(48+h)))
 			if self._pfNode != None:
 				# print(self._pfNode, 'pfNode RP')
-				x, y = self._pfNode.Find_mySquare((x, y), RP=True) 
+				x, y = self._pfNode.Find_mySquare((x, y), RP=True)
 			objects = self._cLogic.Check_forCollision(objCorners=(x, y, x+w, y+h))
 			print(objects, 'LOC?')
 			if objects != [] and len(objects) >= 0:
@@ -73,8 +73,8 @@ class Entity_Main(Main_Node):
 	def My_Collision(self, OSC=None, OSA=None, side=None, staticsList=None):
 		# print('My_Collision:\n\t', OSC)
 		if self._isHit == False:
-			if OSC == None: #Var Resets happen here.
-				self.__isStatic  = False
+			if OSC == True or OSC == None: #Var Resets happen here.
+				# self.__isStatic  = False
 				# print(self.__isStatic)
 
 				return
@@ -84,16 +84,11 @@ class Entity_Main(Main_Node):
 				# 	self._varTime = Timer_Node.GameTime
 				# 	self._varTime += 5
 				# 	self._varTrack = True
-				self.__isStatic = True
+				# self.__isStatic = True
 				# print(self.__isStatic)
 				for newSide in side:
-					if newSide == 'top':
-						self._side = 'up'
-					elif newSide == 'bottom':
-						self._side = 'down'
-					else:
-						self._side = newSide
-					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), self._side, speed=self._info.get_speed())
+					# print(newSide)
+					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), newSide, speed=self._info.get_speed())
 					self._info.set_myCoords(new_Coords)
 					self._info.set_myCorners(self._info.get_ID())
 				#__Other Side Collision: Enemy/Weapon/Friend__#
@@ -102,12 +97,7 @@ class Entity_Main(Main_Node):
 				if OSC != 'Friend':
 					self._myHealth -= OSA
 				for newSide in side:
-					if newSide == 'top':
-						side = 'up'
-					elif newSide == 'bottom':
-						side = 'down'
-					else:
-						side = newSide
+					side = newSide
 					for time in range(50):
 						newCoords = self._kNode.Knock_Back(self._info.get_myCoords(), self._info.get_ID(), side)
 						self.Move_Sets(newCoords)

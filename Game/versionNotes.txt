@@ -1,11 +1,12 @@
 Current Game Version
-	[v.0.2.951]
+		[v0.2.953]
 
 
  ** Last Update Note:
  		Collision: Collision Re-work
-			Slowly working my way back to collision, starting with stopping the player when I hit a wall. As of now
-			I am working on having entities have four points of reference when finding what square they are in while
-			walls only have one. As of now either both have four or both have one. When it should be player has four
-			while walls have one. After that a hopefully quick implementation of figuring out the direction player
-			came from and I should be able to actully re-create wall hit. 
+			Now with a consistent system than can identify objects that are colliding with one of the corners of
+			my target object. Yesterdays problem was because when using an if statement to find if specific group-ID
+			was in the roster. I used == instead of 'in' and that was the problem. Right now when the player temporally
+			hits the wall and no more 'wasd' controls are used the player just continues to react to the wall even
+			though it is no longer in contact with the wall. The player also bounces back and forth when continued
+			collision with the wall happens. This should be an easy fix although the other problem takes priority.

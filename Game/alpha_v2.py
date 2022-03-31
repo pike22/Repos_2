@@ -16,7 +16,7 @@ class Alpha_v2():
 		self.__screenHeight	= 800
 		self.__loopCount	= 33
 		self.__seconds		= 0
-		self.__version		= "Stab Simulator [ALPHA v0.2.951]"
+		self.__version		= "Stab Simulator [ALPHA v0.2.953]"
 
 		#<--\Rosters Of All Entities\-->#
 		self.__entityRoster	= ['#player', '#stalfos', '#slime', ]
@@ -99,6 +99,10 @@ class Alpha_v2():
 
 		#<--\Roster Additions\-->#
 		self.__cNode.set_entityRoster(self.__entityRoster)
+		self.__cNode.set_weaponRoster(self.__weaponRoster)
+		self.__cNode.set_staticRoster(self.__staticRoster)
+		self.__cNode.set_wallRoster(self.__wallRoster)
+		self.__cNode.set_projRoster(self.__projRoster)
 		#add more when needed
 
 		#<--\Collision Setup\-->#
@@ -107,7 +111,7 @@ class Alpha_v2():
 		for key, value in self.__imageDICT.items():
 			self.__cLogic.Add_Collision(pos=value.get_myCoords(), obj=value)
 			# print()
-		# self.__cLogic.Check_ifUsed(self.__Player.get_ID())
+		# self.__cLogic.Check_ifUsed(self.__Player.get_ID(), GC=False)
 		# for obj in self.__imageDICT.values():
 		# 	self.__cLogic.Check_ifUsed(obj.get_ID())
 
@@ -122,9 +126,9 @@ class Alpha_v2():
 		if kill == True:
 			return
 
-		#<--\Stuffs\-->#
-		self.__cLogic.Is_Collision(self.__Player.get_ID())
-
+		#<--\Collision\-->#
+		p_Result = self.__cLogic.Is_Collision(self.__Player.get_ID())
+		self.__cNode.Collision_Result(p_Result, self.__Player)
 
 		#<--\Entity\-->#
 		#
