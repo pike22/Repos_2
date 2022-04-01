@@ -38,6 +38,7 @@ class Collision_Logic_v2():
 					self._yPos = 0
 				boxNumb+=1
 				self.__gridMap[boxNumb] = (self._xPos, self._yPos)
+				Image_Node.Render.create_text(self._xPos+16, self._yPos+16, text=str(boxNumb), fill='Blue')
 				# print((self._xPos, self._yPos), 'box coords\t', y)
 				self._yPos += self._boxSize
 			# print('<----------------------------------------->')
@@ -136,27 +137,24 @@ class Collision_Logic_v2():
 
 	#Currently set up for a one-to-one collision.
 	def Is_Collision(self, tag):
-		objMain 	= self.__collisionObj[tag] #Focused object
-		mapMain		= self.__collisionMap[tag] #Map
+		objMain = self.__collisionObj[tag] #Focused Obj
+		mapMain = self.__collisionMap[tag] #Focused Map
 		# print(mapMain)
-		# sideResult	= {} #For Side Calc
-
 
 		x, y = objMain.get_myCoords()
 		w, h = objMain.get_size()
-		# points = self.Find_myPoints(x, y, x+w, y+h)
-		# print((x, y), 'Coords')
-		# print(self.__collisionMap[tag], 'box(s)')
-
-		#everything is set up to use boxes for collision. somehow in here
-		#I will need to check for boxes used vs the target box. To then determin
-		#where other objects are for collision. ## NOTE: This is a reminder for the next day.
 
 		for box in mapMain:
+			# print(mapMain, objMain.get_ID(),"'s map squares.")
 			self.Check_ifUsed(objMain.get_ID(), box)
+			self.Update_Collision(pos=objMain.get_myCoords(), obj=objMain)
 
-		# if self.boxList != []:
+		# print(len(self.boxList))
+		if self.boxList != []:
+			objMain.set_isStatic(True)
 			# print(self.boxList)
+		else:
+			objMain.set_isStatic(False)
 
 		returnVar = self.boxList
 		self.boxList = []
@@ -166,36 +164,18 @@ class Collision_Logic_v2():
 
 
 
-
-
-
-
-
 	"""#|-----------Ext_Functions-----------|#"""
 		#this is home of extra functions...
-	def Find_myPoints(self, x1, y1, x2, y2):
-		saved = []
-		print((x2, y2), '(x2, y2)')
-		for xPoint in range(int(x2-x1+1)):
-			xPos = x1+xPoint
-			for yPoint in range(int(y2-y1+1)):
-				yPos = y1+yPoint
-				# print((xPos, yPos))
-				saved.append((xPos, yPos))
+	def Side_Calculation(self, obj, targ=None):
+		objMain = self.__collisionObj[obj.get_ID()] #Focused Obj
+		mapMain = self.__collisionMap[obj.get_ID()] #Focused Map
 
-		# 		if xPos == x1 or xPos == x2:
-		# 			# Image_Node.Render.create_oval(xPos, yPos, xPos+1, yPos+1)
-		# 			saved.append((xPos, yPos))
-		# 		elif yPos == y1 or yPos == y2:
-		# 			# Image_Node.Render.create_oval(xPos, yPos, xPos+1, yPos+1)
-		# 			saved.append((xPos, yPos))
-		#
-		#
-		# for value in saved:
-		# 	pass
-
-		return saved #returns list of coords within the square
-
+		#You should take each box that is associated with a corner of the player.
+		#Then base it on that boxes coords rather than where the exact dot is. That will
+		#be easier than trying to guess where the other boxes are. Corrners may prove to
+		#be difficult again. DON'T FORGET.
+			## NOTE: Actually Collision Works. Just need a Side_calculation to acuratly determin the
+					#Direction to bounce to. Fix double bouncing later. 
 
 
 	"""#|--------------Getters--------------|#"""

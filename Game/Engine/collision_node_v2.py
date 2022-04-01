@@ -28,38 +28,33 @@ class Collision_Node_v2():
 		#cResult is a dictionary
 		self.__cResult = cResult #List of objects that are colliding with given objMain.
 
-		if self.__cResult == []:
+
+		if objMain.get_isStatic() == True:
+			for obj in self.__cResult:
+				if obj.get_groupID() in self.__entityRoster:
+					print('entity')
+					#if 'friend':
+					#	OSC='friend'
+					#else:
+					#	OSC='enemy'
+
+				elif obj.get_groupID() in self.__wallRoster:
+					# print('wall', obj.get_ID())
+					self.__logic.Side_Calculation(obj=objMain)
+					# objMain.My_Collision(OSC='Static', side=['down'])
+					pass
+
+				elif obj.get_groupID() in self.__weaponRoster:
+					print('weapon')
+
+				elif obj.get_groupID() in self.__projRoster:
+					print('arrow')
+
+				elif obj.get_groupID() in self.__staticRoster:
+					print('statics')
+		else:
 			objMain.My_Collision()
-
-		limit = len(self.__cResult)
-		timer = 0
-		print('limit:', limit)
-		for obj in self.__cResult:
-			timer += 1
-			print('Timer:', timer)
-			if obj.get_groupID() in self.__entityRoster:
-				print('entity')
-				#if 'friend':
-				#	OSC='friend'
-				#else:
-				#	OSC='enemy'
-
-			elif obj.get_groupID() in self.__wallRoster:
-				print('wall', obj.get_ID())
-				objMain.My_Collision(OSC='Static', side=['down'])
-
-			elif obj.get_groupID() in self.__weaponRoster:
-				print('weapon')
-
-			elif obj.get_groupID() in self.__projRoster:
-				print('arrow')
-
-			elif obj.get_groupID() in self.__staticRoster:
-				print('statics')
-
-			if timer == limit:
-				print('End')
-				break
+			return
 
 
 

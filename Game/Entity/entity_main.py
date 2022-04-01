@@ -74,18 +74,13 @@ class Entity_Main(Main_Node):
 		# print('My_Collision:\n\t', OSC)
 		if self._isHit == False:
 			if OSC == True or OSC == None: #Var Resets happen here.
-				# self.__isStatic  = False
+				self.__isStatic  = False
 				# print(self.__isStatic)
 
 				return
 			#__Other Side Collision: Static__#
 			elif OSC == 'Static':
-				# if self.__isStatic == False and self._varTrack == False:
-				# 	self._varTime = Timer_Node.GameTime
-				# 	self._varTime += 5
-				# 	self._varTrack = True
-				# self.__isStatic = True
-				# print(self.__isStatic)
+				self.__isStatic = True
 				for newSide in side:
 					# print(newSide)
 					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), newSide, speed=self._info.get_speed())
