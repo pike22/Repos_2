@@ -27,6 +27,7 @@ class Collision_Node_v2():
 	def Collision_Result(self, cResult, objMain):
 		#cResult is a dictionary
 		self.__cResult = cResult #List of objects that are colliding with given objMain.
+		objList = []
 
 
 		if objMain.get_isStatic() == True:
@@ -40,8 +41,9 @@ class Collision_Node_v2():
 
 				elif obj.get_groupID() in self.__wallRoster:
 					# print('wall', obj.get_ID())
-					self.__logic.Side_Calculation(obj=objMain)
-					# objMain.My_Collision(OSC='Static', side=['down'])
+					direction = self.__logic.Side_Calculation(obj=objMain, target=obj)
+					objList.append(direction)
+					objMain.My_Collision(OSC='Static', side=objList)
 					pass
 
 				elif obj.get_groupID() in self.__weaponRoster:

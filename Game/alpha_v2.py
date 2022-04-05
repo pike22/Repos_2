@@ -16,7 +16,7 @@ class Alpha_v2():
 		self.__screenHeight	= 800
 		self.__loopCount	= 33
 		self.__seconds		= 0
-		self.__version		= "Stab Simulator [ALPHA v0.2.953]"
+		self.__version		= "Stab Simulator [ALPHA v0.2.955]"
 
 		#<--\Rosters Of All Entities\-->#
 		self.__entityRoster	= ['#player', '#stalfos', '#slime', ]

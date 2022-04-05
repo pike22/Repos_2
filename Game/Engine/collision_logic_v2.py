@@ -53,6 +53,7 @@ class Collision_Logic_v2():
 
 	def Update_Collision(self, pos, obj):
 		self.Add_Collision(pos, obj)
+		# print(self.__collisionMap[P#001])
 
 
 	def Add_Collision(self, pos, obj):
@@ -72,7 +73,7 @@ class Collision_Logic_v2():
 				elif count == 3:	#Bottom Right
 					x += w
 					y += h
-				Image_Node.Render.create_oval(x-1, y-1, x+1, y+1, fill='Red')
+				# Image_Node.Render.create_oval(x-1, y-1, x+1, y+1, fill='Red')
 				for key, value in self.__gridMap.items():
 					val_x, val_y = value
 					if x >= val_x and x < val_x+self._boxSize:
@@ -166,17 +167,55 @@ class Collision_Logic_v2():
 
 	"""#|-----------Ext_Functions-----------|#"""
 		#this is home of extra functions...
-	def Side_Calculation(self, obj, targ=None):
+	def Side_Calculation(self, obj, target):
 		objMain = self.__collisionObj[obj.get_ID()] #Focused Obj
 		mapMain = self.__collisionMap[obj.get_ID()] #Focused Map
+		returnList = []
 
-		#You should take each box that is associated with a corner of the player.
-		#Then base it on that boxes coords rather than where the exact dot is. That will
-		#be easier than trying to guess where the other boxes are. Corrners may prove to
-		#be difficult again. DON'T FORGET.
-			## NOTE: Actually Collision Works. Just need a Side_calculation to acuratly determin the
-					#Direction to bounce to. Fix double bouncing later. 
+		x,  y  = obj.get_myCoords()
+		x1, y1 = self.__gridMap[self.__collisionMap[target.get_ID()]] #Object B
 
+		## NOTE: Use old method for directions, might fix some problems. !!!!!!!!!
+		if y > y1:
+			#Down
+			print('down')
+			x0, y0 = self.__gridMap[mapMain[0]]
+		elif y < y1:
+			#Up
+			print('up')
+			x0, y0 = self.__gridMap[mapMain[3]]
+		if x > x1:
+			#Right
+			print('right')
+			x0, y0 = self.__gridMap[mapMain[0]]
+		elif x < x1:
+			#Left
+			print('left')
+			x0, y0 = self.__gridMap[mapMain[1]]
+
+
+		# for box0 in mapMain:
+		if y0 < y1:
+			print('up')
+			returnList.append('up')
+		if y0 > y1:
+			print('down')
+			returnList.append('down')
+		if x0 > x1:
+			print('right')
+			returnList.append('right')
+		if x0 < x1:
+			print('left')
+			returnList.append('left')
+		# print(returnList)
+		return returnList
+
+			#You should take each box that is associated with a corner of the player.
+			#Then base it on that boxes coords rather than where the exact dot is. That will
+			#be easier than trying to guess where the other boxes are. Corrners may prove to
+			#be difficult again. DON'T FORGET.
+				## NOTE: Actual Collision Works. Just need a Side_calculation to acuratly determin the
+				##		 Direction to bounce to. Fix double bouncing later.
 
 	"""#|--------------Getters--------------|#"""
 		#this is where a list of getters will go...
