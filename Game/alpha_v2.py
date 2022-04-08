@@ -16,7 +16,7 @@ class Alpha_v2():
 		self.__screenHeight	= 800
 		self.__loopCount	= 33
 		self.__seconds		= 0
-		self.__version		= "Stab Simulator [ALPHA v0.2.955]"
+		self.__version		= "Stab Simulator [ALPHA v0.2.959]"
 
 		#<--\Rosters Of All Entities\-->#
 		self.__entityRoster	= ['#player', '#stalfos', '#slime', ]
@@ -31,12 +31,12 @@ class Alpha_v2():
 		#<--\Class Creation/Assignments\-->#
 		self.__mainApp 		= Tk()
 		#Engine#
+		self.__tNode 		= Timer_Node(self.__mainApp)
 		self.__Maps 		= Maps_GetFile()
 		self.__Node 		= Node(self.__mainApp)
 		self.__cLogic		= Collision_Logic_v2()
-		self.__cNode		= Collision_Node_v2(self.__cLogic)
+		self.__cNode		= Collision_Node_v2(self.__cLogic, self.__tNode)
 		self.__iNode 		= Image_Node()
-		self.__tNode 		= Timer_Node(self.__mainApp)
 		self.__pfNode 		= PathFind_Node(self.__cLogic, self.__cNode, self.__iNode)
 		#Entities#
 		self.__Player 		= Player_Main(self.__cLogic, self.__iNode)

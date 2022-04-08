@@ -34,6 +34,8 @@ class Entity_Main(Main_Node):
 
 		self._static = None
 
+		self.LastSide= None
+
 	def Random_Place(self, size, screenWidth, screenHeight):
 		w, h = size
 		while self.__occupied == True:
@@ -81,11 +83,9 @@ class Entity_Main(Main_Node):
 			#__Other Side Collision: Static__#
 			elif OSC == 'Static':
 				self.__isStatic = True
-				for newSide in side:
-					# print(newSide)
-					new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), newSide, speed=self._info.get_speed())
-					self._info.set_myCoords(new_Coords)
-					self._info.set_myCorners(self._info.get_ID())
+				new_Coords = self._kNode.Static_Hit(self._info.get_myCoords(), self._info.get_ID(), side, speed=self._info.get_speed())
+				self._info.set_myCoords(new_Coords)
+				self._info.set_myCorners(self._info.get_ID())
 				#__Other Side Collision: Enemy/Weapon/Friend__#
 			elif OSC == 'Enemy' or OSC == 'Weapon' or OSC == 'Friend':
 				#---------------Math---------------#

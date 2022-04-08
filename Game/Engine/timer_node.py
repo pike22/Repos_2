@@ -7,6 +7,10 @@ class Timer_Node():
 		self.__FPS			  = 1000 / 30
 		self.__frameCount 	  = 33
 
+		#Time_Delay Parameters
+		self._nextTime = 0
+
+
 
 	def Game_Clock(self, showTime=False):
 		Timer_Node.GameTime += 1
@@ -17,6 +21,23 @@ class Timer_Node():
 			self.__frameCount += 33
 
 		self.__mainApp.after(int(self.__FPS), self.Game_Clock)
+
+
+	def Time_Delay(self, delay=None, ): ## NOTE: Delay is in mil-seconds. 33 delay == 1 second
+		if delay != None:
+			self._nextTime = Timer_Node.GameTime + delay
+			print(Timer_Node.GameTime)
+			print(self._nextTime)
+
+
+
+		if Timer_Node.GameTime == self._nextTime:
+			print("Times UP!!")
+			return True
+
+
+		self.__mainApp.after(int(self.__FPS), self.Time_Delay)
+
 
 
 	"""#|--------------Getters--------------|#"""

@@ -2,8 +2,9 @@ from .collision_logic_v2 import Collision_Logic_v2
 
 #use this for the games loop collision
 class Collision_Node_v2():
-	def __init__(self, cLogic):
+	def __init__(self, cLogic, tNode):
 		self.__logic = cLogic
+		self.__tNode = tNode
 
 		#<--Rosters-->#
 		self.__entityRoster = None #All Entities\if move then here.
@@ -42,9 +43,10 @@ class Collision_Node_v2():
 				elif obj.get_groupID() in self.__wallRoster:
 					# print('wall', obj.get_ID())
 					direction = self.__logic.Side_Calculation(obj=objMain, target=obj)
-					objList.append(direction)
-					objMain.My_Collision(OSC='Static', side=objList)
-					pass
+					list = []
+					for item in direction:
+						objMain.My_Collision(OSC='Static', side=item)
+						list.append(item)
 
 				elif obj.get_groupID() in self.__weaponRoster:
 					print('weapon')

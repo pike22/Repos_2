@@ -1,12 +1,9 @@
 Current Game Version
-		[v0.2.953]
+		[v0.2.959]
 
 
  ** Last Update Note:
  		Collision: Collision Re-work
-			Now with a consistent system than can identify objects that are colliding with one of the corners of
-			my target object. Yesterdays problem was because when using an if statement to find if specific group-ID
-			was in the roster. I used == instead of 'in' and that was the problem. Right now when the player temporally
-			hits the wall and no more 'wasd' controls are used the player just continues to react to the wall even
-			though it is no longer in contact with the wall. The player also bounces back and forth when continued
-			collision with the wall happens. This should be an easy fix although the other problem takes priority.
+			All that is left is to fix that stupid double bounce when colliding based on the directions. Most
+			likely due to how I determine the directions. Once that is done the Collision re-work is mostly done.
+			There is still setting it up for the other entities, and then to remember the main reason for the re-work.
